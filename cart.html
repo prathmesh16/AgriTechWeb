@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>AgriTech Home</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!-------MD BOOTSRAP----------->
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="md/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="md/css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom stayles (optional) -->
+    <link href="md/css/style.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap" rel="stylesheet">
+
+    <!-------------BOOTSTRAP-------------->
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <!-- style.css -->
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+</head>
+
+<body>
+    <!-- navbar  -->
+    <nav class="navbar navbar-expand-lg  navbar-light white-color sticky-top " align="center" id="MainNavbar">
+
+        <a class="navbar-brand" href="#"><span><img src="logoTitle.png" id="brand"
+                class="d-inline-block align-center"></a>
+
+        <!-- Collapse button -->
+        <button class="navbar-toggler float-right ml-auto" type="button" data-toggle="collapse" data-target="#navMenu" aria-controls="#navMenu" aria-expanded="false" aria-label="Expand" id="toggleBtn">
+        <span class="navbar-toggler-icon black-text"></span>
+    </button>
+
+        <!-- cart and profile -->
+        <span>
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" data-target="#cartModal" data-toggle="modal"><i
+                        class="fas fa-shopping-cart fa-lg "></i></a>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-user fa-lg" ></i></a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-info">
+                    <a class="dropdown-item" href="">My account</a>
+                    <a class="dropdown-item" href="#">Log out</a>
+                </div>
+            </li>
+        </ul>
+    </span>
+
+
+
+
+
+        <div class="input-group form-inline ml-auto col-sm-10 col-lg-4   searchBarClass">
+            <input class="form-control my-0 py-1" type="text" placeholder="Search" id="seachArea">
+            <div class="input-group-append">
+                <span class="input-group-text" id="searchBtn"><i class="fas fa-search" aria-hidden="true"
+                    id="searchIcon"></i></span>
+            </div>
+        </div>
+
+        <div class="collapse navbar-collapse " id="navMenu">
+
+            <ul class="nav navbar-nav ml-auto ">
+
+
+                <li class="nav-item ">
+                    <a class="nav-link" href="">HOME<span class="sr-only">(current)</span></a>
+                </li>
+
+                <!-- <li class="nav-item ">
+                    <a class="nav-link" href="">CATEGORIES </a>
+                </li> -->
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        CATEGORIES</a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-info">
+                        <a class="dropdown-item" href="">Pesticides</a>
+                        <a class="dropdown-item" href="#">Cropicides</a>
+                        <a class="dropdown-item" href="#">Farming Tools</a>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="">OFFERS</a>
+                </li>
+
+
+            </ul>
+
+        </div>
+
+
+
+    </nav>
+    <!-- navbar  -->
+
+    <!-- modal for cart -->
+    <div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="cartModalTitle" aria-hidden="true">
+
+        <!-- Add .modal-dialog-centered to .modal-dialog to vertically center the modal -->
+        <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+
+            <div class="modal-content cart-modal-class">
+
+                <div class="modal-body">
+                    <div class="container">
+
+                        <!-- Section: Block Content -->
+                        <section>
+                            <div class="row " id="cart-row-header">
+                                <div class="col-md-12 col-lg-12 text-center">
+                                    <h5 id="cart-header-title">YOUR CART</h5>
+                                    <span id="cart-close-icon" aria-hidden="true" type="button" class="close" data-dismiss="modal">&times;</span>
+                                </div>
+                            </div>
+                            <hr>
+
+                        </section>
+                        <!-- Section: Block Content -->
+                        <div class="cart-list">
+
+                            <div class="row cart-item-row ">
+                                <div class="col-lg-2 col-md-2 col-sm-12 text-center">
+                                    <img src="1.jpg" class="cart-item-image img-fluid">
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-12" style="padding-top: 24px">
+
+                                    <div class="row">
+                                        <div class="col-lg-8 col-md-8 col-sm-12 " style="padding-bottom:2px;">
+
+                                            <div class="text-center">
+                                                <div class="flex-column text-md-left">
+                                                    <p class="cart-item-name-class px-4 ">
+                                                        <a>MAHAVIR-129
+                                                    </a>
+                                                    </p>
+                                                    <p class="cart-category-class px-4">
+                                                        <a>Cropicide
+                                                    </a>
+                                                    </p>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-12 text-center">
+
+                                            <div class="row">
+                                                <div class="col text-right">
+                                                    <p class="cart-item-price">Rs. 5000</p>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="row cart-item-quantity">
+                                                        <input type="button" id="minus" class="cart-item-quantity-button" value="-">
+                                                        <input value="1" pattern="\d*" class="text-center cart-item-quantity-input">
+                                                        <input type="button" id="plus" value="+" class="cart-item-quantity-button">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="d-flex d-inline justify-content-center cart-item-remove-div">
+                                        <p class="cart-item-remove-button"><a>Remove Item <i
+                                                class="far fa-trash-alt"></i></a></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row cart-item-row ">
+                                <div class="col-lg-2 col-md-2 col-sm-12 text-center">
+                                    <img src="1.jpg" class="cart-item-image img-fluid">
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-12" style="padding-top: 24px">
+
+                                    <div class="row">
+                                        <div class="col-lg-8 col-md-8 col-sm-12 " style="padding-bottom:2px;">
+
+                                            <div class="text-center">
+                                                <div class="flex-column text-md-left">
+                                                    <p class="cart-item-name-class px-4 ">
+                                                        <a>MAHAVIR-129
+                                                    </a>
+                                                    </p>
+                                                    <p class="cart-category-class px-4">
+                                                        <a>Cropicide
+                                                    </a>
+                                                    </p>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-12 text-center">
+
+                                            <div class="row">
+                                                <div class="col text-right">
+                                                    <p class="cart-item-price">Rs. 5000</p>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="row cart-item-quantity">
+                                                        <input type="button" id="minus" class="cart-item-quantity-button" value="-">
+                                                        <input value="1" pattern="\d*" class="text-center cart-item-quantity-input">
+                                                        <input type="button" id="plus" value="+" class="cart-item-quantity-button">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="d-flex d-inline justify-content-center cart-item-remove-div">
+                                        <p class="cart-item-remove-button"><a>Remove Item <i
+                                                class="far fa-trash-alt"></i></a></p>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="cart-footer">
+
+                            <div class="cart-subtotal-div text-center">
+                                <p id="cart-subtotal">Subtotal = Rs. 13000</p>
+                            </div>
+                            <div class="cart-checkout-div d-flex d-inline justify-content-center">
+
+                                <button id="continue-shopping-btn">Continue</button>
+                                <button id="checkout-btn">Checkout</button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal for cart -->
+
+
+
+    <!-- ---------MD BOOTSTRAP ---------->
+    <!-- JQuery -->
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+
+</body>
+
+</html>

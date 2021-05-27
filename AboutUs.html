@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>My First Google Map</h1>
+
+<div id="googleMap" style="width:100%;height:650px;"></div>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.14.1/firebase.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCpwclbPG8eQcr4jmF5J3U4d-I_SbeHIDY",
+    authDomain: "covid19-ba857.firebaseapp.com",
+    databaseURL: "https://covid19-ba857.firebaseio.com",
+    projectId: "covid19-ba857",
+    storageBucket: "covid19-ba857.appspot.com",
+    messagingSenderId: "133848837781",
+    appId: "1:133848837781:web:3b98bcf24bc98282e8759c"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+<script>
+    firebase.database().ref().child("locations").child("pkj").child("location").on("value",function(snapshot){
+    
+        myMap(snapshot.val().lat,snapshot.val().long);
+    });
+    let markers = [];
+    let sales = [{
+      "name": "PKJ",
+      "lat": "19.9975",
+      "lng": "73.7898"
+    }]
+    var map;
+    window.onload=()=>
+    {
+        var mapProp= {
+            center:new google.maps.LatLng(20.5937,74.7893),
+            zoom:5,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          };
+          
+          map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+          
+    }
+
+function myMap(lat,long) {
+    //alert(lat+" "+long);
+   var loc={
+       "name":"abc",
+       "lat":""+lat,
+       "long":""+long
+   }
+   
+   //sales.push(loc);
+   let newMarker = new google.maps.Marker({
+    position: new google.maps.LatLng(lat,long),
+    map: map,
+    title: "new",
+ });
+ newMarker.setMap(map);
+
+/*
+let infowindow = new google.maps.InfoWindow();
+let bounds = new google.maps.LatLngBounds();
+
+
+if (sales) {
+   for (let i = 0; i < sales.length; i++) {
+     let newMarker = new google.maps.Marker({
+       position: new google.maps.LatLng(sales[i].lat, sales[i].lng),
+       map: map,
+       title: sales[i].name,
+    });
+    google.maps.event.addListener(newMarker, 'click',       (function(newMarker, i) { return function() 
+     {
+         infowindow.setContent('<h3>' + sales[i].name + '</h3>');
+         infowindow.open(map, newMarker);
+      }
+    })(newMarker, i));
+          bounds.extend(newMarker.getPosition());
+          markers.push(newMarker);
+       }
+    }
+*/
+    //setMapOnAll(null);
+}
+function setMapOnAll(map) {
+    for (var i = 0; i < markers.length; i++) {
+      markers[i].setMap(map);
+    }
+  }
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhUVoPae8yP_OWTfEUBEinTMb4lMZz_lg"></script>
+
+</body>
+</html>

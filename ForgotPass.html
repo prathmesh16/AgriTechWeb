@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Forgot Password</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!-------CSS----------->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link rel="stylesheet" href="md/css/bootstrap.min.css">
+    <link rel="stylesheet" href="md/css/mdb.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="jquery.toast.css">
+
+
+    <style type="text/css">
+        .form-control {
+            border-radius: 30px;
+            color: black;
+            font-family: 'Nunito', sans-serif;
+        }
+        
+        input:focus {
+            box-shadow: none !important;
+            border-color: #ced4da !important;
+            color: black !important;
+        }
+        
+        #SignupBtn {
+            border-radius: 20px;
+            border: none;
+            margin-top: 8px;
+            width: 120px;
+            padding-top: 8px;
+            font-weight: bold;
+            font-family: 'Nunito', sans-serif;
+            background-color: #21b30e;
+            color: white;
+        }
+        
+        #SignupBtn:focus {
+            box-shadow: none;
+        }
+        
+        #SignupTitle {
+            color: #292929;
+            font-size: 25px !important;
+            margin-bottom: 20px;
+            font-family: 'Nunito', sans-serif;
+        }
+        
+        #SignupLogo {
+            border: none;
+            border-radius: 40px;
+            width: 80px;
+            height: 80px;
+            margin: 16px;
+        }
+        
+        #SignupLogo:hover {
+            width: 86px;
+            height: 86px;
+            border: none;
+            border-radius: 31.5px;
+            margin: 13px 16px;
+        }
+        
+        #SignupForm {
+            padding: 10px 20px;
+        }
+        
+        .SignupCard {
+            height: 270px;
+            padding-top: 35px;
+            margin-top: 200px;
+            width: 360px;
+            border-top: 5px solid #73fc03;
+            border-right: none;
+            border-left: none;
+            border-radius: 5px;
+            border-bottom: 5px solid #73fc03;
+            margin-bottom: 40px;
+        }
+        
+        #SignupBody {
+            background-image: url('images/back.jpg');
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: auto;
+        }
+        
+        #Username {
+            border-right: none;
+        }
+        
+        #Password,
+        #Email,
+        #Mobile {
+            margin-top: 0px;
+            border-right: none;
+        }
+        
+        #ConfirmPassword {
+            margin-top: 16px;
+        }
+        
+        #PasswordIcon,
+        #EmailIcon,
+        #UserIcon,
+        #MobileIcon {
+            padding: .375rem .75rem;
+            height: calc(1.5em + .75rem + 2px);
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: grey;
+            border-left: none;
+            background-clip: padding-box;
+            border-top: 1px solid #ced4da;
+            border-right: 1px solid #ced4da;
+            border-bottom: 1px solid #ced4da;
+            border-top-right-radius: 30px;
+            border-bottom-right-radius: 30px;
+        }
+        
+        .loader {
+            position: relative;
+            text-align: center;
+            margin: 15px auto 35px auto;
+            z-index: 9999;
+            display: block;
+            width: 80px;
+            height: 80px;
+            border: 10px solid rgba(0, 0, 0, .3);
+            border-radius: 50%;
+            border-top-color: #21b30e;
+            animation: spin 1s ease-in-out infinite;
+            -webkit-animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+        
+        @-webkit-keyframes spin {
+            to {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+        /** MODAL STYLING **/
+        
+        .modal-content {
+            border-radius: 0px;
+            box-shadow: 0 0 20px 8px rgba(0, 0, 0, 0.7);
+        }
+        
+        .modal-backdrop.show {
+            opacity: 0.75;
+        }
+        
+        .loader-txt {
+            p {
+                font-size: 13px;
+                color: #666;
+                small {
+                    font-size: 11.5px;
+                    color: #999;
+                }
+            }
+        }
+    </style>
+
+
+</head>
+
+<body id="SignupBody">
+
+    <center>
+        <div class="card container col-md-3 col-sm-6 text-center SignupCard">
+            <div class="card-body">
+                <h3 class="card-title" id="SignupTitle"><b>Forgot Password</b></h3>
+
+                <div id="SignupForm" align="center">
+
+                    <!--username-->
+                    <div class="form-group" id="divu">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="Username" placeholder="Username" required="yes">
+                            <span class="input-group-addon transparent" id="UserIcon"><span class="fa fa-user" ></span></span>
+                        </div>
+                        <div class="error" id="errUname" style="color: red;font-size:10px;"></div>
+
+                        <br>
+                        <button class="btn" id="SignupBtn" onclick="sendOTP()">Submit</button>
+                    </div>
+
+
+                    <!-----OTP---->
+                    <div class="form-group" id="divo" style="display: none;">
+                        <div class="input-group">
+                            <input type="number" class="form-control" id="otp" placeholder="OTP" required="yes">
+                            <span class="input-group-addon transparent" id="EmailIcon"><span class="fa fa-envelope" ></span></span>
+                        </div>
+                        <br>
+                        <button class="btn" id="SignupBtn" onclick="display()">Next</button>
+                    </div>
+
+
+                    <div id="divp" style="display: none;">
+                        <!----password-------->
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="Password" placeholder="New Password" required="yes">
+                                <span class="input-group-addon transparent" id="PasswordIcon">
+                            <a><span class="fas fa-eye" onclick="ShowOrHidePassword()" id="PassShowBtn"></span></a>
+                                <a><span class="fas fa-eye-slash" onclick="ShowOrHidePassword()" id="PassHideBtn" style="display: none;"></span></a>
+                                </span>
+                            </div>
+
+                            <!----confirm password-------->
+                            <div class="form-group">
+                                <input type="password" class="form-control" id="ConfirmPassword" placeholder="Confirm password" required="yes">
+                            </div>
+
+                            <button class="btn" id="SignupBtn" onclick="cp()">Submit</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+    </center>
+    <div class="modal fade" id="loadMe" tabindex="-1" role="dialog" aria-labelledby="loadMeLabel">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <div class="loader"></div>
+                    <div class="loader-txt">
+                        <p id="loadermsg">Loading....</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- js -->
+    <script type="text/javascript" src="md/js/jquery.min.js"></script>
+    <script type="text/javascript" src="md/js/popper.min.js"></script>
+    <script type="text/javascript" src="md/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="md/js/mdb.min.js"></script>
+    <script src="jquery.toast.js"></script>
+    <script src="jic.js"></script>
+    <script src="MD5.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyBw4RVlD1ZdnNNn4ow5hahtxPxBSpL_tpA",
+            authDomain: "website-e1c2c.firebaseapp.com",
+            databaseURL: "https://website-e1c2c.firebaseio.com",
+            projectId: "website-e1c2c",
+            storageBucket: "website-e1c2c.appspot.com",
+            messagingSenderId: "640557542653",
+            appId: "1:640557542653:web:215d1a31f7ace2f72fe294"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+    <script>
+        function genOTP() {
+            var seq = (Math.floor(Math.random() * 10000) + 10000).toString().substring(1);
+            return seq;
+        }
+
+        function ShowOrHidePassword() {
+
+            var x = document.getElementById("Password");
+            var y = document.getElementById("PassShowBtn");
+            var z = document.getElementById("PassHideBtn");
+
+            if (x.type === "password") {
+                x.type = "text";
+                y.style.display = "none";
+                z.style.display = "inline"
+            } else if (x.type == "text") {
+                x.type = "password";
+                y.style.display = "inline";
+                z.style.display = "none"
+            }
+
+        }
+        var otp = 0;
+
+        function sendOTP() {
+            if (document.getElementById("Username").value == "") {
+                alert("Please Enter Username");
+                return;
+            }
+            $("#loadMe").modal({
+                backdrop: "static", //remove ability to close modal with click
+                keyboard: false, //remove option to close with keyboard
+                show: true //Display loader!
+            });
+
+            firebase.database().ref().child("Users").child(document.getElementById("Username").value).once("value", function(snapshot) {
+                if (snapshot.exists()) {
+                    document.getElementById("loadermsg").innerHTML = "Sending OTP To Your Email-ID...";
+                    //alert(snapshot.val().Email);
+                    otp = genOTP();
+                    $.post("https://agritechmh.000webhostapp.com/sendChangeMail.php", {
+                        msg: "OTP for changing your password ! Here is your OTP : " + otp + " OTP is Valid for 5 min !",
+                        headMsg: "OTP",
+                        email: snapshot.val().Email
+                    }, function(data, status) {
+                        alert("Data: " + data + "\nStatus: " + status);
+                    });
+                    document.getElementById("divu").style = "display:none;";
+                    document.getElementById("divo").style = "display:block;";
+                    setTimeout(function() {
+                        window.location.href = ("login.html");
+                    }, 300000);
+                } else {
+                    //setTimeout(function() {
+
+                    $("#loadMe").modal("hide");
+                    document.getElementById("loadermsg").innerHTML = "Loading...";
+                    // }, 2000);
+                    alert("Account Doesn't Exists !");
+                }
+                setTimeout(function() {
+                    $("#loadMe").modal("hide");
+                    document.getElementById("loadermsg").innerHTML = "Loading...";
+                }, 2000);
+            });
+
+        }
+
+        function display() {
+            if (otp != parseInt(document.getElementById("otp").value)) {
+                alert("Incorrect OTP");
+                return;
+            }
+            $("#loadMe").modal({
+                backdrop: "static", //remove ability to close modal with click
+                keyboard: false, //remove option to close with keyboard
+                show: true //Display loader!
+            });
+
+            document.getElementById("loadermsg").innerHTML = "Verifying OTP...";
+            document.getElementById("divo").style = "display:none;";
+            document.getElementById("divp").style = "display:block;";
+            setTimeout(function() {
+                $("#loadMe").modal("hide");
+                document.getElementById("loadermsg").innerHTML = "Loading...";
+            }, 2000);
+        }
+
+        function cp() {
+            if (document.getElementById("Password").value != document.getElementById("ConfirmPassword").value) {
+                alert("Password Not Matching!");
+                return;
+            }
+            $("#loadMe").modal({
+                backdrop: "static", //remove ability to close modal with click
+                keyboard: false, //remove option to close with keyboard
+                show: true //Display loader!
+            });
+            firebase.database().ref().child("Users").child(document.getElementById("Username").value).child("Password").set(calcMD5(document.getElementById("Password").value));
+            firebase.database().ref().child("Users").child(document.getElementById("Username").value).once("value", function(snapshot) {
+                if (snapshot.exists()) {
+                    $.post("https://agritechmh.000webhostapp.com/sendChangeMail.php", {
+                        msg: "Successfully Changed password !",
+                        headMsg: "Password Changed !",
+                        email: snapshot.val().Email
+                    }, function(data, status) {
+                        alert("Data: " + data + "\nStatus: " + status);
+                    });
+                }
+            });
+            document.getElementById("loadermsg").innerHTML = "Password Changed Successfully !";
+            setTimeout(function() {
+                $("#loadMe").modal("hide");
+                window.location.href = ("login.html");
+            }, 2000);
+
+        }
+    </script>
+</body>
+
+</html>

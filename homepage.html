@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html>
+<script>
+    document.onreadystatechange = function() {
+        if (document.readyState !== "complete") {
+            $("#loadMe").modal({
+                backdrop: "static", //remove ability to close modal with click
+                keyboard: false, //remove option to close with keyboard
+                show: true //Display loader!
+            });
+        }
+    };
+</script>
+<!-- Modal -->
+<div class="modal fade" id="loadMe" tabindex="-1" role="dialog" aria-labelledby="loadMeLabel">
+    <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <div class="loader"></div>
+                <div class="loader-txt">
+                    <p id="loadermsg">Loading please wait....</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<head>
+
+
+    <script>
+        function preloadFunc() {
+            if (localStorage.getItem("Username") === null) {
+                window.location.href = ("login.html");
+            }
+        }
+        window.onpaint = preloadFunc();
+    </script>
+
+    <title>AgriTech | Home</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="shortcut icon" href="ic_launcher_round.png" />
+    <!-------CSS----------->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link rel="stylesheet" href="md/css/bootstrap.min.css">
+    <link rel="stylesheet" href="md/css/mdb.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="jquery.toast.css">
+
+    <style type="text/css">
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        .loader {
+            position: relative;
+            text-align: center;
+            margin: 15px auto 35px auto;
+            z-index: 9999;
+            display: block;
+            width: 80px;
+            height: 80px;
+            border: 10px solid rgba(0, 0, 0, .3);
+            border-radius: 50%;
+            border-top-color: #21b30e;
+            animation: spin 1s ease-in-out infinite;
+            -webkit-animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+        
+        @-webkit-keyframes spin {
+            to {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+        /** MODAL STYLING **/
+        
+        .modal-content {
+            border-radius: 0px;
+            box-shadow: 0 0 20px 8px rgba(0, 0, 0, 0.7);
+        }
+        
+        .modal-backdrop.show {
+            opacity: 0.85;
+        }
+        
+        .loader-txt {
+            p {
+                font-size: 13px;
+                color: #666;
+                small {
+                    font-size: 11.5px;
+                    color: #999;
+                }
+                ;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- navbar  -->
+    <nav class="navbar navbar-expand-lg  navbar-light white-color sticky-top " align="center" id="MainNavbar">
+
+        <a class="navbar-brand" href="#"><span><img src="images/logoTitle.png" id="brand"
+                    class="d-inline-block align-center"></a>
+
+        <!-- Collapse button -->
+        <button class="navbar-toggler float-right ml-auto" type="button" data-toggle="collapse" data-target="#navMenu" aria-controls="#navMenu" aria-expanded="false" aria-label="Expand" id="toggleBtn">
+            <span class="navbar-toggler-icon black-text"></span>
+        </button>
+
+        <!-- cart and profile -->
+        <span>
+            <ul class="nav">
+                <li class="nav-item" onclick="expandcart()">
+                    <a class="nav-link" data-target="#cartModal" data-toggle="modal"><i
+                            class="fas fa-shopping-cart fa-lg "></i><span class="badge badge-danger white-text" id="cartCountBadge"></span></a>
+        </li>
+
+        <li class="nav-item dropdown">
+            <a class="nav-link" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-user fa-lg"></i></a>
+            <div class="dropdown-menu dropdown-menu-right dropdown-info">
+                <a class="dropdown-item" href="profile.html">PROFILE</a>
+                <a class="dropdown-item" href="#" onclick="logout()">LOGOUT</a>
+            </div>
+        </li>
+        </ul>
+        </span>
+
+        <div class="input-group form-inline ml-auto col-sm-10 col-lg-4 searchBarClass">
+            <input class="form-control my-0 py-1" type="text" placeholder="Search" id="myInput" onfocusout="hidediv()">
+            <div class="input-group-append">
+                <span class="input-group-text" id="searchBtn"><i class="fas fa-search" aria-hidden="true"
+                        id="searchIcon"></i></span>
+            </div>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navMenu">
+
+            <ul class="nav navbar-nav ml-auto">
+
+
+                <li class="nav-item active-nav-item">
+                    <a class="nav-link" href="homepage.html">HOME</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="DisplayFilterWise.html">CATEGORIES </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+
+
+    </nav>
+    <!-- navbar  -->
+
+
+
+    <!-- modal for cart -->
+    <div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="cartModalTitle" aria-hidden="true">
+
+        <!-- Add .modal-dialog-centered to .modal-dialog to vertically center the modal -->
+        <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+
+            <div class="modal-content cart-modal-class">
+
+                <div class="modal-body">
+                    <div class="container">
+
+                        <!-- Section: Block Content -->
+                        <section>
+                            <div class="row " id="cart-row-header">
+                                <div class="col-md-12 col-lg-12 text-center">
+                                    <h5 id="cart-header-title">YOUR CART</h5>
+                                    <span id="cart-close-icon" aria-hidden="true" type="button" class="close" data-dismiss="modal">&times;</span>
+                                </div>
+                            </div>
+                            <hr>
+
+                        </section>
+                        <!-- Section: Block Content -->
+                        <!-- 
+                        <div class='text-center p-5' id='noCartItem' style="display: none;height:120px !important;">
+                            <img class='image-fluid' src='images/emptycart.png' style='height:100px; width:100px;' /><br>
+                            <p class='text-muted' style='font-size:18px;margin-top:20px; font-family: Nunito !important;'>Cart is Empty !</p> 
+                        </div> -->
+
+                        <div class="cart-list" id="cartbody">
+
+                        </div>
+
+                        <div class="cart-footer">
+
+                            <div class="cart-subtotal-div text-center">
+                                <p id="cart-subtotal">Subtotal = Rs. 0</p>
+                            </div>
+                            <div class="cart-checkout-div d-flex d-inline justify-content-center">
+
+                                <button id="continue-shopping-btn" data-dismiss="modal">Continue</button>
+                                <button id="checkout-btn" onclick="window.location.href=('checkout.html');">Checkout</button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- main slider -->
+    <div class="row no-gutters" id="mainProducts">
+        <div class="col-sm-12 col-lg-12">
+            <div id="mainSlider" class="carousel slide carousel-fade" data-ride="carousel" data-interval="3000">
+                <ol class="carousel-indicators">
+                    <li data-target="#mainSlider" data-slide-to="0" class="active"></li>
+                    <li data-target="#mainSlider" data-slide-to="1"></li>
+                    <li data-target="#mainSlider" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner" role="listbox">
+                    <div class="carousel-item active">
+                        <img class="d-block w-100 sliderImageClass" src="images/c2.jpg">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100 sliderImageClass" src="images/c1.jpg">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100 sliderImageClass" src="images/c3.jpg">
+                    </div>
+                </div>
+
+
+                <a class="carousel-control-prev" href="#mainSlider" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#mainSlider" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- main slider -->
+
+    <!-- treding popular products -->
+    <div class="container-fluid">
+        <section class="text-center py-4 col-lg-12 popularSection">
+            <h2 class="mb-2 pb-2 headingPopular">Popular Products</h2>
+            <div id="popularSlider" class="carousel slide py-2" data-ride="carousel" data-interval="800000">
+
+                <div class="carousel-inner text-center">
+
+                    <div class="carousel-item active">
+                        <!-- First slide -->
+                        <div class="row " id="row1">
+                            <!--Grid row-->
+
+
+
+                        </div>
+                        <!--/Grid row-->
+                    </div>
+                    <!-- First slide -->
+
+                    <div class="carousel-item">
+                        <!-- First slide -->
+                        <div class="row " id="row2">
+                            <!--Grid row-->
+
+
+
+                        </div>
+                        <!--/Grid row-->
+                    </div>
+                    <!-- First slide -->
+
+
+                </div>
+
+                <!-- controls next and previous -->
+
+                <a class="carousel-control-prev prevWrapperClass" href="#popularSlider" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon prevClass" aria-hidden="true"></span>
+                </a>
+                <a class="carousel-control-next nextWrapperClass" href="#popularSlider" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon nextClass" aria-hidden="true"></span>
+                </a>
+
+            </div>
+            <!-- trending products -->
+
+    </div>
+    <!-- treding popular products -->
+
+    <!-- strip ad -->
+    <section class="container-fluid d-none d-md-block" style="padding: 0 26px;" id="focusresult">
+
+        <div id="carousel-example-2" class="carousel slide carousel-fade mt-3" data-ride="carousel" data-interval="3000">
+            <div class="carousel-inner" role="listbox" style="border-radius: 12px;">
+                <div class="carousel-item active">
+                    <div class="view">
+
+                        <img class="d-block w-100" src="images/strip.png" height="150px">
+                        <div class="mask rgba-white-slight text-center d-flex align-items-center justify-content-center">
+                            <div class="row">
+                                <div class="col-12">
+                                    <p class="h1-responsive red-text font-weight-bold mb-0"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item ">
+                    <div class="view">
+
+                        <img class="d-block w-100" src="images/strip2.jpg" height="150px">
+                        <div class="mask rgba-white-slight text-center d-flex align-items-center justify-content-center">
+                            <div class="row">
+                                <div class="col-12">
+                                    <p class="h1-responsive red-text font-weight-bold mb-0"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- search result -->
+    <div class="container-fluid px-2 px-md-4">
+        <div class="container-fluid my-5" style="display:none;" id="searchResult">
+
+            <h2 class="mb-2 pb-4 pt-4 headingPopular text-center " id="searchhead">Search Results</h2>
+
+
+            <div class="row d-flex justify-content-center align-items-center pt-2 pb-5 px-0 px-md-4" id="rs1">
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <!-- other products -->
+    <div class="container-fluid my-5" style="padding-left:40px;padding-right:40px;">
+
+        <h2 class="mb-2 pb-4 headingPopular text-center ">Other Products</h2>
+
+        <!-- first category -->
+        <div class="row ">
+            <h4 class="catHeader float-left col-lg-12" id="catName">
+                Pesticides
+                <span class="float-right"><button type="button" class=" btn viewMoreBtn d-flex d-inline-block"
+                        data-toggle="collapse" href="#hrp" aria-expanded="false"
+                        aria-controls="hrp">View More</button></span>
+            </h4>
+        </div>
+        <div class="row" id="rp1">
+
+        </div>
+
+        <!-- hidden row -->
+        <div class="collapse row" id="hrp">
+
+        </div>
+
+        <!-- second category -->
+        <div class="row ">
+            <h4 class="catHeader float-left col-lg-12" id="catName">
+                Tools
+                <span class="float-right"><button type="button" class=" btn viewMoreBtn d-flex d-inline-block" data-toggle="collapse" href="#hrt" aria-expanded="false"
+                        aria-controls="hrt">View
+                        More</button></span>
+            </h4>
+        </div>
+        <div class="row" id="rt1">
+
+        </div>
+        <!-- hidden row -->
+        <div class="collapse row" id="hrt">
+
+        </div>
+        <!-- third category -->
+        <div class="row">
+            <h4 class="catHeader float-left col-lg-12" id="catName">
+                Cropicide
+                <span class="float-right"><button type="button" class=" btn viewMoreBtn d-flex d-inline-block" data-toggle="collapse" href="#hrc" aria-expanded="false"
+                        aria-controls="hrc">View
+                        More</button></span>
+            </h4>
+        </div>
+        <div class="row" id="rc1">
+
+        </div>
+        <!-- hidden row -->
+        <div class="collapse row" id="hrc">
+
+        </div>
+    </div>
+
+
+    <!-- app download section -->
+    <div class="container-fluid mb-5 justify-content-center text-center align-items-center d-flex appDownloadSection ">
+        <!--Section: Content-->
+
+
+
+        <!-- Grid row -->
+
+        <div class="row col-lg-10 text-center" style="padding:24px 0px;">
+
+            <!-- Grid column -->
+            <div class="col-lg-5 mb-4 mt-4 text-center justify-content-center align-items-center">
+
+                <!-- Featured image -->
+
+                <img class="img-fluid mx-auto animated fadeInLeft slow mobileImage" src="images/mobile.png">
+
+
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-lg-7 mb-4 align-self-center text-center text-lg-left">
+
+                <h2 class="h2 mb-4 white-text animated fadeInRight slow" style="font-family: Nunito;font-size: 40px !important;">Download AgriTech<br>App Now..</h2>
+                <p class="mb-4 white-text animated fadeInUp">Fast, Simple & Userfriendly.<br>All it takes is few seconds to Download.</p>
+
+                <a href="https://firebasestorage.googleapis.com/v0/b/website-e1c2c.appspot.com/o/AgriTechV8.apk?alt=media&token=b3654e1a-6150-4da9-895a-f8c31784c05d" download><button type="button" class="btn btn-yellow waves-effect btn-md animated fadeInUp" style="font-family: Nunito;font-weight: bold;" id="downloadButton"><i class="fas fa-download fa-lg pr-2"></i> Download
+                    Now</button></a>
+
+            </div>
+            <!-- Grid column -->
+
+        </div>
+
+        <!-- Grid row -->
+
+
+        <!--Section: Content-->
+
+
+    </div>
+
+    <!-- features and speciality -->
+    <div class="container-fluid py-4 z-depth-2 featuresClass">
+        <section class="p-md-2 mx-md-5 text-lg-left">
+
+            <div class="row text-center d-flex justify-content-center">
+                <div class="col-lg-3 col-md-6 mb-lg-0 mb-5">
+                    <img src="images/secure.png" id="secureImage">
+                    <h4 class="mb-4" id="secureText">100% SECURE PAYMENTS</h4>
+                    <p class="text-muted px-2 mb-lg-0">
+                        Moving your card details to much more secured place.
+                    </p>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-lg-0 mb-5">
+                    <img src="images/trustpay.png" id="trustpayImage">
+                    <h4 class="mb-4" id="trustpayText">TRUSTPAY</h4>
+                    <p class="text-muted px-2 mb-lg-0">
+                        100% Payment Protection. Easy Return Policy.
+                    </p>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-md-0 mb-5">
+                    <img src="images/support.png" id="helpImage">
+                    <h4 class="mb-4" id="helpText">HELP CENTER</h4>
+                    <p class="text-muted px-2 mb-md-0">
+                        Got a question? Look no further. Browse our FAQs or submit your query here.
+                    </p>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-md-0 mb-5">
+                    <img src="images/shop-on-go.png" id="shop-on-goImage">
+                    <h4 class="mb-4" id="shop-on-goText">SHOP ON THE GO</h4>
+                    <p class="text-muted px-2 mb-md-0">
+                        Download the app and get excited app only offers at your fingertips.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- feedback modal -->
+    <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold" style="font-family: Nunito;color: green;">Write to us</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+                </div>
+                <div class="modal-body mx-3">
+
+                    <div class="md-form">
+                        <textarea type="text" class=" form-control p-2" id="feedback" rows="4" placeholder="Your Message..." style="font-family: Nunito;"></textarea>
+                    </div>
+
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button id="feedbackSendBtn" onclick="feedback()">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- footer -->
+    <footer class="page-footer font-small unique-color-dark pt-4 z-depth-2">
+
+        <!-- Footer Links -->
+        <div class="container text-center text-md-left">
+
+            <!-- Grid row -->
+            <div class="row">
+
+                <!-- Grid column -->
+                <div class="col-md-4 mx-auto">
+                    <img src="images/logoTitle2.png" class="footerLogo">
+                    <p>AgriTech is a E-commerce platform for farmers, which serves farmers the tools and pesticides easily,quickly and at reasonable rates.</p>
+                </div>
+                <!-- Grid column -->
+
+                <hr class="clearfix w-100 d-md-none">
+
+                <!-- Grid column -->
+                <div class="col-md-2 mx-auto">
+
+                    <!-- Links -->
+                    <h5 class="text-uppercase mt-3 mb-4 footerLinkClass">Company</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="about.html">About Us</a>
+                        </li>
+                        <!-- <li>
+                            <a href="#!">Core Values</a>
+                        </li>
+                        <li>
+                            <a href="#!">Careers</a>
+                        </li>
+                        <li>
+                            <a href="#!">Sitemap</a>
+                        </li> -->
+                    </ul>
+
+                </div>
+                <!-- Grid column -->
+                <hr class="clearfix w-100 d-md-none">
+                <!-- Grid column -->
+                <div class="col-md-2 mx-auto">
+                    <!-- Links -->
+                    <h5 class=" text-uppercase mt-3 mb-4 footerLinkClass">Policy Info</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!">Privacy Policy</a>
+                        </li>
+                        <!-- <li>
+                            <a href="#!">Terms of Sale</a>
+                        </li> -->
+                        <li>
+                            <a href="#!">Terms of Use</a>
+                        </li>
+                        <!-- <li>
+                            <a href="#!">Report Abuse</a>
+                        </li> -->
+                    </ul>
+
+                </div>
+                <!-- Grid column -->
+                <hr class="clearfix w-100 d-md-none">
+                <!-- Grid column -->
+                <div class="col-md-2 mx-auto">
+                    <!-- Links -->
+                    <h5 class="text-uppercase mt-3 mb-4 footerLinkClass">help</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!">FAQ</a>
+                        </li>
+                        <li>
+                            <a href="" data-toggle="modal" data-target="#modalContactForm">Contact Us</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- Grid column -->
+
+            </div>
+            <!-- Grid row -->
+
+        </div>
+        <!-- Footer Links -->
+        <hr>
+
+        <!-- Social buttons -->
+        <ul class="list-unstyled list-inline text-center">
+            <li class="list-inline-item">
+                <a class="btn-floating btn-fb mx-1">
+                    <i class="fab fa-facebook-f"> </i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-tw mx-1">
+                    <i class="fab fa-twitter"> </i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-gplus mx-1">
+                    <i class="fab fa-google-plus-g"> </i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-li mx-1">
+                    <i class="fab fa-linkedin-in"> </i>
+                </a>
+            </li>
+        </ul>
+        <!-- Social buttons -->
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2020 Copyright:
+            <a href="#">AgriTech</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!-- js -->
+    <script type="text/javascript" src="md/js/jquery.min.js"></script>
+    <script type="text/javascript" src="md/js/popper.min.js"></script>
+    <script type="text/javascript" src="md/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="md/js/mdb.min.js"></script>
+    <script src="jquery.toast.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyBw4RVlD1ZdnNNn4ow5hahtxPxBSpL_tpA",
+            authDomain: "website-e1c2c.firebaseapp.com",
+            databaseURL: "https://website-e1c2c.firebaseio.com",
+            projectId: "website-e1c2c",
+            storageBucket: "website-e1c2c.appspot.com",
+            messagingSenderId: "640557542653",
+            appId: "1:640557542653:web:215d1a31f7ace2f72fe294"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+    <script>
+        function starmark(item) {
+
+        }
+
+
+        firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("cart").on("value", function(snapshot) {
+            var cartCnt = snapshot.numChildren();
+            document.getElementById("cartCountBadge").innerHTML = cartCnt;
+            if (cartCnt == 0) {
+                //document.getElementById("checkout-btn").style["backgroundcolor"]="black";
+                document.getElementById("checkout-btn").disabled = true;
+                document.getElementById("checkout-btn").style = "background-color:grey !important";
+            } else {
+                //  document.getElementById("checkout-btn").style["backgroundcolor"]="green";
+                document.getElementById("checkout-btn").disabled = false;
+                document.getElementById("checkout-btn").style = "background-color:green !important";
+            }
+
+        });
+        var cnt = 0;
+        firebase.database().ref().child("Posts").orderByChild("rating/avgrating").limitToLast(10).on('value', function(snapshot1) {
+            if (snapshot1.exists()) {
+                var cnt = 0,
+                    cnt1 = 0,
+                    cnt3 = 0;
+                document.getElementById("row1").innerHTML = "";
+                document.getElementById("row2").innerHTML = "";
+                snapshot1.forEach(function(childSnapshot) {
+                    cnt1++;
+                    cnt3++;
+                    var storageRef = firebase.storage().ref();
+                    if (cnt <= 4) {
+                        //document.getElementById("row1").innerHTML+=
+                        var tmp = "<div class='col align-items-center d-flex justify-content-center m-1' ><div class='card productCardClass px-3'><div class='text-center' onclick=nextProduct('" + encodeURIComponent(childSnapshot.val().name) + "')><view class='zoom'><img  id=imgms" + cnt1 + " class='image-fluid productImage'></view> </div><div class=' mt-1 text-center' onclick=nextProduct('" + encodeURIComponent(childSnapshot.val().name) + "')>  <a><p class='product-name-class'>" + (childSnapshot.val().name).toUpperCase() + "</p> </a> </div> <div class='flex-fill' onclick=nextProduct('" + encodeURIComponent(childSnapshot.val().name) + "')> <a> <p class='categoryClass'>" + childSnapshot.val().catagory + "</p> </a></div><div class='text-center'><ul class='rating rating-layout'>";
+                        var count = parseInt(childSnapshot.val().rating.avgrating);
+                        for (var i = 0; i < 5; i++) {
+                            if (i < count) {
+                                tmp += "<i class='fas fa-star orange-text'></i>";
+                            } else {
+                                tmp += "<i class='fas fa-star' style='color:grey !important;'></i>";
+                            }
+                        }
+
+                        $("#row2").prepend(tmp + "</ul></div> <div class='text-left' onclick=nextProduct('" + encodeURIComponent(childSnapshot.val().name) + "')><p class='product-description-class'>" + (childSnapshot.val().description).substring(0, 100) + "...</p></div><div class='d-flex'><div class='flex-fill text-left'><p class='priceClass'>Rs." + childSnapshot.val().price + "</p></div> <div class='flex-fill text-right'><i class='fas fa-cart-plus fa-lg addCartClass' onclick=addtocart('" + encodeURIComponent(childSnapshot.val().name) + "')></i> </div></div></div></div>");
+                    } else { //document.getElementById("row2").innerHTML+=
+                        var tmp = "<div class='col align-items-center d-flex justify-content-center m-1' ><div class='card productCardClass px-3'><div class='text-center' onclick=nextProduct('" + encodeURIComponent(childSnapshot.val().name) + "')><view class='zoom'><img  id=imgms" + cnt1 + " class='image-fluid productImage'></view> </div><div class=' mt-1 text-center' onclick=nextProduct('" + encodeURIComponent(childSnapshot.val().name) + "')>  <a><p class='product-name-class'>" + (childSnapshot.val().name).toUpperCase() + "</p> </a> </div> <div class='flex-fill' onclick=nextProduct('" + encodeURIComponent(childSnapshot.val().name) + "')> <a> <p class='categoryClass'>" + childSnapshot.val().catagory + "</p> </a></div><div class='text-center'><ul class='rating rating-layout'>";
+
+                        var count = parseInt(childSnapshot.val().rating.avgrating);
+                        for (var i = 0; i < 5; i++) {
+                            if (i < count) {
+                                tmp += "<i class='fas fa-star orange-text'></i>";
+                            } else {
+                                tmp += "<i class='fas fa-star grey-text'></i>";
+                            }
+                        }
+
+                        $("#row1").prepend(tmp + "</ul></div> <div class='text-left' onclick=nextProduct('" + encodeURIComponent(childSnapshot.val().name) + "')><p class='product-description-class'>" + (childSnapshot.val().description).substring(0, 100) + "...</p></div><div class='d-flex'><div class='flex-fill text-left'><p class='priceClass'>Rs." + childSnapshot.val().price + "</p></div> <div class='flex-fill text-right'><i class='fas fa-cart-plus fa-lg addCartClass' onclick=addtocart('" + encodeURIComponent(childSnapshot.val().name) + "')></i> </div></div></div></div>");
+                    }
+                    //sessionStorage.starRating = count;
+                    // no=count;
+                    // var subid= item.id.substring(1);
+
+                    cnt++;
+                    (function(pid) {
+                        storageRef.child(childSnapshot.val().image).getDownloadURL().then(function(url) {
+                            document.getElementById("imgms" + pid).src = url;
+                        }).catch(function(error) {
+                            console.log(error);
+                        });
+                    })(cnt1);
+                });
+            }
+
+        });
+        firebase.database().ref().child("Posts").orderByChild("catagory").equalTo("Pesticide").limitToLast(12).on('value', function(snapshot1) {
+            if (snapshot1.exists()) {
+                var cnt = 0,
+                    cnt1 = 0;
+                document.getElementById("rp1").innerHTML = "";
+                document.getElementById("hrp").innerHTML = "";
+                snapshot1.forEach(function(childSnapshot) {
+                    cnt1++;
+                    var storageRef = firebase.storage().ref();
+                    if (cnt <= 3) {
+                        var tmp = "<div class='col-lg-3 col-md-6 col-sm-12 card hoverable mb-4 otherProductCard'><div class='card-body'><div class='row align-items-center'><div class='col-5 px-0 align-items-center justify-content-center text-center' onclick=nextProduct('" + encodeURIComponent(childSnapshot.val().name) + "')><a><img id=imgp" + cnt1 + " class='img-fluid productImage2' id='otherProductImage'></a></div><div class='col-7'><a><p class='font-weight-bold product-name-class-2 pt-2 text-left' onclick=nextProduct('" + encodeURIComponent(childSnapshot.val().name) + "')>" + (childSnapshot.val().name).toUpperCase() + "</p></a><p class='product-description-class-2'>" + (childSnapshot.val().description).substring(0, 80) + "..</p><ul class='rating list-unstyled list-inline other-rating-layout'>";
+                        var count = parseInt(childSnapshot.val().rating.avgrating);
+                        for (var i = 0; i < 5; i++) {
+                            if (i < count) {
+                                tmp += "<i class='fas fa-star orange-text'></i>";
+                            } else {
+                                tmp += "<i class='fas fa-star grey-text'></i>";
+                            }
+                        }
+
+                        document.getElementById("rp1").innerHTML += tmp + "</ul> <h5 class='priceClass float-left black-text'>Rs." + childSnapshot.val().price + "</h5><span class='float-right'><a data-toggle='tooltip' data-placement='top' title='Add to Cart'><i class='fas fa-cart-plus fa-lg d-block w-100 blue-text addCartClass' onclick=addtocart('" + encodeURIComponent(childSnapshot.val().name) + "')></i></a></span></div></div></div></div>";
+                    } else {
+                        var tmp = "<div class='col-lg-3 col-md-6 col-sm-12 card hoverable mb-4 otherProductCard'><div class='card-body'><div class='row align-items-center'><div class='col-5 px-0 align-items-center justify-content-center text-center' onclick=nextProduct('" + encodeURIComponent(childSnapshot.val().name) + "')><a><img id=imgp" + cnt1 + " class='img-fluid productImage2' id='otherProductImage'></a></div><div class='col-7'><a><p class='font-weight-bold product-name-class-2 pt-2 text-left' onclick=nextProduct('" + encodeURIComponent(childSnapshot.val().name) + "')>" + (childSnapshot.val().name).toUpperCase() + "</p></a><p class='product-description-class-2'>" + (childSnapshot.val().description).substring(0, 80) + "..</p><ul class='rating list-unstyled list-inline other-rating-layout'>";
+                        var count = parseInt(childSnapshot.val().rating.avgrating);
+                        for (var i = 0; i < 5; i++) {
+                            if (i < count) {
+                                tmp += "<i class='fas fa-star orange-text'></i>";
+                            } else {
+                                tmp += "<i class='fas fa-star grey-text'></i>";
+                            }
+                        }
+
+                        document.getElementById("hrp").innerHTML += tmp + "</ul> <h5 class='priceClass float-left black-text'>Rs." + childSnapshot.val().price + "</h5><span class='float-right'><a data-toggle='tooltip' data-placement='top' title='Add to Cart'><i class='fas fa-cart-plus fa-lg d-block w-100 blue-text addCartClass' onclick=addtocart('" + encodeURIComponent(childSnapshot.val().name) + "')></i></a></span></div></div></div></div>";
+                    }
+                    cnt++;
+
+                    (function(pid) {
+                        storageRef.child(childSnapshot.val().image).getDownloadURL().then(function(url) {
+                            document.getElementById("imgp" + pid).src = url;
+                        }).catch(function(error) {
+                            console.log(error);
+                        });
+                    })(cnt1);
+                });
+            }
+        });
+        firebase.database().ref().child("Posts").orderByChild("catagory").equalTo("Farming Tool").limitToLast(12).on('value', function(snapshot1) {
+            if (snapshot1.exists()) {
+                var cnt = 0,
+                    cnt1 = 0;
+                document.getElementById("rt1").innerHTML = "";
+                document.getElementById("hrt").innerHTML = "";
+                snapshot1.forEach(function(childSnapshot) {
+                    cnt1++;
+                    var storageRef = firebase.storage().ref();
+                    if (cnt <= 3) {
+                        var tmp = "<div class='col-lg-3 col-md-6 col-sm-12 card hoverable mb-4 otherProductCard'><div class='card-body'><div class='row align-items-center'><div class='col-5 px-0 align-items-center justify-content-center text-center' onclick=nextProduct('" + encodeURIComponent(childSnapshot.val().name) + "')><a><img id=imgt" + cnt1 + " class='img-fluid productImage2' id='otherProductImage'></a></div><div class='col-7'><a><p class='font-weight-bold product-name-class-2 pt-2 text-left' onclick=nextProduct('" + encodeURIComponent(childSnapshot.val().name) + "')>" + (childSnapshot.val().name).toUpperCase() + "</p></a><p class='product-description-class-2'>" + (childSnapshot.val().description).substring(0, 80) + "..</p><ul class='rating list-unstyled list-inline other-rating-layout'>";
+                        var count = parseInt(childSnapshot.val().rating.avgrating);
+                        for (var i = 0; i < 5; i++) {
+                            if (i < count) {
+                                tmp += "<i class='fas fa-star orange-text'></i>";
+                            } else {
+                                tmp += "<i class='fas fa-star grey-text'></i>";
+                            }
+                        }
+
+                        document.getElementById("rt1").innerHTML += tmp + "</ul> <h5 class='priceClass float-left black-text'>Rs." + childSnapshot.val().price + "</h5><span class='float-right'><a data-toggle='tooltip' data-placement='top' title='Add to Cart'><i class='fas fa-cart-plus fa-lg d-block w-100 blue-text addCartClass' onclick=addtocart('" + encodeURIComponent(childSnapshot.val().name) + "')></i></a></span></div></div></div></div>";
+                    } else {
+                        var tmp = "<div class='col-lg-3 col-md-6 col-sm-12 card hoverable mb-4 otherProductCard'><div class='card-body'><div class='row align-items-center'><div class='col-5 px-0 align-items-center justify-content-center text-center' onclick=nextProduct('" + encodeURIComponent(childSnapshot.val().name) + "')><a><img id=imgt" + cnt1 + " class='img-fluid productImage2' id='otherProductImage'></a></div><div class='col-7'><a><p class='font-weight-bold product-name-class-2 pt-2 text-left' onclick=nextProduct('" + encodeURIComponent(childSnapshot.val().name) + "')>" + (childSnapshot.val().name).toUpperCase() + "</p></a><p class='product-description-class-2'>" + (childSnapshot.val().description).substring(0, 80) + "..</p><ul class='rating list-unstyled list-inline other-rating-layout'>";
+                        var count = parseInt(childSnapshot.val().rating.avgrating);
+                        for (var i = 0; i < 5; i++) {
+                            if (i < count) {
+                                tmp += "<i class='fas fa-star orange-text'></i>";
+                            } else {
+                                tmp += "<i class='fas fa-star grey-text'></i>";
+                            }
+                        }
+
+                        document.getElementById("hrt").innerHTML += tmp + "</ul> <h5 class='priceClass float-left black-text'>Rs." + childSnapshot.val().price + "</h5><span class='float-right'><a data-toggle='tooltip' data-placement='top' title='Add to Cart'><i class='fas fa-cart-plus fa-lg d-block w-100 blue-text addCartClass' onclick=addtocart('" + encodeURIComponent(childSnapshot.val().name) + "')></i></a></span></div></div></div></div>";
+                    }
+                    cnt++;
+
+                    (function(pid) {
+                        storageRef.child(childSnapshot.val().image).getDownloadURL().then(function(url) {
+                            document.getElementById("imgt" + pid).src = url;
+                        }).catch(function(error) {
+                            console.log(error);
+                        });
+                    })(cnt1);
+                });
+            }
+        });
+        firebase.database().ref().child("Posts").orderByChild("catagory").equalTo("Cropicide").limitToLast(12).on('value', function(snapshot1) {
+            if (snapshot1.exists()) {
+                var cnt = 0,
+                    cnt1 = 0;
+                document.getElementById("rc1").innerHTML = "";
+                document.getElementById("hrc").innerHTML = "";
+                snapshot1.forEach(function(childSnapshot) {
+                    cnt1++;
+                    var storageRef = firebase.storage().ref();
+                    if (cnt <= 3) {
+                        var tmp = "<div class='col-lg-3 col-md-6 col-sm-12 card hoverable mb-4 otherProductCard'><div class='card-body'><div class='row align-items-center'><div class='col-5 px-0 align-items-center justify-content-center text-center' onclick=nextProduct('" + encodeURIComponent(childSnapshot.val().name) + "')><a><img id=imgc" + cnt1 + " class='img-fluid productImage2' id='otherProductImage'></a></div><div class='col-7'><a><p class='font-weight-bold product-name-class-2 pt-2 text-left' onclick=nextProduct('" + encodeURIComponent(childSnapshot.val().name) + "')>" + (childSnapshot.val().name).toUpperCase() + "</p></a><p class='product-description-class-2'>" + (childSnapshot.val().description).substring(0, 80) + "..</p><ul class='rating list-unstyled list-inline other-rating-layout'>";
+                        var count = parseInt(childSnapshot.val().rating.avgrating);
+                        for (var i = 0; i < 5; i++) {
+                            if (i < count) {
+                                tmp += "<i class='fas fa-star orange-text'></i>";
+                            } else {
+                                tmp += "<i class='fas fa-star grey-text'></i>";
+                            }
+                        }
+
+                        document.getElementById("rc1").innerHTML += tmp + "</ul> <h5 class='priceClass float-left black-text'>Rs." + childSnapshot.val().price + "</h5><span class='float-right'><a data-toggle='tooltip' data-placement='top' title='Add to Cart'><i class='fas fa-cart-plus fa-lg d-block w-100 blue-text addCartClass' onclick=addtocart('" + encodeURIComponent(childSnapshot.val().name) + "')></i></a></span></div></div></div></div>";
+                    } else {
+                        var tmp = "<div class='col-lg-3 col-md-6 col-sm-12 card hoverable mb-4 otherProductCard'><div class='card-body'><div class='row align-items-center'><div class='col-5 px-0 align-items-center justify-content-center text-center' onclick=nextProduct('" + encodeURIComponent(childSnapshot.val().name) + "')><a><img id=imgc" + cnt1 + " class='img-fluid productImage2' id='otherProductImage'></a></div><div class='col-7'><a><p class='font-weight-bold product-name-class-2 pt-2 text-left' onclick=nextProduct('" + encodeURIComponent(childSnapshot.val().name) + "')>" + (childSnapshot.val().name).toUpperCase() + "</p></a><p class='product-description-class-2'>" + (childSnapshot.val().description).substring(0, 80) + "..</p><ul class='rating list-unstyled list-inline other-rating-layout'>";
+                        var count = parseInt(childSnapshot.val().rating.avgrating);
+                        for (var i = 0; i < 5; i++) {
+                            if (i < count) {
+                                tmp += "<i class='fas fa-star orange-text'></i>";
+                            } else {
+                                tmp += "<i class='fas fa-star grey-text'></i>";
+                            }
+                        }
+
+                        document.getElementById("hrc").innerHTML += tmp + "</ul> <h5 class='priceClass float-left black-text'>Rs." + childSnapshot.val().price + "</h5><span class='float-right'><a data-toggle='tooltip' data-placement='top' title='Add to Cart'><i class='fas fa-cart-plus fa-lg d-block w-100 blue-text addCartClass' onclick=addtocart('" + encodeURIComponent(childSnapshot.val().name) + "')></i></a></span></div></div></div></div>";
+                    }
+                    cnt++;
+
+                    (function(pid) {
+                        storageRef.child(childSnapshot.val().image).getDownloadURL().then(function(url) {
+                            document.getElementById("imgc" + pid).src = url;
+                        }).catch(function(error) {
+                            console.log(error);
+                        });
+                    })(cnt1);
+
+
+
+
+
+                });
+            }
+            setTimeout(function() {
+                $("#loadMe").modal("hide");
+            }, 1000);
+        });
+
+        function nextProduct(name) {
+            //localStorage.setItem("pname",name);
+            window.location.href = ("ProductDetails.html?pname=" + name);
+        }
+
+        function changeqty(name, qty) {
+            name = decodeURIComponent(name);
+            if (qty == 0)
+                qty = 1;
+            qty = parseInt(qty);
+            firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("cart").child(name).child("qty").set(qty);
+        }
+
+        function expandcart() {
+            firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("cart").orderByChild("name").on('value', function(snapshot1) {
+                var storageRef = firebase.storage().ref();
+                document.getElementById("cartbody").innerHTML = "";
+                if (snapshot1.exists()) {
+                    var cnt = 0,
+                        cnt1 = 0,
+                        total = 0;
+                    document.getElementById("cartbody").innerHTML = "";
+
+                    snapshot1.forEach(function(childSnapshot) {
+                        total += childSnapshot.val().price * childSnapshot.val().qty;
+                        //document.getElementById("cartbody").innerHTML+="<!-- First row --><tr><th scope='row'><img id=img"+cnt+" alt='' class='img-fluid z-depth-0' style='height: 120px;'></th><td><h5 class='mt-3'><strong>"+childSnapshot.val().name+"</strong></h5><p class='text-muted'>"+childSnapshot.val().catagory+"</p></td><td></td><td>"+childSnapshot.val().price+"</td><td><input type='number' value='2' aria-label='Search' class='form-control' style='width: 100px'></td><td class='font-weight-bold'><strong>"+childSnapshot.val().price+"</strong></td><td><button type='button' class='btn btn-sm btn-primary' id=removebtn"+cnt+" data-toggle='tooltip' data-placement='top' title='Remove item' onclick=removeitem('"+ encodeURIComponent(childSnapshot.val().name)+"')>X</button></td></tr><!-- First row -->";
+                        // $("#removebtn"+cnt).click(function(){
+                        // firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("cart").child(childSnapshot.val().name).remove();
+                        // });
+                        cnt++;
+                        document.getElementById("cartbody").innerHTML += "<div class='row cart-item-row' ><div class='col-lg-2 col-md-2 col-sm-12 text-center' onclick=nextProduct('" + encodeURIComponent(childSnapshot.val().name) + "')><img id=img" + cnt + " class='cart-item-image img-fluid'></div><div class='col-lg-10 col-md-10 col-sm-12' style='padding-top: 24px'><div class='row'><div class='col-lg-8 col-md-8 col-sm-12 ' style='padding-bottom:2px;'><div class='text-center'> <div class='flex-column text-md-left'> <p class='cart-item-name-class px-4 ' onclick=nextProduct('" + encodeURIComponent(childSnapshot.val().name) + "')> <a>" + childSnapshot.val().name + "  </a> </p> <p class='cart-category-class px-4'> <a>" + childSnapshot.val().catagory + "</a> </p></div></div></div><div class='col-lg-4 col-md-4 col-sm-12 text-center'><div class='row'><div class='col text-right'><p class='cart-item-price'>Rs." + childSnapshot.val().price + "</p></div><div class='col'><div class='row cart-item-quantity'><input type='button' id='minus' class='cart-item-quantity-button' value='-' onclick=changeqty('" + encodeURIComponent(childSnapshot.val().name) + "','" + (childSnapshot.val().qty - 1) + "')><input value=" + childSnapshot.val().qty + " pattern='\d*' onkeyup=changeqty('" + encodeURIComponent(childSnapshot.val().name) + "',this.value) class='text-center cart-item-quantity-input'><input type='button' id='plus' value='+' onclick=changeqty('" + encodeURIComponent(childSnapshot.val().name) + "','" + (parseInt(childSnapshot.val().qty) + 1) + "') class='cart-item-quantity-button'> </div></div></div></div></div> <div class='d-flex d-inline justify-content-center cart-item-remove-div'><p class='cart-item-remove-button'><a id=removebtn" + cnt + " onclick=removeitem('" + encodeURIComponent(childSnapshot.val().name) + "')>Remove Item <i class='far fa-trash-alt'></i></a></p></div></div></div><hr>";
+                        (function(pid) {
+                            storageRef.child(childSnapshot.val().image).getDownloadURL().then(function(url) {
+                                document.getElementById("img" + pid).src = url;
+                            }).catch(function(error) {
+                                console.log(error);
+                            });
+                        })(cnt);
+                        // storageRef.child(childSnapshot.val().image).getDownloadURL().then(function(url) {
+
+
+
+                        //	document.getElementById("img"+cnt).src=url;
+                        //	cnt++;
+                        // });
+
+
+                    });
+                    document.getElementById("cart-subtotal").innerHTML = "Subtotal = Rs. " + total;
+                }
+            });
+        }
+
+        function removeitem(val) {
+            val = decodeURIComponent(val);
+            firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("cart").child(val).remove();
+            expandcart();
+        }
+
+        function addtocart(item) {
+
+            item = decodeURIComponent(item);
+
+            firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("cart").child(item).once("value", function(snapshot) {
+                if (snapshot.exists()) {
+                    $.toast({
+                        text: "Warning", // Text that is to be shown in the toast
+                        heading: 'Item Already added in Cart !', // Optional heading to be shown on the toast
+                        icon: 'warning', // Type of toast icon
+                        showHideTransition: 'fade', // fade, slide or plain
+                        allowToastClose: true, // Boolean value true or false
+                        hideAfter: 3000, // false to make it sticky or number representing the miliseconds as time after which toast needs to be hidden
+                        stack: 5, // false if there should be only one toast at a time or a number representing the maximum number of toasts to be shown at a time
+                        position: 'bottom-right', // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
+
+
+
+                        textAlign: 'left', // Text alignment i.e. left, right or center
+                        loader: true, // Whether to show loader or not. True by default
+                        loaderBg: 'orange', // Background color of the toast loader
+                        beforeShow: function() {}, // will be triggered before the toast is shown
+                        afterShown: function() {}, // will be triggered after the toat has been shown
+                        beforeHide: function() {}, // will be triggered before the toast gets hidden
+                        afterHidden: function() {} // will be triggered after the toast has been hidden
+                    });
+                } else {
+                    $.toast({
+                        text: "Success", // Text that is to be shown in the toast
+                        heading: 'Item added in Cart !', // Optional heading to be shown on the toast
+                        icon: 'success', // Type of toast icon
+                        showHideTransition: 'fade', // fade, slide or plain
+                        allowToastClose: true, // Boolean value true or false
+                        hideAfter: 3000, // false to make it sticky or number representing the miliseconds as time after which toast needs to be hidden
+                        stack: 5, // false if there should be only one toast at a time or a number representing the maximum number of toasts to be shown at a time
+                        position: 'bottom-right', // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
+
+
+
+                        textAlign: 'left', // Text alignment i.e. left, right or center
+                        loader: true, // Whether to show loader or not. True by default
+                        loaderBg: '#9EC600', // Background color of the toast loader
+                        beforeShow: function() {}, // will be triggered before the toast is shown
+                        afterShown: function() {}, // will be triggered after the toat has been shown
+                        beforeHide: function() {}, // will be triggered before the toast gets hidden
+                        afterHidden: function() {} // will be triggered after the toast has been hidden
+                    });
+                    firebase.database().ref().child("Posts").child(item).once('value', function(snapshot1) {
+                        var obj = {
+                            name: snapshot1.val().name,
+                            price: snapshot1.val().price,
+                            image: snapshot1.val().image,
+                            catagory: snapshot1.val().catagory,
+                            seller: snapshot1.val().seller,
+                            qty: 1
+                        };
+                        firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("cart").child(item).set(obj);
+                    });
+                }
+            });
+
+
+        }
+
+        function feedback() {
+            if (document.getElementById("feedback").value == "") {
+                alert("Write something !");
+                return;
+            }
+            firebase.database().ref().child("Feedbacks").push({
+                Feedback: document.getElementById("feedback").value,
+                Name: localStorage.getItem("Username")
+            });
+            $("#modalContactForm").modal("hide");
+            $.toast({
+                text: "Success", // Text that is to be shown in the toast
+                heading: 'Thanks for your Feedback!', // Optional heading to be shown on the toast
+                icon: 'success', // Type of toast icon
+                showHideTransition: 'fade', // fade, slide or plain
+                allowToastClose: true, // Boolean value true or false
+                hideAfter: 3000, // false to make it sticky or number representing the miliseconds as time after which toast needs to be hidden
+                stack: 5, // false if there should be only one toast at a time or a number representing the maximum number of toasts to be shown at a time
+                position: 'bottom-right', // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
+
+
+
+                textAlign: 'left', // Text alignment i.e. left, right or center
+                loader: true, // Whether to show loader or not. True by default
+                loaderBg: '#9EC600', // Background color of the toast loader
+                beforeShow: function() {}, // will be triggered before the toast is shown
+                afterShown: function() {}, // will be triggered after the toat has been shown
+                beforeHide: function() {}, // will be triggered before the toast gets hidden
+                afterHidden: function() {} // will be triggered after the toast has been hidden
+            });
+            document.getElementById("feedback").value = "";
+        }
+
+        function logout() {
+            localStorage.clear();
+            window.location.href = ("login.html");
+        }
+        firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("cart").orderByChild("name").on('value', function(snapshot1) {
+            if (parseInt(snapshot1.numChildren()) == 0) {
+                document.getElementById("cartbody").style = "background-image:url('images/emptycart.png');background-repeat: no-repeat;background-size:290px 250px ;background-position: center center; ";
+                document.getElementById("cart-subtotal").innerHTML = "Subtotal = Rs. 0";
+            } else {
+                document.getElementById("cartbody").style = "background-color:white;";
+
+            }
+        });
+        $(document).ready(function() {
+            $("#myInput").on("keyup", function() {
+                if (document.getElementById("myInput").value == "") {
+                    // document.getElementById("mainProducts").scrollIntoView();
+                    document.getElementById("searchResult").style = "display:none;background-color:#e8fae6 !important;border-radius: 12px;";
+                    return;
+                }
+                document.getElementById("searchResult").style = "background-color:#e8fae6 !important;border-radius: 12px;";
+                // document.getElementById("searchhead").innerHTML="Serach Results";
+                document.getElementById("focusresult").scrollIntoView();
+                var value = $(this).val().toLowerCase();
+                $("#rs1 .card").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+                if ($("#rs1 .card:visible").length == 0) {
+                    document.getElementById("notfound").style = "display:block;";
+                } else {
+                    document.getElementById("notfound").style = "display:none;";
+                }
+            });
+
+        });
+
+        function hidediv() {
+            //document.getElementById("searchhead").innerHTML="";
+            if (document.getElementById("myInput").value != "")
+                return;
+            document.getElementById("mainProducts").scrollIntoView();
+            document.getElementById("searchResult").style = "display:none;background-color:#e8fae6 !important;border-radius: 12px;";
+        }
+        firebase.database().ref().child("Posts").orderByChild("catagory").on('value', function(snapshot1) {
+            if (snapshot1.exists()) {
+                var cnt = 0,
+                    cnt1 = 0;
+                document.getElementById("rs1").innerHTML = "<div id='notfound'class='text-center pt-2' style='display: none;'><img class='image-fluid' src='images/alert.png' style='height:80px; width:80px;' /><br><p style='font-size:18px;font-weight:bold;margin-top:12px;'>Sorry, No Results Found !</p></div>";
+                snapshot1.forEach(function(childSnapshot) {
+                    cnt1++;
+                    var storageRef = firebase.storage().ref();
+                    var tmp = "<div class='col-lg-3 col-md-6 col-sm-12 card hoverable mb-4 otherProductCard'><div class='card-body'><div class='row align-items-center'><div class='col-5 px-0 align-items-center justify-content-center text-center' onclick=nextProduct('" + encodeURIComponent(childSnapshot.val().name) + "')><a><img id=imgs" + cnt1 + " class='img-fluid productImage2' id='otherProductImage'></a></div><div class='col-7'><a><p class='font-weight-bold product-name-class-2 pt-2 text-left' onclick=nextProduct('" + encodeURIComponent(childSnapshot.val().name) + "')>" + (childSnapshot.val().name).toUpperCase() + "</p></a><p class='product-description-class-2'>" + (childSnapshot.val().description).substring(0, 80) + "..</p><ul class='rating list-unstyled list-inline other-rating-layout'>";
+                    var count = parseInt(childSnapshot.val().rating.avgrating);
+                    for (var i = 0; i < 5; i++) {
+                        if (i < count) {
+                            tmp += "<i class='fas fa-star orange-text'></i>";
+                        } else {
+                            tmp += "<i class='fas fa-star grey-text'></i>";
+                        }
+                    }
+
+                    document.getElementById("rs1").innerHTML += tmp + "</ul> <h5 class='priceClass float-left black-text'>Rs." + childSnapshot.val().price + "</h5><span class='float-right'><a data-toggle='tooltip' data-placement='top' title='Add to Cart'><i class='fas fa-cart-plus fa-lg d-block w-100 blue-text addCartClass' onclick=addtocart('" + encodeURIComponent(childSnapshot.val().name) + "')></i></a></span></div></div></div></div>";
+                    (function(pid) {
+                        storageRef.child(childSnapshot.val().image).getDownloadURL().then(function(url) {
+                            document.getElementById("imgs" + pid).src = url;
+                        }).catch(function(error) {
+                            console.log(error);
+                        });
+                    })(cnt1);
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

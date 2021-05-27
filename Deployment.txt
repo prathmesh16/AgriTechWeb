@@ -1,0 +1,13 @@
+We need one server to manage the responces.So The account is created account on https://in.000webhost.com/
+
+Using this 000webhost server the responces are managed.
+
+We created a new website and strorage for our website on 000webhost.
+
+Then we uploded the files of our website and required resouces like images,videos .etc on the cloud service of 000webhost to make it globally accessible.
+
+We took a domain name from a site named freenom.
+
+And the domain name is parked on to the name of our 000webhost website.
+
+Using that Domain we made our site globally accessible.Which can be accessed by browser from anywhere.

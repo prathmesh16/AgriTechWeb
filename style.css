@@ -1,0 +1,1193 @@
+    img[alt="www.000webhost.com"] {
+        display: none;
+    }
+    /*-------------------------navbar---------------*/
+    
+    #brand {
+        height: 45px;
+        width: 150px;
+    }
+    
+    #MainNavbar {
+        background-color: white;
+    }
+    
+    #searchArea {
+        width: 450px;
+    }
+    
+    .searchBarClass input:focus {
+        box-shadow: none !important;
+        border-color: #ced4da !important;
+        color: black !important;
+    }
+    
+    #searchBtn {
+        background-color: ghostwhite;
+        border-color: #ced4da;
+    }
+    
+    #searchIcon {
+        color: green;
+    }
+    
+    .nav-link,
+    .dropdown-item {
+        color: green !important;
+        font-family: Nunito;
+    }
+    
+    .nav-link:hover,
+    .dropdown-item:hover {
+        color: green !important;
+        background-color: #ebebeb;
+    }
+    
+    .active-nav-item {
+        background-color: #ebebeb !important;
+    }
+    /*------------------main slider-----------*/
+    /*-----popular products slider-----*/
+    
+    .prevClass {
+        display: inline-block;
+        margin-right: auto;
+        margin-left: -50px;
+        width: 36px !important;
+        height: 36px !important;
+        background: no-repeat 50% 100% 100%;
+        background-color: black;
+        border-radius: 18px;
+    }
+    
+    .nextClass {
+        display: inline-block;
+        width: 36px !important;
+        height: 36px !important;
+        background: no-repeat 50% 100% 100%;
+        background-color: black;
+        border-radius: 18px;
+        margin-left: auto;
+        margin-right: -50px;
+    }
+    
+    .popularSection {
+        padding: 40px;
+    }
+    
+    .productImage {
+        height: 140px;
+        padding: 8px;
+    }
+    
+    .categoryClass {
+        text-align: center;
+        margin-top: 10px;
+        font-family: Nunito;
+        color: #757575 !important;
+    }
+    
+    .headingPopular {
+        font-family: Nunito;
+        font-size: 24px;
+        font-weight: bold;
+    }
+    
+    .priceClass {
+        font-family: Nunito;
+        font-weight: bold !important;
+        font-size: 21px;
+        margin-top: -4px;
+    }
+    
+    .priceClass:hover {
+        color: red !important;
+    }
+    
+    .priceClass2 {
+        font-family: Nunito;
+        font-weight: bold !important;
+        font-size: 19px;
+        margin-top: -15px;
+    }
+    
+    .priceClass2:hover {
+        color: red !important;
+    }
+    /* -----other products-------  */
+    
+    .catHeader {
+        color: black;
+        font-family: Nunito !important;
+        font-size: 20px !important;
+        margin-top: 10px;
+        margin-left: -16px;
+    }
+    
+    .catHeader span {
+        margin-right: -48px;
+    }
+    
+    .viewMoreBtn {
+        margin-top: -6px;
+        width: 100px !important;
+        height: 36px;
+        margin-right: 16px!important;
+        color: white;
+        background-color: green;
+        text-align: center;
+        font-size: 12px;
+        font-family: Nunito;
+    }
+    
+    .viewMoreBtn:focus {
+        outline: none !important;
+        box-shadow: none !important;
+    }
+    
+    .viewMoreBtn:hover {
+        border: 1.5px solid green;
+        color: green;
+        background-color: white;
+    }
+    /* -----other products-------  */
+    /*--------- app download------------ */
+    
+    .appDownloadSection {
+        background-image: url('images/downloadBg.png');
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    
+    .mobileImage {
+        height: 520px;
+    }
+    /*--------- app download------------ */
+    /*-----pincode section---------*/
+    
+    .pinCardClass {
+        height: 381px !important;
+        width: 290px !important;
+        padding: 20px;
+        box-shadow: none !important;
+        border-radius: 10px;
+        margin-top: 50px;
+    }
+    
+    .pinInput {
+        background-color: ghostwhite;
+        border-radius: 0;
+        height: 36px;
+    }
+    
+    #pinBtn {
+        margin: 12px;
+        box-shadow: none;
+        border-radius: 0;
+    }
+    
+    .pinImage {
+        margin-top: 10px;
+        height: 100px;
+        width: 100px;
+        padding: 8px;
+    }
+    
+    #pinHeading {
+        margin-top: 0px;
+        font-size: 15px;
+        font-family: Nunito;
+        color: black;
+    }
+    
+    #pinText {
+        font-family: Nunito;
+        width: 250px;
+        font-size: 14px;
+        color: #424242;
+        margin-top: 30px;
+    }
+    
+    #pinBtn {
+        border-radius: 20px;
+        font-size: 16px;
+        background-color: black;
+        color: white;
+        margin-top: 16px;
+        width: 100px;
+    }
+    
+    #pinBtn:hover {
+        border-radius: 20px;
+        font-size: 16px;
+        border-color: black;
+        background-color: white;
+        color: black;
+    }
+    
+    .pinHrClass {
+        width: 30px;
+        margin-top: -10px;
+        background-color: grey;
+    }
+    /*---------strip-ad-----------*/
+    
+    .stripAdClass {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+    /*----------features-----------*/
+    
+    #secureImage {
+        width: 72px;
+        height: 76px;
+        margin-bottom: 14px;
+    }
+    
+    #helpImage {
+        width: 70px;
+        height: 70px;
+        margin-bottom: 20px;
+    }
+    
+    #trustpayImage,
+    #shop-on-goImage {
+        width: 66px;
+        height: 66px;
+        margin-bottom: 24px;
+    }
+    
+    #secureImage:hover {
+        width: 76px;
+        height: 80px;
+        margin-bottom: 12px;
+        margin-top: -2px;
+    }
+    
+    #helpImage:hover {
+        width: 74px;
+        height: 74px;
+        margin-bottom: 18px;
+        margin-top: -2px;
+    }
+    
+    #trustpayImage:hover,
+    #shop-on-goImage:hover {
+        width: 70px;
+        height: 70px;
+        margin-bottom: 22px;
+        margin-top: -2px;
+    }
+    
+    #secureText,
+    #shop-on-goText,
+    #helpText,
+    #trustpayText {
+        font-family: Nunito;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    
+    .featuresClass {
+        margin-bottom: -10px;
+        margin-top: 10px;
+    }
+    /*-----footer-------*/
+    
+    .footerLinkClass {
+        font-size: 17px;
+        font-family: Nunito;
+        font-weight: bold;
+    }
+    
+    .list-unstyled {
+        font-family: Nunito;
+    }
+    
+    .list-unstyled li a {
+        color: #bababa;
+    }
+    
+    .list-unstyled li a:hover {
+        color: white;
+        text-decoration: none;
+    }
+    
+    .footer-copyright a:hover {
+        text-decoration: none;
+        color: limegreen;
+    }
+    
+    .page-footer {
+        margin-top: 10px;
+    }
+    
+    .footerLogo {
+        height: 45px;
+        width: 150px;
+        margin-top: 8px;
+        margin-left: -10px;
+        margin-bottom: 7px;
+    }
+    
+    .footerLogo:hover {
+        height: 49px;
+        width: 155px;
+        margin-top: 6px;
+        margin-left: -12px;
+        margin-bottom: 5px;
+    }
+    
+    p {
+        font-family: Nunito;
+    }
+    
+    .list-inline-item a i:hover {
+        color: limegreen;
+    }
+    /* ---- cart design---------- */
+    
+    #cart-row-header {
+        padding: 10px 0px 0px 0px;
+    }
+    
+    #cart-header-title {
+        font-family: Nunito !important;
+        font-weight: bold;
+    }
+    
+    #cart-close-icon {
+        margin-top: -39px;
+        font-size: 30px;
+        font-family: Nunito !important;
+    }
+    
+    .cart-item-name-class:hover {
+        color: #075e02;
+    }
+    
+    .cart-item-name-class {
+        /* padding-left: 12px !important;
+	padding-right: 12px !important; */
+        display: block;
+        font-weight: bold;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2 !important;
+        font-family: Nunito !important;
+        height: 21px*1.4*2 !important;
+        font-size: 21px !important;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+    
+    .cart-item-quantity-button {
+        width: 40px;
+        height: 40px;
+        color: white;
+        background-color: #2e2e2e;
+        border: none;
+        font-size: 24px;
+        font-weight: bold;
+    }
+    
+    .cart-item-quantity-button:focus,
+    .cart-item-quantity-input:focus {
+        outline: none !important;
+        box-shadow: none !important;
+    }
+    
+    .cart-item-quantity-button:hover {
+        background-color: #075e02;
+    }
+    
+    .cart-item-quantity-input {
+        width: 40px;
+        height: 40px;
+        color: black;
+        background-color: white;
+        border: none;
+    }
+    
+    .cart-item-price {
+        font-family: Nunito !important;
+        font-size: 24px;
+        font-weight: bold;
+    }
+    
+    .cart-item-quantity {
+        border: 0.5px solid #2e2e2e;
+        width: 121px;
+        margin-top: -4px;
+        border-radius: 10px;
+    }
+    
+    #minus {
+        border-top-left-radius: 9px;
+        border-bottom-left-radius: 9px;
+    }
+    
+    #plus {
+        border-top-right-radius: 9px;
+        border-bottom-right-radius: 9px;
+    }
+    
+    .cart-item-image {
+        height: 160px;
+    }
+    
+    .cart-category-class {
+        font-family: Nunito;
+        color: #757575 !important;
+        margin-top: -10px;
+    }
+    
+    .cart-item-remove-button {
+        font-size: 18px;
+        text-align: center;
+        padding-top: 4px;
+        margin-top: -4px;
+        padding-bottom: 4px;
+        font-family: Nunito !important;
+        color: #c91104;
+        width: 140px;
+    }
+    
+    .cart-item-remove-button:hover {
+        font-weight: bold;
+    }
+    
+    .cart-item-row {
+        padding: 10px 0px;
+    }
+    
+    .cart-list {
+        height: 400px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+    
+    #cart-subtotal {
+        font-size: 24px !important;
+        font-family: Nunito !important;
+        font-weight: bold;
+    }
+    
+    .cart-subtotal-div {
+        padding-top: 16px;
+    }
+    
+    .cart-footer {
+        border-top: 1px solid #ced4da;
+        margin-top: 10px;
+        /* box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.16), 0 0px 2px 0 rgba(0, 0, 0, 0.12) !important; */
+    }
+    
+    #continue-shopping-btn {
+        width: 150px;
+        font-family: Nunito;
+        font-size: 18px;
+        background-color: white;
+        color: green;
+        border-radius: 20px;
+        height: 40px;
+        margin-right: 8px;
+        border: 0.8px solid green;
+    }
+    
+    #continue-shopping-btn:hover,
+    #checkout-btn:hover {
+        background-color: #2e2e2e;
+        color: white;
+        height: 41.6px;
+        border: none;
+    }
+    
+    #continue-shopping-btn:focus,
+    #checkout-btn:focus {
+        outline: none !important;
+        box-shadow: none !important;
+    }
+    
+    #checkout-btn {
+        width: 150px;
+        font-family: Nunito;
+        font-weight: k;
+        font-size: 18px;
+        background-color: green;
+        color: white;
+        border-radius: 20px;
+        height: 41.6px;
+        margin-left: 8px;
+        padding: 0px 0px;
+        border: none;
+    }
+    
+    .cart-modal-class {
+        border-radius: 16px !important;
+        height: 640px !important;
+    }
+    /* profile activity */
+    
+    .profile-accordian-heading {
+        background-color: white;
+        outline: none !important;
+    }
+    
+    #logoutBtn:hover {
+        color: yellow;
+    }
+    /* category  */
+    
+    .productImage3 {
+        height: 130px;
+        padding: 8px;
+    }
+    
+    .productImage4 {
+        height: 130px;
+        padding: 8px;
+        margin-top: -24px;
+    }
+    
+    .productDescriptionClass {
+        text-align: left;
+        display: block;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2 !important;
+        font-family: Nunito;
+        height: 15px*1.4*2 !important;
+        font-size: 15px !important;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        width: 160px !important;
+        margin-top: -10px;
+    }
+    
+    .productNameClass3 {
+        text-align: left;
+        display: block;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1 !important;
+        font-family: Nunito;
+        height: 17px*1.4*1 !important;
+        font-size: 17px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        font-weight: bold;
+        color: black;
+        width: 160px !important;
+    }
+    
+    .productNameClass3:hover {
+        text-decoration: none!important;
+        color: orangered !important;
+    }
+    
+    .productCategoryClass {
+        font-family: Nunito;
+        color: #757575 !important;
+        margin-top: -14px;
+    }
+    
+    .slider {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 5px;
+        border-radius: 3px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 1;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+    }
+    
+    .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: green;
+        cursor: pointer;
+    }
+    
+    .slider::-moz-range-thumb {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: green;
+        cursor: pointer;
+    }
+    
+    #filterBtn {
+        margin-top: -10px;
+        background-color: white;
+        border-radius: 4px;
+        border: 1px solid green;
+        font-size: 12px;
+        font-weight: bold;
+        padding: 5px 8px;
+        color: green;
+        text-transform: uppercase;
+        font-family: Nunito;
+    }
+    
+    #filterBtn:hover {
+        background-color: green;
+        border: none;
+        color: white;
+    }
+    
+    #filterBtn:focus {
+        outline: none !important;
+        box-shadow: none !important;
+    }
+    /* .category-product-list {
+	height: 556px;
+	overflow-y: auto;
+	overflow-x: hidden;
+} */
+    /* product details page */
+    
+    #mainProductImage {
+        max-height: 310px;
+        max-width: 310px;
+        height: auto;
+        width: auto;
+    }
+    
+    .main-product-name-class {
+        font-family: Nunito;
+        font-size: 28px;
+    }
+    
+    .main-category-class {
+        font-family: Nunito;
+        color: #757575 !important;
+        font-size: 22px;
+        margin-top: -8px;
+    }
+    
+    .main-description-class {
+        font-family: Nunito;
+        color: #4f4f4f;
+        font-size: 17px;
+    }
+    
+    .main-rating-layout {
+        margin-top: -8px;
+        font-size: 18px;
+    }
+    
+    .main-price-class {
+        font-size: 25px;
+        font-family: Nunito;
+        font-weight: bold;
+    }
+    
+    .cart-btn-class {
+        font-size: 16px;
+        font-family: Nunito;
+        color: white;
+        background-color: green;
+        border-radius: 20px;
+        border: none;
+        padding: 8px 12px;
+    }
+    
+    #addToCartBtn:hover {
+        color: green;
+        background-color: white;
+        border-radius: 20px;
+        border: 1.2px solid green;
+    }
+    
+    #addToCartBtn:focus {
+        outline: none !important;
+        box-shadow: none !important;
+    }
+    
+    .main-price-class:hover {
+        color: orangered !important;
+    }
+    
+    .main-product-name-class:hover {
+        color: orangered;
+    }
+    
+    .product-description-class {
+        text-align: left;
+        display: block;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2 !important;
+        font-family: Nunito;
+        height: 16px*1.4*2 !important;
+        font-size: 16px !important;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        width: 200px;
+        margin-top: -8px;
+    }
+    
+    .product-name-class {
+        text-align: center;
+        font-size: 17px;
+        margin-top: 8px;
+        font-weight: bold;
+        font-family: Nunito;
+    }
+    
+    .product-name-class:hover {
+        color: orangered;
+    }
+    
+    .categoryClass {
+        margin-top: -15px;
+        text-align: center;
+        font-family: Nunito;
+        color: #757575 !important;
+    }
+    
+    .productCardClass {
+        height: 360px !important;
+        width: 240px !important;
+        padding-top: 24px;
+        z-index: 2;
+        border: none;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.16), 0 1px 2px 0 rgba(0, 0, 0, 0.12) !important;
+        margin-top: 2px;
+    }
+    
+    .productCardClass:hover {
+        box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12) !important;
+    }
+    
+    .productImage {
+        max-height: 140px;
+        max-width: 140px;
+        height: 100%;
+        width: auto;
+    }
+    
+    .product-Image {
+        max-height: 170px;
+        max-width: 170px;
+        height: 100%;
+        width: auto;
+    }
+    
+    .rating-layout {
+        font: 15px;
+        text-align: center;
+        margin-top: -16px;
+        margin-left: -40px;
+    }
+    
+    .addCartClass {
+        color: green;
+    }
+    
+    .addCartClass:hover {
+        color: purple !important;
+    }
+    
+    .detailCard {
+        margin-top: 60px;
+    }
+    
+    .product-description-class-2 {
+        text-align: left;
+        display: block;
+        margin-top: -12px;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2 !important;
+        font-family: Nunito;
+        height: 15px*1.4*2 !important;
+        font-size: 15px !important;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        width: 164px !important;
+    }
+    
+    .product-name-class-2 {
+        text-align: center;
+        display: block;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1 !important;
+        font-family: Nunito;
+        height: 16px*1.4*1 !important;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        width: 164px !important;
+        font-size: 16px;
+    }
+    
+    .product-name-class-2:hover {
+        color: orangered;
+    }
+    
+    .other-rating-layout {
+        margin-top: -10px;
+    }
+    
+    .productImage2 {
+        height: 120px;
+        padding: 6px;
+    }
+    
+    .otherProductCard {
+        height: 190px;
+    }
+    
+    .orderProductCard {
+        height: auto;
+    }
+    
+    .priceClass2 {
+        font-family: Nunito;
+        font-weight: bold !important;
+        font-size: 18px;
+        margin-top: -8px;
+    }
+    
+    .priceClass2:hover {
+        color: maroon !important;
+    }
+    
+    .product-name-class-3 {
+        text-align: center;
+        display: block;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1 !important;
+        font-family: Nunito;
+        height: 18px*1.4*1 !important;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        width: 180px !important;
+        font-size: 18px;
+    }
+    
+    .product-name-class-3:hover {
+        color: orangered;
+    }
+    
+    .quantityClass {
+        background-color: green;
+        color: white;
+        font-family: Nunito;
+        font-size: 16px;
+        border: none;
+        text-align: center;
+        border-radius: 30px;
+        padding: 2px 8px;
+        width: 75px;
+        margin-top: 4px;
+    }
+    
+    .quantityClass2 {
+        background-color: green;
+        color: white;
+        font-family: Nunito;
+        font-size: 16px;
+        border: none;
+        text-align: center;
+        border-radius: 30px;
+        padding: 2px 8px;
+        width: 75px;
+        margin-top: -9px;
+    }
+    
+    #totAmt {
+        font-family: Nunito;
+        font-size: 22px;
+        color: white;
+    }
+    
+    #totAmt1 {
+        font-family: Nunito;
+        font-size: 22px;
+        color: white;
+    }
+    
+    label {
+        font-family: Nunito;
+    }
+    
+    .placeOrderForm input:focus {
+        box-shadow: none !important;
+        outline: none !important;
+        color: black !important;
+        font-family: Nunito !important;
+        border-color: #ced4da !important;
+    }
+    
+    .placeOrderForm input {
+        color: black !important;
+        font-family: Nunito !important;
+    }
+    
+    #cp {
+        font-family: Nunito;
+        font-size: 18px;
+        background-color: white;
+        color: green !important;
+        border-radius: 8px;
+        border: 1px solid green;
+        height: 45px;
+    }
+    
+    #mp {
+        font-family: Nunito;
+        font-size: 18px;
+        background-color: green;
+        color: white !important;
+        border-radius: 8px;
+        border: 1px solid green;
+        height: 45px;
+    }
+    
+    #cp:hover,
+    #mp:hover {
+        background-color: #181717;
+        color: white !important;
+        border: none;
+    }
+    
+    .placeOrderCard {
+        border-top: 4px solid rgb(6, 180, 6);
+        border-bottom: 4px solid rgb(6, 180, 6);
+    }
+    
+    .team-class img {
+        border-radius: 50%;
+    }
+    
+    .team-class h6 {
+        font-family: Nunito !important;
+    }
+    
+    .team-class small {
+        font-family: Nunito !important;
+    }
+    /* grid */
+    
+    .d-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 100px;
+        grid-gap: 7px;
+    }
+    
+    .item {
+        position: relative;
+    }
+    
+    .item:nth-child(1) {
+        grid-column: 1 / 2;
+        grid-row: 1 / 4;
+    }
+    
+    .item:nth-child(2) {
+        grid-column: 2;
+        grid-row: 0 / 3;
+    }
+    
+    .item:nth-child(3) {
+        grid-column: 2;
+        grid-row: 2 / 3;
+    }
+    
+    .item:nth-child(4) {
+        grid-column: 2;
+        grid-row: 3 / 3;
+    }
+    
+    .item a {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        overflow: hidden;
+    }
+    
+    .item img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+    
+    .about-body,
+    .profile-body {
+        background-image: url('images/bg.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+    
+    #feedbackSendBtn {
+        padding: 10px 30px;
+        color: white;
+        background-color: green;
+        border-radius: 24px;
+        font-family: Nunito;
+        border: none;
+    }
+    
+    #feedbackSendBtn:focus {
+        outline: none !important;
+        box-shadow: none !important;
+    }
+    
+    #feedbackSendBtn:hover {
+        background-color: #2e2e2e;
+    }
+    
+    #cartCountBadge {
+        border-radius: 50% !important;
+        font-family: Nunito !important;
+        font-size: 12px !important;
+        margin-left: -8px !important;
+        background-color: orangered !important;
+    }
+    
+    #cancell {
+        box-shadow: none !important;
+        font-size: 14px !important;
+        font-family: Nunito !important;
+        background-color: white !important;
+        border: 0.8px solid green !important;
+        color: green !important;
+        border-radius: 8px !important;
+    }
+    
+    #submit {
+        box-shadow: none !important;
+        font-size: 14px !important;
+        font-family: Nunito !important;
+        background-color: green !important;
+        color: white !important;
+        border: 0.8px solid green !important;
+        border-radius: 8px !important;
+    }
+    
+    #cancell:hover {
+        background-color: #2e2e2e !important;
+        color: white !important;
+        border: 0.8px solid #2e2e2e !important;
+    }
+    
+    #submit:hover {
+        background-color: #2e2e2e !important;
+        border: 0.8px solid #2e2e2e !important;
+    }
+    
+    #addr-collapse input:focus,
+    #addr-collapse textarea:focus,
+    #addr-collapse select:focus,
+    .modal-body input:focus {
+        box-shadow: none !important;
+        outline: none !important;
+        border-color: #ced4da !important;
+    }
+    
+    #productUploadBtn {
+        font-size: 15px !important;
+        font-family: Nunito !important;
+        background-color: green !important;
+        color: white !important;
+        border: 0.8px solid green !important;
+        border-radius: 20px !important;
+        padding: 8px 18px;
+    }
+    
+    #productUploadBtn:hover {
+        background-color: #2e2e2e !important;
+    }
+    
+    .paymentStatus {
+        font-size: 16px;
+        font-family: Nunito !important;
+        margin-top: -8px;
+    }
+    
+    .myOrderCard {
+        height: 190px !important;
+    }
+    
+    .order-detail-fields {
+        font-size: 18px;
+        font-family: Nunito !important;
+    }
+    
+    .order-detail-values {
+        font-size: 18px;
+        font-family: Nunito !important;
+        /* margin-top: -15px !important; */
+        color: #575555 !important;
+    }
+    
+    th {
+        font-family: Nunito !important;
+        font-size: 16px !important;
+        font-weight: bold !important;
+        width: 150px !important;
+    }
+    
+    td {
+        font-family: Nunito !important;
+        font-size: 16px !important;
+    }
+    
+    #review:focus {
+        outline: none !important;
+        box-shadow: none !important;
+    }
+    
+    #review {
+        width: 150px;
+        font-family: Nunito;
+        font-size: 18px;
+        background-color: green;
+        color: white;
+        border-radius: 20px;
+        height: 40px;
+        padding: 0px 0px;
+        border: none;
+        margin-top: -20px;
+    }
+    
+    #review:hover {
+        background-color: #2e2e2e;
+        color: white;
+        height: 40px;
+        border: none;
+    }
+    
+    #edit-product-btn {
+        color: #3e9df0 !important;
+    }
+    
+    #delete-product-btn {
+        color: orangered !important;
+    }
+    
+    #productEditModal {
+        overflow: hidden !important;
+    }
+    
+    #productUploadBtn:focus,
+    textarea:focus,
+    select:focus {
+        box-shadow: none !important;
+        outline: none !important;
+        border-color: #ced4da !important;
+    }

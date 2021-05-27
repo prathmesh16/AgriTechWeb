@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html>
+<script>
+    document.onreadystatechange = function() {
+        if (document.readyState !== "complete") {
+            $("#loadMe").modal({
+                backdrop: "static", //remove ability to close modal with click
+                keyboard: false, //remove option to close with keyboard
+                show: true //Display loader!
+            });
+        }
+    };
+</script>
+<!-- Modal -->
+<div class="modal fade" id="loadMe" tabindex="-1" role="dialog" aria-labelledby="loadMeLabel">
+    <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <div class="loader"></div>
+                <div class="loader-txt">
+                    <p id="loadermsg">Loading please wait....</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<head>
+    <script>
+        function preloadFunc() {
+            if (localStorage.getItem("Username") === null) {
+                window.location.href = ("login.html");
+            }
+        }
+        window.onpaint = preloadFunc();
+    </script>
+    <title>Profile</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <!-------CSS----------->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link rel="stylesheet" href="md/css/bootstrap.min.css">
+    <link rel="stylesheet" href="md/css/mdb.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="jquery.toast.css">
+
+
+
+
+    <style type="text/css">
+        .loader {
+            position: relative;
+            text-align: center;
+            margin: 15px auto 35px auto;
+            z-index: 9999;
+            display: block;
+            width: 80px;
+            height: 80px;
+            border: 10px solid rgba(0, 0, 0, .3);
+            border-radius: 50%;
+            border-top-color: #21b30e;
+            animation: spin 1s ease-in-out infinite;
+            -webkit-animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+        
+        @-webkit-keyframes spin {
+            to {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+        
+        .hover:hover {
+            cursor: pointer;
+        }
+        /** MODAL STYLING **/
+        
+        .modal-content {
+            border-radius: 0px;
+            box-shadow: 0 0 20px 8px rgba(0, 0, 0, 0.7);
+        }
+        
+        .modal-backdrop.show {
+            opacity: 0.85;
+        }
+        
+        .loader-txt {
+            p {
+                font-size: 13px;
+                color: #666;
+                small {
+                    font-size: 11.5px;
+                    color: #999;
+                }
+            }
+        }
+    </style>
+
+</head>
+
+<body class="profile-body">
+
+    <!-- edit modal -->
+    <div class="modal fade" id="loadMeip" tabindex="-1" role="dialog" aria-labelledby="loadMeLabel">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content p-4" style="border-bottom:8px solid limegreen; border-radius: 8px;">
+                <div class="loader-txt">
+                    <p class="font-weight-bold">Update Information</p>
+                </div>
+                <div class="modal-body text-center">
+                    <p class="text-left">Enter Info</p>
+                    <input type="text" class="form-control" name="ipdata" id="ipdata">
+                    <br>
+                    <button class="btn" id="cancell">Cancel</button><button class="btn" id="submit">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- navbar  -->
+    <nav class="navbar navbar-expand-lg  navbar-light white-color sticky-top " align="center" id="MainNavbar">
+
+        <a class="navbar-brand" href="#"><span><img src="images/logoTitle.png" id="brand"
+                class="d-inline-block align-center"></a>
+
+        <!-- Collapse button -->
+        <button class="navbar-toggler float-right ml-auto" type="button" data-toggle="collapse" data-target="#navMenu" aria-controls="#navMenu" aria-expanded="false" aria-label="Expand" id="toggleBtn">
+        <span class="navbar-toggler-icon black-text"></span>
+    </button>
+
+        <!-- cart and profile -->
+        <span>
+        <ul class="nav">
+            <li class="nav-item" onclick="expandcart()">
+                <a class="nav-link" data-target="#cartModal" data-toggle="modal"><i
+                        class="fas fa-shopping-cart fa-lg "></i><span class="badge white-text badge-danger" id="cartCountBadge"></span></a>
+        </li>
+
+        <li class="nav-item dropdown active-nav-item">
+            <a class="nav-link" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-user fa-lg"></i></a>
+            <div class="dropdown-menu dropdown-menu-right dropdown-info">
+                <a class="dropdown-item active-nav-item">PROFILE</a>
+                <a class="dropdown-item" onclick="logout()">LOGOUT</a>
+            </div>
+        </li>
+        </ul>
+        </span>
+
+
+        <div class="collapse navbar-collapse" id="navMenu">
+
+            <ul class="nav navbar-nav ml-auto">
+
+
+                <li class="nav-item">
+                    <a class="nav-link" href="homepage.html">HOME</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="chat.html">CHATS </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="DisplayFilterWise.html">CATEGORIES </a>
+                </li>
+
+
+            </ul>
+
+        </div>
+
+
+
+    </nav>
+    <!-- navbar  -->
+
+    <!-- modal for cart -->
+    <div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="cartModalTitle" aria-hidden="true">
+
+        <!-- Add .modal-dialog-centered to .modal-dialog to vertically center the modal -->
+        <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+
+            <div class="modal-content cart-modal-class">
+
+                <div class="modal-body">
+                    <div class="container">
+
+                        <!-- Section: Block Content -->
+                        <section>
+                            <div class="row " id="cart-row-header">
+                                <div class="col-md-12 col-lg-12 text-center">
+                                    <h5 id="cart-header-title">YOUR CART</h5>
+                                    <span id="cart-close-icon" aria-hidden="true" type="button" class="close" data-dismiss="modal">&times;</span>
+                                </div>
+                            </div>
+                            <hr>
+
+                        </section>
+                        <!-- Section: Block Content -->
+                        <div class="cart-list" id="cartbody">
+
+                        </div>
+
+                        <div class="cart-footer">
+
+                            <div class="cart-subtotal-div text-center">
+                                <p id="cart-subtotal">Subtotal = Rs. 0</p>
+                            </div>
+                            <div class="cart-checkout-div d-flex d-inline justify-content-center">
+
+                                <button id="continue-shopping-btn" data-dismiss="modal">Continue</button>
+                                <button id="checkout-btn" onclick="window.location.href=('checkout.html');">Checkout</button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- main content -->
+
+    <div class="container pt-2 pb-5 my-5">
+        <div class="d-flex justify-content-center">
+
+            <div class="card" style="width: 436px;border-radius: 4px !important;border: none !important;">
+                <div class="success-color-dark p-3 white-text" style="border-top-left-radius: 4px !important;
+                border-top-right-radius: 4px !important;">
+                    <div class="d-flex">
+                        <div class="flex-fill  text-left ">
+                            <p id="name1" class="text-uppercase">Username</p>
+                        </div>
+                        <div class="flex-fill text-right" onclick="logout()" style="margin-top: -2px; font-size: 14px;">
+                            <a id="logoutBtn">LOGOUT</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="success-color-dark" style="height: 80px;margin-top: -5px;"></div>
+
+                <div class="avatar mx-auto white pb-2">
+                    <view class="zoom">
+                        <img class="rounded-circle" id="profilepic" style="cursor:pointer;height: 150px;width: 150px;margin-top: -75px;border:4px solid white; background-color: ghostwhite;">
+                    </view>
+                    <input id="ipimg" type="file" style="display:none;">
+                </div>
+
+                <div class="card-body px-3 py-4">
+
+                    <div class="d-flex">
+                        <div class="flex-fill">
+                            <div class=" d-flex flex-column text-center hover" onclick="displayOrder()">
+                                <p class="font-weight-bold mb-0" id="orders">0</p>
+                                <p class="small text-uppercase mb-0">Orders</p>
+                            </div>
+                        </div>
+                        <div class="flex-fill">
+                            <div class=" d-flex flex-column text-center  border-left border-right hover" onclick="displayDelivery()">
+                                <p class="font-weight-bold mb-0" id="delivery">0</p>
+                                <p class="small text-uppercase mb-0">Deliveries</p>
+                            </div>
+                        </div>
+                        <div class="flex-fill">
+                            <div class=" d-flex flex-column text-center hover" onclick="displayMyProducts()">
+                                <p class="font-weight-bold mb-0" id="products">0</p>
+                                <p class="small text-uppercase mb-0">Products</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!--Accordion wrapper-->
+                <div class="accordion " id="profile-accordian" role="tablist" aria-multiselectable="true">
+
+                    <!-- Accordion card -->
+                    <div class="card">
+
+                        <!-- Card header -->
+                        <div class="card-header text-left black-text profile-accordian-heading" role="tab" id="basic-details-heading">
+                            <div class="d-flex" data-toggle="collapse" data-parent="#profile-accordian" href="#profile-collapse" aria-expanded="false">
+                                <div class="flex-fill text-left">
+                                    <p class="mb-0" style="font-family: Nunito; font-size:14px; font-weight: bold;">
+                                        BASIC DETAILS
+                                    </p>
+                                </div>
+                                <div class="flex-fill text-right">
+                                    <i class="fas fa-angle-down rotate-icon"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card body -->
+                        <div id="profile-collapse" class="collapse show" role="tabpanel" data-parent="#profile-accordian">
+                            <div class="card-body">
+
+                                <div class="d-flex">
+
+                                    <div class="flex-fill text-left d-none d-md-block" style="margin-top: 10px !important">
+                                        <div class="flex-column">
+                                            <p><i class="fas fa-user m"></i></p>
+                                            <p><i class="fas fa-mobile-alt"></i></p>
+                                            <p><i class="far fa-envelope"></i></p>
+                                            <p><i class="far fa-address-book"></i></p>
+                                            <p><i class="fas fa-birthday-cake"></i></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex-fill text-left" style="margin-top: 10px !important;">
+                                        <div class="flex-column">
+                                            <p style="font-weight: bold;">Username</p>
+                                            <p style="font-weight: bold;">Mobile</p>
+                                            <p style="font-weight: bold;">Email-ID</p>
+                                            <p style="font-weight: bold;">Address</p>
+                                            <p style="font-weight: bold;">DOB</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex-fill text-left ml-2" style="margin-top: 10px !important;">
+                                        <div class="flex-column">
+                                            <p id="name">Username</p>
+                                            <p id="phone">Mobile</p>
+                                            <p id="email">Email</p>
+                                            <p id="address">Address</p>
+                                            <p id="dob">DOB</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex-fill text-right" style="margin-top: 26px !important">
+                                        <div class="flex-column">
+                                            <br>
+                                            <p><i class="fas fa-pencil-alt" onclick="changePhone()"></i></p>
+                                            <p><i class="fas fa-pencil-alt" onclick="changeEmail()"></i></p>
+                                            <p><i class="fas fa-pencil-alt" onclick="changeAddress()"></i></p>
+                                            <p><i class="fas fa-pencil-alt" onclick="changeDOB()"></i></p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Accordion card -->
+                        <div class="card ">
+
+                            <!-- Card header -->
+                            <div class="card-header text-left  black-text profile-accordian-heading" role="tab" id="manage-addr-heading">
+                                <div class="d-flex" data-toggle="collapse" data-parent="#profile-accordian" href="#addr-collapse" aria-expanded="false">
+                                    <div class="flex-fill text-left">
+                                        <p class="mb-0" style="font-family: Nunito; font-size:14px; font-weight: bold;">
+                                            ADD PRODUCTS
+                                        </p>
+                                    </div>
+                                    <div class="flex-fill text-right">
+                                        <i class="fas fa-angle-down rotate-icon"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card body -->
+                            <div id="addr-collapse" class="collapse" role="tabpanel" data-parent="#profile-accordian">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-center">
+                                        <div class="form-group">
+                                            <img class="rounded-circle" src="images/defaultP.png" id="picI" style="height: 100px;width:100px;border:4px solid white; background-color: ghostwhite; cursor:pointer;">
+                                            <input id="imgI" type="file" style="display:none;">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" placeholder="Name of Product" id="nameI">
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" type="number" min="1" placeholder="Price of Product (Per Item)" id="priceI">
+                                    </div>
+                                    <div class="form-group">
+                                        <select class="form-control" id="catagoryI">
+                                                <option value="Pesticide">Pesticide</option>
+                                                <option value="Cropicide">Cropicide</option>
+                                                <option value="Farming Tool">Farming Tool</option>
+                                            </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea class="form-control" placeholder="Product Description" id="descriptionI"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" type="number" min="1" placeholder="Quantity" id="qtyI" value="1">
+                                    </div>
+                                    <div class="form-group" align="center">
+                                        <button onclick="addProduct()" id="productUploadBtn">UPLOAD</button>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Accordion card -->
+                        <div class="card">
+
+                            <!-- Card header -->
+                            <div class="card-header text-left  black-text profile-accordian-heading" role="tab" id="payments-heading">
+                                <div class="d-flex" data-toggle="collapse" data-parent="#profile-accordian" href="#payments-collapse" aria-expanded="false">
+                                    <div class="flex-fill text-left">
+                                        <p class="mb-0" style="font-family: Nunito; font-size:14px; font-weight: bold;">
+                                            PAYMENTS
+                                        </p>
+                                    </div>
+                                    <div class="flex-fill text-right">
+                                        <i class="fas fa-angle-down rotate-icon"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card body -->
+                            <div id="payments-collapse" class="collapse" role="tabpanel" data-parent="#profile-accordian">
+                                <div class="card-body">
+                                    Payments
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!-- Accordion wrapper -->
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- feedback modal -->
+    <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold" style="font-family: Nunito;color: green;">Write to us</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+</button>
+                </div>
+                <div class="modal-body mx-3">
+
+                    <div class="md-form">
+                        <textarea type="text" class=" form-control p-2" id="feedback" rows="4" placeholder="Your Message..." style="font-family: Nunito;"></textarea>
+                    </div>
+
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button id="feedbackSendBtn" onclick="feedback()">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- footer -->
+    <footer class="page-footer font-small unique-color-dark pt-4 z-depth-2">
+
+        <!-- Footer Links -->
+        <div class="container text-center text-md-left">
+
+            <!-- Grid row -->
+            <div class="row">
+
+                <!-- Grid column -->
+                <div class="col-md-4 mx-auto">
+                    <img src="images/logoTitle2.png" class="footerLogo">
+                    <p>AgriTech is a E-commerce platform for farmers, which serves farmers the tools and pesticides easily,quickly and at reasonable rates.</p>
+                </div>
+                <!-- Grid column -->
+
+                <hr class="clearfix w-100 d-md-none">
+
+                <!-- Grid column -->
+                <div class="col-md-2 mx-auto">
+
+                    <!-- Links -->
+                    <h5 class="text-uppercase mt-3 mb-4 footerLinkClass">Company</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="about.html">About Us</a>
+                        </li>
+                        <!-- <li>
+                            <a href="#!">Core Values</a>
+                        </li>
+                        <li>
+                            <a href="#!">Careers</a>
+                        </li>
+                        <li>
+                            <a href="#!">Sitemap</a>
+                        </li> -->
+                    </ul>
+
+                </div>
+                <!-- Grid column -->
+                <hr class="clearfix w-100 d-md-none">
+                <!-- Grid column -->
+                <div class="col-md-2 mx-auto">
+                    <!-- Links -->
+                    <h5 class=" text-uppercase mt-3 mb-4 footerLinkClass">Policy Info</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!">Privacy Policy</a>
+                        </li>
+                        <!-- <li>
+                            <a href="#!">Terms of Sale</a>
+                        </li> -->
+                        <li>
+                            <a href="#!">Terms of Use</a>
+                        </li>
+                        <!-- <li>
+                            <a href="#!">Report Abuse</a>
+                        </li> -->
+                    </ul>
+
+                </div>
+                <!-- Grid column -->
+                <hr class="clearfix w-100 d-md-none">
+                <!-- Grid column -->
+                <div class="col-md-2 mx-auto">
+                    <!-- Links -->
+                    <h5 class="text-uppercase mt-3 mb-4 footerLinkClass">help</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!">FAQ</a>
+                        </li>
+                        <li>
+                            <a href="" data-toggle="modal" data-target="#modalContactForm">Contact Us</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- Grid column -->
+
+            </div>
+            <!-- Grid row -->
+
+        </div>
+        <!-- Footer Links -->
+        <hr>
+
+        <!-- Social buttons -->
+        <ul class="list-unstyled list-inline text-center">
+            <li class="list-inline-item">
+                <a class="btn-floating btn-fb mx-1">
+                    <i class="fab fa-facebook-f"> </i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-tw mx-1">
+                    <i class="fab fa-twitter"> </i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-gplus mx-1">
+                    <i class="fab fa-google-plus-g"> </i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-li mx-1">
+                    <i class="fab fa-linkedin-in"> </i>
+                </a>
+            </li>
+        </ul>
+        <!-- Social buttons -->
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2020 Copyright:
+            <a href="#">AgriTech</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+
+
+
+
+
+
+    <!-- js -->
+    <script type="text/javascript" src="md/js/jquery.min.js"></script>
+    <script type="text/javascript" src="md/js/popper.min.js"></script>
+    <script type="text/javascript" src="md/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="md/js/mdb.min.js"></script>
+    <script src="jquery.toast.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyBw4RVlD1ZdnNNn4ow5hahtxPxBSpL_tpA",
+            authDomain: "website-e1c2c.firebaseapp.com",
+            databaseURL: "https://website-e1c2c.firebaseio.com",
+            projectId: "website-e1c2c",
+            storageBucket: "website-e1c2c.appspot.com",
+            messagingSenderId: "640557542653",
+            appId: "1:640557542653:web:215d1a31f7ace2f72fe294"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+    <script>
+        function logout() {
+            localStorage.clear();
+            window.location.href = ("login.html");
+        }
+
+        function feedback() {
+            if (document.getElementById("feedback").value == "") {
+                alert("Write something !");
+                return;
+            }
+            firebase.database().ref().child("Feedbacks").push({
+                Feedback: document.getElementById("feedback").value,
+                Name: localStorage.getItem("Username")
+            });
+            $("#modalContactForm").modal("hide");
+            $.toast({
+                text: "Success", // Text that is to be shown in the toast
+                heading: 'Thanks for your Feedback!', // Optional heading to be shown on the toast
+                icon: 'success', // Type of toast icon
+                showHideTransition: 'fade', // fade, slide or plain
+                allowToastClose: true, // Boolean value true or false
+                hideAfter: 3000, // false to make it sticky or number representing the miliseconds as time after which toast needs to be hidden
+                stack: 5, // false if there should be only one toast at a time or a number representing the maximum number of toasts to be shown at a time
+                position: 'bottom-right', // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
+
+
+
+                textAlign: 'left', // Text alignment i.e. left, right or center
+                loader: true, // Whether to show loader or not. True by default
+                loaderBg: '#9EC600', // Background color of the toast loader
+                beforeShow: function() {}, // will be triggered before the toast is shown
+                afterShown: function() {}, // will be triggered after the toat has been shown
+                beforeHide: function() {}, // will be triggered before the toast gets hidden
+                afterHidden: function() {} // will be triggered after the toast has been hidden
+            });
+            document.getElementById("feedback").value = "";
+        }
+
+
+        window.onload = () => {
+            $("#loadMe").modal({
+                backdrop: "static", //remove ability to close modal with click
+                keyboard: false, //remove option to close with keyboard
+                show: true //Display loader!
+            });
+            //document.getElementById("myName").innerHTML=localStorage.getItem("Username");
+            /*let bannerNode = document.querySelector('[alt="www.000webhost.com"]').parentNode.parentNode;
+            bannerNode.parentNode.removeChild(bannerNode);*/
+            //document.getElementById("name").innerHTML="pkj";
+            document.getElementById("name").innerHTML = localStorage.getItem("Username");
+            firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("cart").on("value", function(snapshot) {
+                var cartCnt = snapshot.numChildren();
+                document.getElementById("cartCountBadge").innerHTML = cartCnt;
+                if (cartCnt == 0) {
+                    //document.getElementById("checkout-btn").style["backgroundcolor"]="black";
+                    document.getElementById("checkout-btn").disabled = true;
+                    document.getElementById("checkout-btn").style = "background-color:grey !important";
+                } else {
+                    //  document.getElementById("checkout-btn").style["backgroundcolor"]="green";
+                    document.getElementById("checkout-btn").disabled = false;
+                    document.getElementById("checkout-btn").style = "background-color:green !important";
+                }
+
+            });
+            firebase.database().ref().child("Users").child(localStorage.getItem("Username")).on('value', function(snapshot) {
+                document.getElementById("name1").innerHTML = snapshot.val().Name;
+                //document.getElementById("email1").innerHTML=snapshot.val().Email;
+
+                document.getElementById("name").innerHTML = snapshot.val().Name;
+                document.getElementById("phone").innerHTML = snapshot.val().Phone;
+                document.getElementById("email").innerHTML = snapshot.val().Email;
+                if (snapshot.val().DOB != null)
+                    document.getElementById("dob").innerHTML = snapshot.val().DOB;
+                if (snapshot.val().Address != null)
+                    document.getElementById("address").innerHTML = snapshot.val().Address;
+
+                var storageRef = firebase.storage().ref();
+                storageRef.child(snapshot.val().Image).getDownloadURL().then(function(url) {
+                    var test = url;
+                    document.getElementById("profilepic").src = test;
+                }).catch(function(error) {});
+            });
+            counts();
+        }
+
+        function changeqty(name, qty) {
+            name = decodeURIComponent(name);
+            if (qty == 0)
+                qty = 1;
+            qty = parseInt(qty);
+            firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("cart").child(name).child("qty").set(qty);
+        }
+
+        function nextProduct(name) {
+            //localStorage.setItem("pname",name);
+            window.location.href = ("ProductDetails.html?pname=" + name);
+        }
+
+        function expandcart() {
+            firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("cart").orderByChild("name").on('value', function(snapshot1) {
+                var storageRef = firebase.storage().ref();
+                document.getElementById("cartbody").innerHTML = "";
+                if (snapshot1.exists()) {
+                    var cnt = 0,
+                        cnt1 = 0,
+                        total = 0;
+                    document.getElementById("cartbody").innerHTML = "";
+
+                    snapshot1.forEach(function(childSnapshot) {
+                        total += childSnapshot.val().price * childSnapshot.val().qty;
+                        //document.getElementById("cartbody").innerHTML+="<!-- First row --><tr><th scope='row'><img id=img"+cnt+" alt='' class='img-fluid z-depth-0' style='height: 120px;'></th><td><h5 class='mt-3'><strong>"+childSnapshot.val().name+"</strong></h5><p class='text-muted'>"+childSnapshot.val().catagory+"</p></td><td></td><td>"+childSnapshot.val().price+"</td><td><input type='number' value='2' aria-label='Search' class='form-control' style='width: 100px'></td><td class='font-weight-bold'><strong>"+childSnapshot.val().price+"</strong></td><td><button type='button' class='btn btn-sm btn-primary' id=removebtn"+cnt+" data-toggle='tooltip' data-placement='top' title='Remove item' onclick=removeitem('"+ encodeURIComponent(childSnapshot.val().name)+"')>X</button></td></tr><!-- First row -->";
+                        // $("#removebtn"+cnt).click(function(){
+                        // firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("cart").child(childSnapshot.val().name).remove();
+                        // });
+                        cnt++;
+                        document.getElementById("cartbody").innerHTML += "<div class='row cart-item-row' ><div class='col-lg-2 col-md-2 col-sm-12 text-center' onclick=nextProduct('" + encodeURIComponent(childSnapshot.val().name) + "')><img id=img" + cnt + " class='cart-item-image img-fluid'></div><div class='col-lg-10 col-md-10 col-sm-12' style='padding-top: 24px'><div class='row'><div class='col-lg-8 col-md-8 col-sm-12 ' style='padding-bottom:2px;'><div class='text-center'> <div class='flex-column text-md-left'> <p class='cart-item-name-class px-4 ' onclick=nextProduct('" + encodeURIComponent(childSnapshot.val().name) + "')> <a>" + childSnapshot.val().name + "  </a> </p> <p class='cart-category-class px-4'> <a>" + childSnapshot.val().catagory + "</a> </p></div></div></div><div class='col-lg-4 col-md-4 col-sm-12 text-center'><div class='row'><div class='col text-right'><p class='cart-item-price'>Rs." + childSnapshot.val().price + "</p></div><div class='col'><div class='row cart-item-quantity'><input type='button' id='minus' class='cart-item-quantity-button' value='-' onclick=changeqty('" + encodeURIComponent(childSnapshot.val().name) + "','" + (childSnapshot.val().qty - 1) + "')><input value=" + childSnapshot.val().qty + " pattern='\d*' onkeyup=changeqty('" + encodeURIComponent(childSnapshot.val().name) + "',this.value) class='text-center cart-item-quantity-input'><input type='button' id='plus' value='+' onclick=changeqty('" + encodeURIComponent(childSnapshot.val().name) + "','" + (parseInt(childSnapshot.val().qty) + 1) + "') class='cart-item-quantity-button'> </div></div></div></div></div> <div class='d-flex d-inline justify-content-center cart-item-remove-div'><p class='cart-item-remove-button'><a id=removebtn" + cnt + " onclick=removeitem('" + encodeURIComponent(childSnapshot.val().name) + "')>Remove Item <i class='far fa-trash-alt'></i></a></p></div></div></div><hr>";
+                        (function(pid) {
+                            storageRef.child(childSnapshot.val().image).getDownloadURL().then(function(url) {
+                                document.getElementById("img" + pid).src = url;
+                            }).catch(function(error) {
+                                console.log(error);
+                            });
+                        })(cnt);
+                        // storageRef.child(childSnapshot.val().image).getDownloadURL().then(function(url) {
+
+
+
+                        //	document.getElementById("img"+cnt).src=url;
+                        //	cnt++;
+                        // });
+
+
+                    });
+                    document.getElementById("cart-subtotal").innerHTML = "Subtotal = Rs. " + total;
+                }
+            });
+        }
+
+        function addtocart(item) {
+
+            item = decodeURIComponent(item);
+
+            firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("cart").child(item).once("value", function(snapshot) {
+                if (snapshot.exists()) {
+                    $.toast({
+                        text: "Warning", // Text that is to be shown in the toast
+                        heading: 'Item Already added in Cart !', // Optional heading to be shown on the toast
+                        icon: 'warning', // Type of toast icon
+                        showHideTransition: 'fade', // fade, slide or plain
+                        allowToastClose: true, // Boolean value true or false
+                        hideAfter: 3000, // false to make it sticky or number representing the miliseconds as time after which toast needs to be hidden
+                        
+                        stack: 5, // false if there should be only one toast at a time or a number representing the maximum number of toasts to be shown at a time
+                        position: 'bottom-right', // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
+                        textAlign: 'left', // Text alignment i.e. left, right or center
+                        loader: true, // Whether to show loader or not. True by default
+                        loaderBg: 'orange', // Background color of the toast loader
+                        beforeShow: function() {}, // will be triggered before the toast is shown
+                        afterShown: function() {}, // will be triggered after the toat has been shown
+                        beforeHide: function() {}, // will be triggered before the toast gets hidden
+                        afterHidden: function() {} // will be triggered after the toast has been hidden
+                    });
+                } 
+                else 
+                {
+                    
+                    $.toast({
+                        text: "Success", // Text that is to be shown in the toast
+                        heading: 'Item added in Cart !', // Optional heading to be shown on the toast
+                        icon: 'success', // Type of toast icon
+                        showHideTransition: 'fade', // fade, slide or plain
+                        allowToastClose: true, // Boolean value true or false
+                        hideAfter: 3000, // false to make it sticky or number representing the miliseconds as time after which toast needs to be hidden
+                        stack: 5, // false if there should be only one toast at a time or a number representing the maximum number of toasts to be shown at a time
+                        position: 'bottom-right', // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
+                        textAlign: 'left', // Text alignment i.e. left, right or center
+                        loader: true, // Whether to show loader or not. True by default
+                        loaderBg: '#9EC600', // Background color of the toast loader
+                        beforeShow: function() {}, // will be triggered before the toast is shown
+                        afterShown: function() {}, // will be triggered after the toat has been shown
+                        beforeHide: function() {}, // will be triggered before the toast gets hidden
+                        afterHidden: function() {} // will be triggered after the toast has been hidden
+                    });
+
+                    firebase.database().ref().child("Posts").child(item).once('value', function(snapshot1) {
+                        var obj = {
+                            name: snapshot1.val().name,
+                            price: snapshot1.val().price,
+                            image: snapshot1.val().image,
+                            catagory: snapshot1.val().catagory,
+                            seller: snapshot1.val().seller,
+                            qty: 1
+                        };
+                        firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("cart").child(item).set(obj);
+                    });
+                }
+            });
+
+
+        }
+
+        function changePhone() {
+            //alert("in");
+            $("#loadMeip").modal({
+                backdrop: "static", //remove ability to close modal with click
+                keyboard: false, //remove option to close with keyboard
+                show: true //Display loader!
+            });
+            document.getElementById("ipdata").type = "number";
+            document.getElementById("ipdata").value = document.getElementById("phone").innerHTML;
+            $("#cancell").click(function() {
+                $("#loadMeip").modal("hide");
+            });
+            $("#submit").click(function() {
+                var chk = confirm("Do you want to submit Data ?");
+                if (!chk)
+                    return;
+                if (!check_mobile(document.getElementById("ipdata").value)) {
+                    alert("Mobile No. is incorrect !");
+                    return;
+                }
+                firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("Phone").set(document.getElementById("ipdata").value);
+                $("#submit").unbind();
+
+                $.post("https://agritechmh.000webhostapp.com/sendChangeMail.php", {
+                    msg: "Your Phone changed !",
+                    headMsg: "Information changed",
+                    email: document.getElementById("email").innerHTML
+                }, function(data, status) {
+                    alert("Data: " + data + "\nStatus: " + status);
+                });
+                $("#loadMeip").modal("hide");
+            });
+
+        }
+
+        function changeEmail() {
+            //alert("in");
+            document.getElementById("ipdata").type = "email";
+            $("#loadMeip").modal({
+                backdrop: "static", //remove ability to close modal with click
+                keyboard: false, //remove option to close with keyboard
+                show: true //Display loader!
+            });
+            document.getElementById("ipdata").value = document.getElementById("email").innerHTML;
+            var old = document.getElementById("email").innerHTML;
+            $("#cancell").click(function() {
+                $("#loadMeip").modal("hide");
+            });
+            $("#submit").click(function() {
+                var chk = confirm("Do you want to submit Data ?");
+                if (!chk)
+                    return;
+                if (!check_email(document.getElementById("ipdata").value)) {
+                    alert("Email is incorrect !");
+                    return;
+                }
+                firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("Email").set(document.getElementById("ipdata").value);
+                $("#submit").unbind();
+                $.post("https://agritechmh.000webhostapp.com/sendChangeMail.php", {
+                    msg: "Your Email changed !",
+                    headMsg: "Information changed",
+                    email: old
+                }, function(data, status) {
+                    alert("Data: " + data + "\nStatus: " + status);
+                });
+                $("#loadMeip").modal("hide");
+            });
+
+        }
+
+        function changeAddress() {
+            //alert("in");
+            $("#loadMeip").modal({
+                backdrop: "static", //remove ability to close modal with click
+                keyboard: false, //remove option to close with keyboard
+                show: true //Display loader!
+            });
+            document.getElementById("ipdata").type = "text";
+            document.getElementById("ipdata").value = document.getElementById("address").innerHTML;
+            $("#cancell").click(function() {
+                $("#loadMeip").modal("hide");
+            });
+            $("#submit").click(function() {
+                var chk = confirm("Do you want to submit Data ?");
+                if (!chk)
+                    return;
+                firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("Address").set(document.getElementById("ipdata").value);
+                $("#submit").unbind();
+                $.post("https://agritechmh.000webhostapp.com/sendChangeMail.php", {
+                    msg: "Your Address changed !",
+                    headMsg: "Information changed",
+                    email: document.getElementById("email").innerHTML
+                }, function(data, status) {
+                    alert("Data: " + data + "\nStatus: " + status);
+                });
+                $("#loadMeip").modal("hide");
+            });
+
+        }
+
+        function changeDOB() {
+            //alert("in");
+            $("#loadMeip").modal({
+                backdrop: "static", //remove ability to close modal with click
+                keyboard: false, //remove option to close with keyboard
+                show: true //Display loader!
+            });
+            document.getElementById("ipdata").type = "date";
+            if (document.getElementById("dob").innerHTML != "DOB") {
+                var str = "";
+                str = (document.getElementById("dob").innerHTML).substr(6, 4) + "-" + (document.getElementById("dob").innerHTML).substr(3, 2) + "-" + (document.getElementById("dob").innerHTML).substr(0, 2);
+                document.getElementById("ipdata").value = str;
+            }
+
+            $("#cancell").click(function() {
+                $("#loadMeip").modal("hide");
+            });
+            $("#submit").click(function() {
+                var chk = confirm("Do you want to submit Data ?");
+                if (!chk)
+                    return;
+                var str = "";
+                str = (document.getElementById("ipdata").value).substr(8, 2) + "/" + (document.getElementById("ipdata").value).substr(5, 2) + "/" + (document.getElementById("ipdata").value).substr(0, 4);
+
+                firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("DOB").set(str);
+                $("#submit").unbind();
+                $.post("https://agritechmh.000webhostapp.com/sendChangeMail.php", {
+                    msg: "Your DOB changed !",
+                    headMsg: "Information changed",
+                    email: document.getElementById("email").innerHTML
+                }, function(data, status) {
+                    alert("Data: " + data + "\nStatus: " + status);
+                });
+                $("#loadMeip").modal("hide");
+            });
+
+        }
+
+        function check_mobile(phone) {
+            if (phone.match(/^\d[0-9]+$/)) {
+                if (phone.match(/^\d{10}$/))
+                    return true;
+                else
+                    return false;
+            } else false;
+        }
+
+        function check_email(email) {
+            if (email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/))
+                return true;
+            else
+                return false;
+        }
+
+        function displayOrder() {
+            if (parseInt(document.getElementById("orders").innerHTML) == 0)
+                return;
+            window.location.href = ('displayOrders.html');
+        }
+
+        function displayDelivery() {
+            if (parseInt(document.getElementById("delivery").innerHTML) == 0)
+                return;
+            window.location.href = ('displayDelivery.html');
+        }
+
+        function displayMyProducts() {
+            if (parseInt(document.getElementById("products").innerHTML) == 0)
+                return;
+            window.location.href = ('displayMyProducts.html');
+        }
+        /*
+ function changeInfo(ele)
+        {
+            //alert("in");
+            $("#loadMeip").modal({
+                backdrop: "static", //remove ability to close modal with click
+                keyboard: false, //remove option to close with keyboard
+                show: true //Display loader!
+              });
+              var tmp;
+              if(ele=="phone")
+              {
+                tmp="Phone";
+                document.getElementById("ipdata").value=document.getElementById("phone").innerHTML;
+              }
+              else if(ele=="email")
+              {
+                tmp="Email";
+                document.getElementById("ipdata").value=document.getElementById("email").innerHTML;
+              }
+              else if(ele=="address")
+              {
+                tmp="Address";
+                document.getElementById("ipdata").value=document.getElementById("address").innerHTML;
+              }
+              else{
+                tmp="DOB";
+                document.getElementById("ipdata").value=document.getElementById("dob").innerHTML;
+              }
+              $("#cancell").click(function(){
+                    $("#loadMeip").modal("hide");
+              });
+              $("#submit").click(function(){
+                  var chk=confirm("Do you want to submit Data ?");
+                  if(chk)
+                  {
+                    firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child(tmp).set(document.getElementById("ipdata").value);
+                    tmp="";
+                    $("#loadMeip").modal("hide");
+                  }
+                });
+
+        }
+       
+        */
+        $('#picI').click(function() {
+            $('#imgI').trigger('click');
+        });
+        $("#imgI").change(function(e) {
+
+            for (var i = 0; i < e.originalEvent.srcElement.files.length; i++) {
+
+                var file = e.originalEvent.srcElement.files[i];
+                var img = document.getElementById("picI");
+                var reader = new FileReader();
+                reader.onloadend = function() {
+                    img.src = reader.result;
+                }
+                reader.readAsDataURL(file);
+                $("#imgI").after(img);
+                imgFlag = true;
+            }
+        });
+
+        function addProduct() {
+
+            //alert(document.getElementById("catagoryI").value);
+            if (document.getElementById("nameI").value == "" || document.getElementById("descriptionI").value == "" || document.getElementById("priceI").value == "" || document.getElementById("qtyI").value == "") {
+                alert("All fields are required !");
+                return;
+            }
+            if (parseInt(document.getElementById("priceI").value) < 1) {
+                alert("Price must be greater than 1");
+                return;
+            }
+            if (parseInt(document.getElementById("qtyI").value) < 1) {
+                alert("Quantity must be greater than 0");
+                return;
+            }
+            if (document.getElementById("imgI").files.length != 0) {
+                firebase.database().ref().child("Posts").orderByChild("name").equalTo(document.getElementById("nameI").value).once('value', function(snapshottmp) {
+                    if (!snapshottmp.exists()) {
+                        $("#loadMe").modal({
+                            backdrop: "static", //remove ability to close modal with click
+                            keyboard: false, //remove option to close with keyboard
+                            show: true //Display loader!
+                        });
+                        // Created a Storage Reference with root dir
+                        var storageRef = firebase.storage().ref();
+                        // Get the file from DOM
+                        var file = document.getElementById("imgI").files[0];
+
+                        //var output_format = file.name.split(".").pop();
+
+                        //comp_img=document.getElementById("SignupLogo");
+                        //comp_img.src=jic.compress(comp_img,25,output_format).src;
+                        //alert(jic.compress(comp_img,25,output_format).src);
+                        //console.log(file);
+                        var imgname = uuidv4();
+                        //dynamically set reference to the file name
+                        var thisRef = storageRef.child(imgname);
+
+                        //put request upload file to firebase storage
+                        thisRef.put(file).then(function(snapshot) {
+                            document.getElementById("loadermsg").innerHTML = "Product Uploaded Successfully!";
+                            setTimeout(function() {
+                                $("#loadMe").modal("hide");
+                                document.getElementById("loadermsg").innerHTML = "Loading Please wait...";
+                            }, 2000);
+                        });
+                        var rating = {
+                            avgrating: 0,
+                            people: 0
+                        }
+                        var product = {
+                            catagory: document.getElementById("catagoryI").value,
+                            name: document.getElementById("nameI").value,
+                            price: parseInt(document.getElementById("priceI").value),
+                            quantity: "" + parseInt(document.getElementById("qtyI").value),
+                            image: imgname,
+                            seller: localStorage.getItem("Username"),
+                            description: document.getElementById("descriptionI").value,
+                            rating: rating
+                        }
+                        firebase.database().ref().child("Posts").child(document.getElementById("nameI").value).set(product);
+                        firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("MyItems").child(document.getElementById("nameI").value).set(product);
+                        document.getElementById("catagoryI").value = "Pesticide";
+                        document.getElementById("nameI").value = "";
+                        document.getElementById("priceI").value = "";
+                        document.getElementById("qtyI").value = "";
+                        document.getElementById("descriptionI").value = "";
+                        document.getElementById("picI").src = "defaultp.png";
+                        document.getElementById("imgI").value = "";
+                    } else {
+                        alert("Please try with different Name!");
+                    }
+                });
+            } else {
+                $("#loadMe").modal("hide");
+                alert("Please select Product Image");
+            }
+        }
+
+        function uuidv4() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = Math.random() * 16 | 0,
+                    v = c == 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+        }
+        $('#profilepic').click(function() {
+            $('#ipimg').trigger('click');
+        });
+        $("#ipimg").change(function(e) {
+            document.getElementById("loadermsg").innerHTML = "Uploading Image...";
+            $("#loadMe").modal({
+                backdrop: "static", //remove ability to close modal with click
+                keyboard: false, //remove option to close with keyboard
+                show: true //Display loader!
+            });
+            // Created a Storage Reference with root dir
+            var storageRef = firebase.storage().ref();
+            // Get the file from DOM
+            var file = document.getElementById("ipimg").files[0];
+
+            //var output_format = file.name.split(".").pop();
+
+            //comp_img=document.getElementById("SignupLogo");
+            //comp_img.src=jic.compress(comp_img,25,output_format).src;
+            //alert(jic.compress(comp_img,25,output_format).src);
+            //console.log(file);
+            var imgname = uuidv4();
+            //dynamically set reference to the file name
+            var thisRef = storageRef.child(imgname);
+
+            //put request upload file to firebase storage
+            thisRef.put(file).then(function(snapshot) {
+                firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("Image").set(imgname);
+
+                document.getElementById("loadermsg").innerHTML = " Image Successfully Uploaded !";
+                setTimeout(function() {
+                    $("#loadMe").modal("hide");
+                }, 2000);
+            });
+        });
+
+        function counts() {
+            var ref = firebase.database().ref().child("Users").child(localStorage.getItem("Username"));
+            ref.child("orders").on('value', function(snapshot) {
+                document.getElementById("orders").innerHTML = snapshot.numChildren();
+            });
+            ref.child("delivery").on('value', function(snapshot) {
+                document.getElementById("delivery").innerHTML = snapshot.numChildren();
+            });
+            ref.child("MyItems").on('value', function(snapshot) {
+                document.getElementById("products").innerHTML = snapshot.numChildren();
+            });
+            setTimeout(function() {
+                $("#loadMe").modal("hide");
+            }, 2000);
+        }
+
+        function removeitem(val) {
+            val = decodeURIComponent(val);
+            firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("cart").child(val).remove();
+            expandcart();
+        }
+        firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("cart").orderByChild("name").on('value', function(snapshot1) {
+            if (parseInt(snapshot1.numChildren()) == 0) {
+                document.getElementById("cartbody").style = "background-image:url('images/emptycart.png');background-repeat: no-repeat;background-size:290px 250px ;background-position: center center; ";
+                document.getElementById("cart-subtotal").innerHTML = "Subtotal = Rs. 0";
+            } else {
+                document.getElementById("cartbody").style = "background-color:white;";
+            }
+        });
+    </script>
+</body>
+
+</html>

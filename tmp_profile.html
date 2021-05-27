@@ -1,0 +1,147 @@
+<html>
+    <head>
+        <script>
+                    
+        function preloadFunc()
+        {
+            if(localStorage.getItem("Username")===null)
+			{
+                window.location.replace("login.html");
+            }
+        }
+        window.onpaint = preloadFunc();
+        </script>
+        <title>Profile</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+        <style>
+            img{
+                height: 200px;
+                width: 200px;
+                border-radius: 100px;
+            }
+            .card
+            {
+                border-radius: 50px;
+            }
+            Body{
+			
+                background-image: url('back.jpg');
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+           
+		#LogoutBtn{
+			border-radius: 20px;
+			border: none;
+            width: 120px;
+            height: 40px;
+			font-weight: bold;
+			font-family: 'Nunito',sans-serif;
+			background-color:#21b30e;
+			color: white;
+        }
+        #LogoutBtn:hover{
+            background-color: rgba(0, 200, 0,0.75 );
+        }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div align=center>
+                <div align="center" class="mt-4">
+                    <img src="default.png" id="profilepic">
+                    <p><br><b id="name1" style="color: white;background-color:rgba(0,0,0,0.25);border-radius:5px; padding:5px;">Prathmesh Jadhav</b></p>
+                    <p id="email1" style="color: white; background-color:rgba(0,0,0,0.25);border-radius:5px;width:35%;">Prajadhav1243@gmail.com</p>
+                </div>
+                <div>
+                    <div class="card col-6 mt-2" style="text-align: left;">
+                        <p class="ml-4 mt-2 mb-2" style="font-size: 20px;">Username</p>
+                        <p class="ml-4" id="name">Prathmesh Jadhav</p>
+                    </div>
+                    <div class="card col-6 mt-2"  style="text-align: left;">
+                        <p class="ml-4 mt-2 mb-2" style="font-size: 20px;">Mobile</p>
+                        <p class="ml-4" id="phone">9146524645</p>
+                    </div>
+                    
+                    <div class="card col-6 mt-2" style="text-align: left;">
+                        <p class="ml-4 mt-2 mb-2" style="font-size: 20px;">Email</p>
+                        <p class="ml-4" id="email">Prajadhav1243@gmail.com</p>
+                    </div>
+                    
+                    <div class="card col-6 mt-2" style="text-align: left;">
+                        <p class="ml-4 mt-2 mb-2" style="font-size: 20px;">Address</p>
+                        <p class="ml-4" id="address">Pune</p>
+                    </div>
+                    
+                    <div class="card col-6 mt-2" style="text-align: left;">
+                        <p class="ml-4 mt-2 mb-2" style="font-size: 20px;">D.O.B.</p>
+                        <p class="ml-4" id="dob">16-11-1999</p>
+                    </div>
+                </div>
+            </div>
+            <a href="homepage.html"><button id="LogoutBtn">Back</button></a>
+        </div>
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase.js"></script>
+
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+            https://firebase.google.com/docs/web/setup#available-libraries -->
+
+        <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyBw4RVlD1ZdnNNn4ow5hahtxPxBSpL_tpA",
+            authDomain: "website-e1c2c.firebaseapp.com",
+            databaseURL: "https://website-e1c2c.firebaseio.com",
+            projectId: "website-e1c2c",
+            storageBucket: "website-e1c2c.appspot.com",
+            messagingSenderId: "640557542653",
+            appId: "1:640557542653:web:215d1a31f7ace2f72fe294"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        </script>
+        <script>
+            function logout()
+            {
+                localStorage.clear();
+                window.location.replace("login.html");
+            }
+            window.onload = () => {
+                /*let bannerNode = document.querySelector('[alt="www.000webhost.com"]').parentNode.parentNode;
+                bannerNode.parentNode.removeChild(bannerNode);*/
+                //document.getElementById("name").innerHTML="pkj";
+                document.getElementById("name").innerHTML=localStorage.getItem("Username");    
+                firebase.database().ref().child("Users").child(localStorage.getItem("Username")).on('value',function(snapshot) {
+                    document.getElementById("name1").innerHTML=snapshot.val().Name;
+                    document.getElementById("email1").innerHTML=snapshot.val().Email;
+
+                    document.getElementById("name").innerHTML=snapshot.val().Name;
+                    document.getElementById("phone").innerHTML=snapshot.val().Phone;
+                    document.getElementById("email").innerHTML=snapshot.val().Email;
+                    document.getElementById("dob").innerHTML=snapshot.val().DOB;
+                    document.getElementById("address").innerHTML=snapshot.val().Address;
+                    
+                    var storageRef = firebase.storage().ref();
+                    storageRef.child(snapshot.val().Image).getDownloadURL().then(function(url) {
+                        var test = url;
+                        document.getElementById("profilepic").src = test;
+                    }).catch(function(error) {
+                    });
+                });	
+        }
+        </script>
+    </body>
+</html>

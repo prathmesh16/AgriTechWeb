@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html>
+    <script>
+        document.onreadystatechange = function() {
+            if (document.readyState !== "complete") {
+                $("#loadMe").modal({
+                    backdrop: "static", //remove ability to close modal with click
+                    keyboard: false, //remove option to close with keyboard
+                    show: true //Display loader!
+                });
+            }
+        };
+    </script>
+    <!-- Modal -->
+    <div class="modal fade" id="loadMe" tabindex="-1" role="dialog" aria-labelledby="loadMeLabel">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <div class="loader"></div>
+                    <div class="loader-txt">
+                        <p id="loadermsg">Loading please wait....</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<head>
+    <title>AgriTech | Chat</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!-------CSS----------->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="md/css/bootstrap.min.css">
+    <link rel="stylesheet" href="md/css/mdb.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="chat-style.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style type="text/css">
+        .loader {
+            position: relative;
+            text-align: center;
+            margin: 15px auto 35px auto;
+            z-index: 9999;
+            display: block;
+            width: 80px;
+            height: 80px;
+            border: 10px solid rgba(0, 0, 0, .3);
+            border-radius: 50%;
+            border-top-color: #21b30e;
+            animation: spin 1s ease-in-out infinite;
+            -webkit-animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+        
+        @-webkit-keyframes spin {
+            to {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+        
+        .hover:hover {
+            cursor: pointer;
+        }
+        /** MODAL STYLING **/
+        
+        .modal-content {
+            border-radius: 0px;
+            box-shadow: 0 0 20px 8px rgba(0, 0, 0, 0.7);
+        }
+        
+        .modal-backdrop.show {
+            opacity: 0.85;
+        }
+        .cartCountBadge {
+            border-radius: 50% !important;
+            font-family: Nunito !important;
+            font-size: 12px !important;
+            margin-top: auto;
+            margin-left: -20px !important;
+            background-color: green !important;
+        }
+        .loader-txt {
+            p {
+                font-size: 13px;
+                color: #666;
+                small {
+                    font-size: 11.5px;
+                    color: #999;
+                }
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="container my-5">
+        <div class="row no-gutters">
+            <div class="col-md-4 left-panel">
+
+                <div class="left-panel-top no-gutters border-right">
+                    <img src="default.png" alt="profile-pic" class="profile-pic" id="profile-pic">
+                    <span class="right-menu float-right" id="lnkNewChat" onclick="PopulateFriendList()" data-toggle="modal" data-target="#modalFriendList">
+                        <i class="material-icons">chat</i>
+                    </span>
+                   
+                    <div class="modal fade" id="modalFriendList">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="card">
+                                    <div class="card-header">
+                                        Friend List
+                                        <span class="close" data-dismiss="modal" style="cursor:pointer;">&times;</span>
+                                    </div>
+                                    <li class="list-group-item" style="background-color:#f8f8f8;">
+                                        <input type="text" id="myInput2" placeholder="Search or new chat" class="form-control form-rounded" onfocusout="f2()" />
+                                    </li>
+                                    <ul class="list-group list-group-flush" id="lstFriend"></ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="search-area border-right">
+                    <div class="input-area">
+                        <i class="material-icons">search</i>
+                        <input type="text" placeholder="Search.." id="myInput">
+                    </div>
+                </div>
+
+                <div class="chat-list border-right" id="chatlist">
+
+
+                </div>
+            </div>
+
+            <div class="col-md-8 right-panel">
+
+                <div class="right-panel-top no-gutters justify-content-between">
+                    <div class="d-flex">
+                        <img src="default.png" alt="profile-pic" class="profile-pic" id="frdImage">
+                        <div class="text">
+                            <h6 class="font-weight-bold" id="frdName">User</h6>
+                            <p class="text-muted" id="status">Last Seen at 12:34 pm</p>
+                        </div>
+                    </div>
+                    <span class="float-right">
+
+                    <i class="material-icons" style="transform: rotate(90deg);">search</i>
+
+                    <!-- <span class="dropdown"> -->
+                        <span class="" data-toggle="dropdown">
+                            <i class="material-icons" style="transform: rotate(-45deg);margin-left: 6px;margin-right: 6px;">attach_file</i>       
+                        </span>
+                    <div class="dropdown-menu">
+                        <a href="#" class="dropdown-item" onclick="ChooseImage()">
+                                Image
+                                <input type="file" id="imageFile" onchange="SendImage(this);" accept="image/*" style="display:none;" />
+                            </a>
+                    </div>
+
+                    <!-- </span> -->
+
+                    <i class="material-icons">more_vert</i>
+
+
+
+                    </span>
+                </div>
+
+                <div class="chatbox" id="chats">
+                   
+
+                </div>
+                <div class="row" style="position:absolute;" >
+                    <div class="col-md-12" id="emoji" style="display:none;">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#smiley" role="tab" aria-controls="home" aria-selected="true">Smiley</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Shape</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="smiley" role="tabpanel" aria-labelledby="home-tab">
+
+                            </div>
+                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+                            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="msg-box ">
+                   
+                    <span>
+                        <i class="material-icons" onclick="showEmojiPanel()">sentiment_satisfied_alt</i>
+                    </span>
+                    <input type="text" placeholder="Type a message.." onfocus="hideEmojiPanel()" class="msg-input" id="msg">
+                    <span>
+                        <i class="material-icons d-none" id="send" onclick="sendMessage()">send</i>
+                        <i class="material-icons" id="mic" onclick="record(this)">mic_none</i>
+                    </span>
+
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+
+
+    </div>
+
+    </div>
+
+
+
+
+     <audio id="myAudio" style="display: none;">
+        <source src="audio.mp3" type="audio/mpeg">
+      </audio>
+
+
+
+
+
+
+
+
+
+
+    <!-- js -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="md/js/jquery.min.js"></script>
+    <script type="text/javascript" src="md/js/popper.min.js"></script>
+    <script type="text/javascript" src="md/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="md/js/mdb.min.js"></script>
+
+    <script id="chatlist-template" type="text/x-handlebars-template">
+        <div class="chat-list-item" id="{{name}}" onclick="openChat(encodeURIComponent('{{name}}'),'{{image}}')" >
+            <img src="{{image}}" class="profile-pic">
+            <div class="text">
+                <h6>{{name}}</h6>
+                <p class="text-muted" id="lastMsg{{name}}">{{{lastMsg}}}</p>
+            </div>
+            <span class="time text-muted small" id="lastMsgTime{{name}}">
+                {{lastMsgTime}}
+            </span>
+            {{#if unrmsgs}}
+                <span class="badge badge-danger white-text cartCountBadge" id="cartCountBadge{{name}}">{{unrmsgs}}</span>
+            {{/if}}
+        </div>
+        
+    </script>
+
+    <script id="leftMsg-template" type="text/x-handlebars-template">
+
+        <div class="row no-gutters">
+            <div class="col-md-5 no-gutters">
+                
+                <div class="left-side no-gutters">
+                  
+                    <div class="left-msg flex-column">
+                        <p class="first-left">{{{firstMsg.msg}}} <span class="time text-muted small">{{firstMsg.time}}</span>
+                           
+                        </p>
+                        {{#each msgs}}
+                             <p>{{{msg}}} <span class="time text-muted small">{{time}}</span>
+                                
+                            </p>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    
+    <script id="rightMsg-template" type="text/x-handlebars-template">
+        <div class="row no-gutters">
+            <div class="col-md-5 no-gutters offset-md-7">
+                
+                <div class="right-side no-gutters ">
+                    <div class="right-msg flex-column">
+                        <p class="first-right">{{{firstMsg.msg}}} <span class="time text-muted small">{{firstMsg.time}}</span>
+                            {{#if firstMsg.seen}}
+                                    <i class="fas fa-check-double fa-xs ml-2" style="color:rgb(35, 118, 167)"></i>
+                            {{else}}
+                                    <i class="fas fa-check-double fa-xs ml-2" style="color:rgb(117, 115, 115)"></i>
+                            {{/if}}
+                        </p>
+                        {{#each msgs}}
+                             <p>{{{msg}}}<span class="time text-muted small">{{time}}</span>
+                                    {{#if seen}}
+                                    <i class="fas fa-check-double fa-xs ml-2" style="color:rgb(35, 118, 167)"></i>
+                                    {{else}}
+                                    <i class="fas fa-check-double fa-xs ml-2" style="color:rgb(117, 115, 115)"></i>
+                                    {{/if}}
+                             </p>
+                        {{/each}}
+                    </div>
+                    
+                </div>
+            </div>
+           
+        </div>
+    </script>
+
+    <script src="https://twitter.github.io/typeahead.js/js/handlebars.js"></script>
+
+   <!-- The core Firebase JS SDK is always required and must be listed first -->
+   <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase.js"></script>
+
+   <!-- TODO: Add SDKs for Firebase products that you want to use
+       https://firebase.google.com/docs/web/setup#available-libraries -->
+
+   <script>
+       // Your web app's Firebase configuration
+       var firebaseConfig = {
+           apiKey: "AIzaSyBw4RVlD1ZdnNNn4ow5hahtxPxBSpL_tpA",
+           authDomain: "website-e1c2c.firebaseapp.com",
+           databaseURL: "https://website-e1c2c.firebaseio.com",
+           projectId: "website-e1c2c",
+           storageBucket: "website-e1c2c.appspot.com",
+           messagingSenderId: "640557542653",
+           appId: "1:640557542653:web:215d1a31f7ace2f72fe294"
+       };
+       // Initialize Firebase
+       firebase.initializeApp(firebaseConfig);
+   </script>
+   <script>
+    window.onload=()=>
+    {
+        //document.getElementById("chat-c").style="display:none;";
+        firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("Status").set("online");
+        document.addEventListener("visibilitychange", function() {
+            console.log(document.hidden, document.visibilityState);
+            if(document.hidden)
+            {
+                firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("Status").set("offline");
+            }
+            else
+            {
+                firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("Status").set("online");
+            }
+          },false);
+    }
+    window.onunload=()=>{
+        firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("Status").set("offline");
+    }
+   
+</script>
+   <script>
+
+    
+/////////////////////////////////////////////////////////////////
+// Emoji
+loadAllEmoji();
+
+function loadAllEmoji() {
+    var emoji = '';
+    for (var i = 128512; i <= 128566; i++) {
+        emoji += `<a href="#" style="font-size: 22px;" onclick="getEmoji(this)">&#${i};</a>`;
+    }
+
+    document.getElementById('smiley').innerHTML = emoji;
+}
+
+function showEmojiPanel() {
+    document.getElementById('emoji').removeAttribute('style');
+}
+
+function hideEmojiPanel() {
+    document.getElementById('emoji').setAttribute('style', 'display:none;');
+}
+
+function getEmoji(control) {
+    document.getElementById('msg').value += control.innerHTML;
+    $("#msg").trigger('keyup');
+}
+//////////////////////////////////////////////////////////////////////
+    function f2()
+    {
+        $("#myInput2").val('');
+        //$("#myInput2").trigger('keyup');
+    }
+    function f1()
+    {
+        $("#myInput").val('');
+        $("#myInput").trigger('keyup');
+    }
+    function PopulateFriendList() {
+        document.getElementById('lstFriend').innerHTML = `<div class="text-center">
+                                                             <span class="spinner-border text-primary mt-5" style="width:7rem;height:7rem"></span>
+                                                         </div>`;
+        var db = firebase.database().ref('Users');
+        var lst = '';
+        db.once('value', function (users) {
+            if (users.hasChildren()) {
+                document.getElementById('lstFriend').innerHTML = '';
+            }   
+            var cnt=0;    
+            var storageRef = firebase.storage().ref();
+            users.forEach(function (data) {
+                var user = data.val();
+       
+      
+                if (user.Name !== localStorage.getItem("Username")) {
+                    cnt++;
+                    (function(pid) {
+                        storageRef.child(user.Image).getDownloadURL().then(function(url) {
+                    document.getElementById('lstFriend').innerHTML += `<li class="list-group-item list-group-item-action search" data-dismiss="modal" onclick="openChat('${user.Name}','${url}')">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <img id="img${cnt}" src="${url}" class="profile-pic" />
+                                    </div>
+                                    <div class="col-md-10" style="cursor:pointer;">
+                                        <div class="name">${user.Name}</div>
+                                    </div>
+                                </div>
+                            </li>`;
+                           
+                                   // document.getElementById("img" + pid).src = url;
+                                }).catch(function(error) {
+                                    console.log(error);
+                                });
+                            })(cnt);
+                            
+                            
+                }
+            });
+    
+            $(document).ready(function() {
+                $("#myInput2").on("keyup", function() {     
+                    var value = $(this).val().toLowerCase();
+                    $("#lstFriend .search").filter(function() {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+            
+            });
+        });
+    
+    }
+
+    $(document).ready(function() {
+        $("#myInput").on("keyup", function() {     
+            var value = $(this).val().toLowerCase();
+            $("#chatlist .chat-list-item").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    
+    });
+
+    function AddZero(num) {
+        return (num >= 0 && num < 10) ? "0" + num : num + "";
+    }
+    function sendMessage()
+    {
+
+        if(document.getElementById("msg").value=="")
+            return;
+        var roomID="";
+        if(localStorage.getItem("Username")>(globalName))
+        {
+            roomID=localStorage.getItem("Username")+globalName;
+        }
+        else
+        {
+            roomID=globalName+localStorage.getItem("Username");
+        }
+        var now = new Date();
+        var strDateTime = [[ now.getFullYear(), 
+            AddZero(now.getMonth() + 1), 
+            AddZero(now.getDate())].join("/"), 
+            [AddZero(now.getHours()), 
+            AddZero(now.getMinutes())].join(":"), 
+            now.getHours() >= 12 ? "PM" : "AM"].join(" ");
+
+        var obj={
+            from:localStorage.getItem("Username"),
+            to:globalName,
+            time:strDateTime,
+            seen:false,
+            message:document.getElementById("msg").value,
+        };
+        firebase.database().ref().child("Messages").child(roomID).child("messages").push(obj);
+       // firebase.database().ref().child("Messages").child(roomID).child("lastMsg").child("msg").set(document.getElementById("msg").value);
+       // firebase.database().ref().child("Messages").child(roomID).child("lastMsg").child("time").set(strDateTime);
+        firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("frds").child(globalName).child("lastMsg").set({msg:document.getElementById("msg").value,time:strDateTime});
+        firebase.database().ref().child("Users").child(globalName).child("frds").child(localStorage.getItem("Username")).child("lastMsg").set({msg:document.getElementById("msg").value,time:strDateTime});      
+        firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("frds").child(globalName).child("img").set(document.getElementById("frdImage").src);     
+        firebase.database().ref().child("Users").child(globalName).child("frds").child(localStorage.getItem("Username")).child("img").set(document.getElementById("profile-pic").src);      
+        firebase.database().ref().child("Users").child(globalName).child("frds").child(localStorage.getItem("Username")).child("unrmsgs").once("value",function(snapshotu){
+            if(snapshotu.exists()){
+                var n=snapshotu.val();
+                n++;
+               // firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("frds").child(globalName).child("unrmsgs").set(n);     
+                firebase.database().ref().child("Users").child(globalName).child("frds").child(localStorage.getItem("Username")).child("unrmsgs").set(n);       
+                
+            }
+            else
+            {
+               // firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("frds").child(globalName).child("unrmsgs").set(1);     
+                firebase.database().ref().child("Users").child(globalName).child("frds").child(localStorage.getItem("Username")).child("unrmsgs").set(1);      
+               
+            }
+        });
+       
+
+        document.getElementById("msg").value=""; 
+        document.getElementById('msg').focus();
+    }
+    $("#msg").on("focus",function(){
+        if(globalName!=""){
+            
+            firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("frds").child(globalName).child("unrmsgs").set(0);         
+           
+        }
+        });
+    $("#msg").on("keyup",function()
+    {
+        if( document.getElementById("msg").value=="")
+        {
+            document.getElementById("send").classList="material-icons d-none";
+            document.getElementById("mic").classList="material-icons";
+        }
+        else
+        {
+            document.getElementById("send").classList="material-icons";
+            document.getElementById("mic").classList="material-icons d-none";
+        }
+    });
+    firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("Image").on("value",function(snapshot){
+        var storageRef = firebase.storage().ref();
+        storageRef.child(snapshot.val()).getDownloadURL().then(function(url) {
+            document.getElementById("profile-pic").src=url;
+        });
+    })
+var ftime=true;
+var clcnt1=0;
+var clcnt=0;
+    firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("frds").orderByChild("lastMsg/time").once("value",function(snpashot){
+       
+        
+        var chatlist = Handlebars.compile($("#chatlist-template").html());
+        var storageRef = firebase.storage().ref();
+       clcnt=snpashot.numChildren();
+        if(clcnt1<=clcnt)
+            document.getElementById("chatlist").innerHTML="";
+   
+        snpashot.forEach(function(childSnapshot)
+        {
+           
+            //alert(snpashot.ref.parent.key);
+            firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("frds").child(childSnapshot.key).on("value",function(lastMsg){
+                
+           // storageRef.child(lastMsg.val().img).getDownloadURL().then(function(url) {
+                            clcnt1++;
+                           // if(childSnapshot.val().Name==localStorage.getItem("Username"))
+                            //    document.getElementById("profile-pic").src=url;
+                          //  else
+                          //  {
+                                if(lastMsg.val()==null)
+                                {
+                                    var context = {
+                                        unrmsgs:0,
+                                        image:lastMsg.val().img,
+                                        name:childSnapshot.key,
+                                        lastMsg:"Hi. How are you ?",
+                                        lastMsgTime:"03:34"
+                                    }; 
+                                }
+                                else{
+                                    var context = {
+                                        unrmsgs:lastMsg.val().unrmsgs,
+                                        image:lastMsg.val().img,
+                                        name:childSnapshot.key,
+                                        lastMsg:lastMsg.val().lastMsg.msg,
+                                        lastMsgTime:lastMsg.val().lastMsg.time.substr(10,6)
+                                    }; 
+                                }
+                                
+                                console.log(clcnt1,clcnt);
+                                if(clcnt1<=clcnt){
+                                    $("#chatlist").prepend(chatlist(context));     
+                                }   
+                                else{
+                                    if(lastMsg.val().unrmsgs==0)
+                                        {
+                                            if(document.getElementById("cartCountBadge"+childSnapshot.key)!=null)
+                                                document.getElementById("cartCountBadge"+childSnapshot.key).parentNode.removeChild( document.getElementById("cartCountBadge"+childSnapshot.key));
+                                            document.getElementById("lastMsg"+childSnapshot.key).innerHTML=lastMsg.val().lastMsg.msg;
+                                            document.getElementById("lastMsgTime"+childSnapshot.key).innerHTML=lastMsg.val().lastMsg.time.substr(10,6);
+                                       }
+                                        else
+                                        {
+                                            // document.getElementById(childSnapshot.val().Name).style="display:none;";
+                                            // $("#"+childSnapshot.val().Name).hide();
+                                            //if(document.getElementById(childSnapshot.key)!=null)
+                                                    document.getElementById(childSnapshot.key).parentNode.removeChild(document.getElementById(childSnapshot.key));
+                                            $("#chatlist").prepend(chatlist(context));
+                                        }
+                                }   
+                                if(clcnt1==clcnt)
+                                 $("#loadMe").modal("hide"); 
+                            // }
+                            
+                        //}).catch(function(error) {
+                        //    console.log(error);
+                        //});    
+                                                                                                                                                                                                                                                                                                                        
+                }); 
+           
+            
+        });
+        ftime=false;
+        clcnt1++;
+        $("#chatlist").scrollTop();
+        //$("#loadMe").modal("hide");
+        setTimeout(function() {
+            $("#loadMe").modal("hide");
+        }, 2000);
+        
+    });
+    firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("frds").orderByChild("lastMsg/time").limitToLast(1).on("child_added",function(childSnapshot){
+        var chatlist = Handlebars.compile($("#chatlist-template").html());
+        var storageRef = firebase.storage().ref();
+        //alert(snapshot.key);
+        if(clcnt1>clcnt){
+        firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("frds").child(childSnapshot.key).on("value",function(lastMsg){
+                
+           // storageRef.child(lastMsg.val().img).getDownloadURL().then(function(url) {
+                        
+                                    var context = {
+                                        unrmsgs:lastMsg.val().unrmsgs,
+                                        image:lastMsg.val().img,
+                                        name:childSnapshot.key,
+                                        lastMsg:lastMsg.val().lastMsg.msg,
+                                        lastMsgTime:lastMsg.val().lastMsg.time.substr(10,6)
+                                    }; 
+                               if(document.getElementById(childSnapshot.key)!=null)
+                                    document.getElementById(childSnapshot.key).parentNode.removeChild(document.getElementById(childSnapshot.key));
+                                    
+                                   $("#chatlist").prepend(chatlist(context));
+                                   
+                        
+                            
+                        //}).catch(function(error) {
+                         //   console.log(error);
+                       // });    
+                                                                                                                                                                                                                                                                                                                        
+                });
+            }
+            $("#chatlist").scrollTop();
+    });
+    
+    var globalName="";
+    function openChat(name,image)
+    {
+        f1();
+        //alert(name);
+        name=decodeURIComponent(name);
+
+        document.getElementById("frdImage").src=image;
+        document.getElementById("frdName").innerHTML=name;
+             
+        globalName=name;
+        
+        firebase.database().ref().child("Users").child(globalName).child("Status").on("value",function(snapshot){
+            if(snapshot.exists())
+            {
+                document.getElementById("status").innerHTML=snapshot.val();
+            }
+            else
+            {
+                document.getElementById("status").innerHTML="offline";
+            }
+        });
+
+        displayMsgs();
+    }
+    var oldroomId="default";
+    var listner;
+    function displayMsgs()
+    {
+        if(oldroomId!=roomID)
+        {
+            gc=0;
+            firebase.database().ref().child("Messages").child(oldroomId).child("messages").off("value",listner);
+        }
+        var roomID="";
+        if(localStorage.getItem("Username")>(globalName))
+        {
+            roomID=localStorage.getItem("Username")+globalName;
+        }
+        else
+        {
+            roomID=globalName+localStorage.getItem("Username");
+        }
+        oldroomId=roomID;
+        firebase.database().ref().child("Messages").child(roomID).child("messages").orderByChild("seen").equalTo(false).once("value",function(snapshot)
+        {
+            if(snapshot.exists())
+            {
+                snapshot.forEach(function(childSnapshot)
+                {
+                    //alert("in");
+                    if(childSnapshot.val().from==globalName)
+                        firebase.database().ref().child("Messages").child(roomID).child("messages").child(childSnapshot.key).child("seen").set(true);
+                });
+            }
+        });
+        firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("frds").child(globalName).child("unrmsgs").set(0);  
+       //alert(roomID);
+       document.getElementById("chats").innerHTML=`<div class="text-center">
+        <span class="spinner-border text-primary mt-5" style="width:7rem;height:7rem"></span>
+    </div>`;
+        listner=firebase.database().ref().child("Messages").child(roomID).child("messages").on("value",function(snapshot){
+           document.getElementById("chats").innerHTML="";
+           firebase.database().ref().child("Messages").child(roomID).child("messages").orderByChild("seen").equalTo(false).once("value",function(snapshot)
+           {
+               if(snapshot.exists())
+               {
+                   snapshot.forEach(function(childSnapshot)
+                   {
+                       //alert("in");
+                       if(childSnapshot.val().from==globalName)
+                           firebase.database().ref().child("Messages").child(roomID).child("messages").child(childSnapshot.key).child("seen").set(true);
+                   });
+               }
+           });
+           firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("frds").child(globalName).child("unrmsgs").set(0);  
+            if(snapshot.exists())
+            {
+                var l=0,r=0;
+                var msgs=[];
+                var firstMsg={};
+                var leftMsg = Handlebars.compile($("#leftMsg-template").html());
+                var rightMsg = Handlebars.compile($("#rightMsg-template").html());
+                snapshot.forEach(function(childSnapshot){
+                    if(localStorage.getItem("Username")!=childSnapshot.val().from)
+                    {
+                        if(r!=0)
+                        {
+                            var context = {
+                                    firstMsg:firstMsg,
+                                   msgs:msgs
+                                };    
+                                $("#chats").append(rightMsg(context));
+                                firstMsg={};
+                                msgs=[];
+                                r=0;
+                        }
+                        l++;
+                        if(l==1){
+                            if(childSnapshot.val().msgtype=="image")
+                            {
+                                firstMsg={msg:`<img src='${childSnapshot.val().message}' class="img-fluid" />`,time:childSnapshot.val().time.substr(10,9),seen:childSnapshot.val().seen};
+                            }
+                            else if(childSnapshot.val().msgtype=="audio")
+                            {
+                                firstMsg={msg:`<audio controls>
+                                    <source src="${childSnapshot.val().message}" type="video/webm" />
+                                </audio>`,time:childSnapshot.val().time.substr(10,9),seen:childSnapshot.val().seen};
+                            }
+                            else
+                                firstMsg={msg:childSnapshot.val().message,time:childSnapshot.val().time.substr(10,9),seen:childSnapshot.val().seen};
+                        }else{   
+                            if(childSnapshot.val().msgtype=="image")
+                            {
+                                msgs.push({msg:`<img src='${childSnapshot.val().message}' class="img-fluid" />`,time:childSnapshot.val().time.substr(10,9),seen:childSnapshot.val().seen});
+                            }
+                            else if(childSnapshot.val().msgtype=="audio")
+                            {
+                                msgs.push({msg:`<audio controls>
+                                    <source src="${childSnapshot.val().message}" type="video/webm" />
+                                </audio>`,time:childSnapshot.val().time.substr(10,9),seen:childSnapshot.val().seen});
+                            }
+                            else
+                                msgs.push({msg:childSnapshot.val().message,time:childSnapshot.val().time.substr(10,9),seen:childSnapshot.val().seen}); 
+                          //  msgs.push({msg:childSnapshot.val().message,time:childSnapshot.val().time.substr(10,9)});
+                        }
+                    }
+                    else
+                    {
+                        if(l!=0)
+                        {
+                            var context = {
+                                firstMsg:firstMsg,
+                                msgs:msgs
+                                };    
+                                $("#chats").append(leftMsg(context));
+                                firstMsg={};
+                                msgs=[];
+                                l=0;
+                        }
+                        
+                        r++;
+                        if(r==1){
+                            if(childSnapshot.val().msgtype=="image")
+                            {
+                                firstMsg={msg:`<img src='${childSnapshot.val().message}' class="img-fluid" />`,time:childSnapshot.val().time.substr(10,9),seen:childSnapshot.val().seen};
+                            }
+                            else if(childSnapshot.val().msgtype=="audio")
+                            {
+                                firstMsg={msg:`<audio controls>
+                                    <source src="${childSnapshot.val().message}" type="video/webm" />
+                                </audio>`,time:childSnapshot.val().time.substr(10,9),seen:childSnapshot.val().seen};
+                            }
+                            else
+                                firstMsg={msg:childSnapshot.val().message,time:childSnapshot.val().time.substr(10,9),seen:childSnapshot.val().seen};
+                        }else{   
+                            if(childSnapshot.val().msgtype=="image")
+                            {
+                                msgs.push({msg:`<img src='${childSnapshot.val().message}' class="img-fluid" />`,time:childSnapshot.val().time.substr(10,9),seen:childSnapshot.val().seen});
+                            }
+                            else if(childSnapshot.val().msgtype=="audio")
+                            {
+                                msgs.push({msg:`<audio controls>
+                                    <source src="${childSnapshot.val().message}" type="video/webm" />
+                                </audio>`,time:childSnapshot.val().time.substr(10,9),seen:childSnapshot.val().seen});
+                            }
+                            else
+                                msgs.push({msg:childSnapshot.val().message,time:childSnapshot.val().time.substr(10,9),seen:childSnapshot.val().seen}); 
+                          //  msgs.push({msg:childSnapshot.val().message,time:childSnapshot.val().time.substr(10,9)});
+                        }
+                    }
+                    firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("frds").child(globalName).child("unrmsgs").set(0);  
+                });
+                if(l!=0)
+                {
+                    var context = {
+                        firstMsg:firstMsg,
+                        msgs:msgs,
+                        };    
+                        $("#chats").append(leftMsg(context));
+                        firstMsg="";
+                        msgs=[];
+                        l=0;            
+                        if(gc!=0)
+                            document.getElementById("myAudio").play();
+                }
+                else if(r!=0)
+                {
+                    var context = {
+                            firstMsg:firstMsg,
+                           msgs:msgs,
+                        };    
+                        $("#chats").append(rightMsg(context));
+                        firstMsg="";
+                        msgs=[];
+                        r=0;
+                }
+               
+                gc++;   
+                firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("frds").child(globalName).child("unrmsgs").set(0);   
+                document.getElementById('chats').scrollTo(0, document.getElementById('chats').scrollHeight);
+               // $("#chats").scrollTop($("#chats").height());
+            }
+           
+        });
+    }
+var gc=0;
+/////////////////////////////////////////////
+// Audio record
+
+let chunks = [];
+let recorder;
+var timeout;
+
+function record(control) {
+    let device = navigator.mediaDevices.getUserMedia({ audio: true });
+    device.then(stream => {
+        if (recorder === undefined) {
+            recorder = new MediaRecorder(stream);
+            recorder.ondataavailable = e => {
+                chunks.push(e.data);
+
+                if (recorder.state === 'inactive') {
+                    let blob = new Blob(chunks, { type: 'audio/webm' });
+                    //document.getElementById('audio').innerHTML = '<source src="' + URL.createObjectURL(blob) + '" type="video/webm" />'; //;
+                    var roomID="";
+                    if(localStorage.getItem("Username")>(globalName))
+                    {
+                        roomID=localStorage.getItem("Username")+globalName;
+                    }
+                    else
+                    {
+                        roomID=globalName+localStorage.getItem("Username");
+                    }
+                    var now = new Date();
+                    var strDateTime = [[ now.getFullYear(), 
+                        AddZero(now.getMonth() + 1), 
+                        AddZero(now.getDate())].join("/"), 
+                        [AddZero(now.getHours()), 
+                        AddZero(now.getMinutes())].join(":"), 
+                        now.getHours() >= 12 ? "PM" : "AM"].join(" ");
+        
+                    var reader = new FileReader();
+            
+                    reader.addEventListener("load", function () {
+                        var chatMessage = {
+                            from:localStorage.getItem("Username"),
+                            message: reader.result,
+                            seen:false,
+                            msgtype: 'audio',
+                           time:strDateTime,
+                           to:globalName
+                        };
+                        firebase.database().ref().child("Messages").child(roomID).child("lastMsg").child("msg").set("Audio &nbsp &nbsp<i class='fa fa-music' aria-hidden='true'></i>");
+                       // firebase.database().ref().child("Messages").child(roomID).child("lastMsg").child("time").set(strDateTime);  
+                        firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("frds").child(globalName).child("lastMsg").set({msg:"Audio &nbsp &nbsp<i class='fa fa-music' aria-hidden='true'></i>",time:strDateTime});
+                        firebase.database().ref().child("Users").child(globalName).child("frds").child(localStorage.getItem("Username")).child("lastMsg").set({msg:"Audio &nbsp &nbsp<i class='fa fa-music' aria-hidden='true'></i>",time:strDateTime});      
+                        firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("frds").child(globalName).child("img").set(document.getElementById("frdImage").src);     
+                        firebase.database().ref().child("Users").child(globalName).child("frds").child(localStorage.getItem("Username")).child("img").set(document.getElementById("profile-pic").src);      
+                        firebase.database().ref().child("Users").child(globalName).child("frds").child(localStorage.getItem("Username")).child("unrmsgs").once("value",function(snapshotu){
+                            if(snapshotu.exists()){
+                                var n=snapshotu.val();
+                                n++;
+                               // firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("frds").child(globalName).child("unrmsgs").set(n);     
+                                firebase.database().ref().child("Users").child(globalName).child("frds").child(localStorage.getItem("Username")).child("unrmsgs").set(n);       
+                                
+                            }
+                            else
+                            {
+                               // firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("frds").child(globalName).child("unrmsgs").set(1);     
+                                firebase.database().ref().child("Users").child(globalName).child("frds").child(localStorage.getItem("Username")).child("unrmsgs").set(1);      
+                               
+                            }
+                        });
+                       
+                        firebase.database().ref('Messages').child(roomID).child("messages").push(chatMessage, function (error) {
+                            if (error) alert(error);
+                            else {
+            
+                                document.getElementById('msg').value = '';
+                                document.getElementById('msg').focus();
+                            }
+                        });
+                    }, false);
+
+                    reader.readAsDataURL(blob);
+                }
+            }
+
+            recorder.start();
+            control.setAttribute('class', 'fas fa-stop fa-2x');
+        }
+    });
+
+    if (recorder !== undefined) {
+        if (control.getAttribute('class').indexOf('stop') !== -1) {
+            recorder.stop();
+            control.setAttribute('class', 'material-icons');
+        }
+        else {
+            chunks = [];
+            recorder.start();
+            control.setAttribute('class', 'material-icons');
+        }
+    }
+}
+
+/////////////////////////////////////////////////////////////////
+
+    function ChooseImage() {
+        document.getElementById('imageFile').click();
+    }
+    function SendImage(event) {
+        var file = event.files[0];
+    
+        if (!file.type.match("image.*")) {
+            alert("Please select image only.");
+        }
+        else {
+            var roomID="";
+            if(localStorage.getItem("Username")>(globalName))
+            {
+                roomID=localStorage.getItem("Username")+globalName;
+            }
+            else
+            {
+                roomID=globalName+localStorage.getItem("Username");
+            }
+            var now = new Date();
+            var strDateTime = [[ now.getFullYear(), 
+                AddZero(now.getMonth() + 1), 
+                AddZero(now.getDate())].join("/"), 
+                [AddZero(now.getHours()), 
+                AddZero(now.getMinutes())].join(":"), 
+                now.getHours() >= 12 ? "PM" : "AM"].join(" ");
+
+            var reader = new FileReader();
+    
+            reader.addEventListener("load", function () {
+                var chatMessage = {
+                    from:localStorage.getItem("Username"),
+                    message: reader.result,
+                    seen:false,
+                    msgtype: 'image',
+                   time:strDateTime,
+                   to:globalName
+                };
+               // firebase.database().ref().child("Messages").child(roomID).child("lastMsg").child("msg").set("Image&nbsp &nbsp<i class='fas fa-image'></i>");
+               // firebase.database().ref().child("Messages").child(roomID).child("lastMsg").child("time").set(strDateTime);  
+                firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("frds").child(globalName).child("lastMsg").set({msg:"Image&nbsp &nbsp<i class='fas fa-image'></i>",time:strDateTime});
+                firebase.database().ref().child("Users").child(globalName).child("frds").child(localStorage.getItem("Username")).child("lastMsg").set({msg:"Image&nbsp &nbsp<i class='fas fa-image'></i>",time:strDateTime});      
+                firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("frds").child(globalName).child("img").set(document.getElementById("frdImage").src);     
+                firebase.database().ref().child("Users").child(globalName).child("frds").child(localStorage.getItem("Username")).child("img").set(document.getElementById("profile-pic").src);      
+                firebase.database().ref().child("Users").child(globalName).child("frds").child(localStorage.getItem("Username")).child("unrmsgs").once("value",function(snapshotu){
+                    if(snapshotu.exists()){
+                        var n=snapshotu.val();
+                        n++;
+                       // firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("frds").child(globalName).child("unrmsgs").set(n);     
+                        firebase.database().ref().child("Users").child(globalName).child("frds").child(localStorage.getItem("Username")).child("unrmsgs").set(n);       
+                        
+                    }
+                    else
+                    {
+                       // firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("frds").child(globalName).child("unrmsgs").set(1);     
+                        firebase.database().ref().child("Users").child(globalName).child("frds").child(localStorage.getItem("Username")).child("unrmsgs").set(1);      
+                       
+                    }
+                });    
+                firebase.database().ref('Messages').child(roomID).child("messages").push(chatMessage, function (error) {
+                    if (error) alert(error);
+                    else {
+    
+                        document.getElementById('msg').value = '';
+                        document.getElementById('msg').focus();
+                    }
+                });
+            }, false);
+    
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        }
+    }
+   </script>
+
+</body>
+
+</html>

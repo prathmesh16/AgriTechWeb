@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+        function preloadFunc() {
+            if (localStorage.getItem("Username") === null) {
+                window.location.href = ("login.html");
+            }
+        }
+        window.onpaint = preloadFunc();
+    </script>
+    <title>Delivery Details</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <!-------CSS----------->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link rel="stylesheet" href="md/css/bootstrap.min.css">
+    <link rel="stylesheet" href="md/css/mdb.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="jquery.toast.css">
+
+
+
+    <style type="text/css">
+        .loader {
+            position: relative;
+            text-align: center;
+            margin: 15px auto 35px auto;
+            z-index: 9999;
+            display: block;
+            width: 80px;
+            height: 80px;
+            border: 10px solid rgba(0, 0, 0, .3);
+            border-radius: 50%;
+            border-top-color: #21b30e;
+            animation: spin 1s ease-in-out infinite;
+            -webkit-animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+        
+        @-webkit-keyframes spin {
+            to {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+        /** MODAL STYLING **/
+        
+        .modal-content {
+            border-radius: 0px;
+            box-shadow: 0 0 20px 8px rgba(0, 0, 0, 0.7);
+        }
+        
+        .modal-backdrop.show {
+            opacity: 0.85;
+        }
+        
+        .loader-txt {
+            p {
+                font-size: 13px;
+                color: #666;
+                small {
+                    font-size: 11.5px;
+                    color: #999;
+                }
+            }
+        }
+        .product-Image {
+        max-height: 170px;
+        max-width: 170px;
+        height: 100%;
+        width: auto;
+    }
+    .order-detail-fields {
+        font-size: 18px;
+        font-family: Nunito !important;
+    }
+    
+    .order-detail-values {
+        font-size: 18px;
+        font-family: Nunito !important;
+        /* margin-top: -15px !important; */
+        color: #575555 !important;
+    }
+    
+    th {
+        font-family: Nunito !important;
+        font-size: 16px !important;
+        font-weight: bold !important;
+        width: 150px !important;
+    }
+    
+    td {
+        font-family: Nunito !important;
+        font-size: 16px !important;
+    }
+    </style>
+
+</head>
+
+<body>
+    <!-- Modal -->
+    <div class="modal fade" id="loadMe" tabindex="-1" role="dialog" aria-labelledby="loadMeLabel">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <div class="loader"></div>
+                    <div class="loader-txt">
+                        <p id="loadermsg">Loading please wait....</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="loadMeip" tabindex="-1" role="dialog" aria-labelledby="loadMeLabel">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content p-4" style="border-bottom: 8px solid limegreen; border-radius: 12px;">
+                <div class="text-center">
+                    <p id="loadermsg" class="font-weight-bold mt-4" style="font-size: 20px;">Update Delivery Status</p>
+                </div>
+                <div class="modal-body text-center">
+
+                    <div class="row justify-content-center align-items-center">
+
+                        <div class="col-md-2" style="margin-top: -14px;">
+                            <input type="checkbox" name="ipdata" id="ipdata" style="height: 16px;width: 16px">
+                        </div>
+                        <div>
+                            <p style="font-weight: bold; font-size: 16px;text-align: center;margin-left: -8px;">
+                                COMPLETED
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <br>
+                    <button class="btn" id="cancell">Cancell</button>&nbsp<button class="btn" id="submit">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- navbar  -->
+    <nav class="navbar navbar-expand-lg  navbar-light white-color sticky-top " align="center" id="MainNavbar">
+
+        <a class="navbar-brand" href="#"><span><img src="images/logoTitle.png" id="brand"
+                class="d-inline-block align-center"></a>
+
+        <!-- Collapse button -->
+        <button class="navbar-toggler float-right ml-auto" type="button" data-toggle="collapse" data-target="#navMenu" aria-controls="#navMenu" aria-expanded="false" aria-label="Expand" id="toggleBtn">
+        <span class="navbar-toggler-icon black-text"></span>
+    </button>
+
+        <!-- cart and profile -->
+        <span>
+        <ul class="nav">
+            <li class="nav-item" onclick="expandcart()">
+                <a class="nav-link" data-target="#cartModal" data-toggle="modal"><i
+                        class="fas fa-shopping-cart fa-lg "></i><span class="badge white-text" id="cartCountBadge"></span></a>
+        </li>
+
+        <li class="nav-item dropdown">
+            <a class="nav-link" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-user fa-lg"></i></a>
+            <div class="dropdown-menu dropdown-menu-right dropdown-info">
+                <a class="dropdown-item" href="profile.html">PROFILE</a>
+                <a class="dropdown-item" href="#" onclick="logout()">LOGOUT</a>
+            </div>
+        </li>
+        </ul>
+        </span>
+
+
+
+
+
+
+        <div class="collapse navbar-collapse" id="navMenu">
+
+            <ul class="nav navbar-nav ml-auto">
+
+
+                <li class="nav-item">
+                    <a class="nav-link" href="homepage.html">HOME</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="DisplayFilterWise.html">CATEGORIES </a>
+                </li>
+
+
+            </ul>
+
+        </div>
+
+
+
+    </nav>
+    <!-- navbar  -->
+
+    <!-- modal for cart -->
+    <div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="cartModalTitle" aria-hidden="true">
+
+        <!-- Add .modal-dialog-centered to .modal-dialog to vertically center the modal -->
+        <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+
+            <div class="modal-content cart-modal-class">
+
+                <div class="modal-body">
+                    <div class="container">
+
+                        <!-- Section: Block Content -->
+                        <section>
+                            <div class="row " id="cart-row-header">
+                                <div class="col-md-12 col-lg-12 text-center">
+                                    <h5 id="cart-header-title">YOUR CART</h5>
+                                    <span id="cart-close-icon" aria-hidden="true" type="button" class="close" data-dismiss="modal">&times;</span>
+                                </div>
+                            </div>
+                            <hr>
+
+                        </section>
+                        <!-- Section: Block Content -->
+                        <div class="cart-list" id="cartbody">
+
+                        </div>
+
+                        <div class="cart-footer">
+
+                            <div class="cart-subtotal-div text-center">
+                                <p id="cart-subtotal">Subtotal = Rs. 0</p>
+                            </div>
+                            <div class="cart-checkout-div d-flex d-inline justify-content-center">
+
+                                <button id="continue-shopping-btn" data-dismiss="modal">Continue</button>
+                                <button id="checkout-btn" onclick="window.location.href=('checkout.html');">Checkout</button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- main content  -->
+    <div class="container-fluid px-3 px-md-5 py-4 ">
+
+        <div class="card px-1 px-md-3 py-3 my-4">
+
+            <p class="font-weight-bold text-center pt-2" style="font-size: 22px;">Delivery Details</p>
+            <hr class="mx-auto pb-1" style="width: 90px;margin-top: -12px;">
+            <p class="pt-1 font-weight-bold order-detail-fields text-center" id="ordId" style="color: maroon;">Order ID - </p>
+            <div class="d-flex row justify-content-center px-0 px-md-4">
+                <div class="col-lg-3 text-center  pt-4 pb-2 mt-1 px-2">
+                    <img src="images/defaultP.png" class="product-Image" id="ordImage">
+                    <p class="font-weight-bold product-name-class-3 pt-4 mx-auto" id="name"></p>
+
+                </div>
+                <div class="col-lg-4 text-center  justify-content-center py-0 py-md-4 px-4 " style="border-top-left-radius: 10px; border-bottom-left-radius: 10px;">
+
+                    <table class="table table-bordered table-striped text-left">
+                        <tbody>
+
+                            <tr>
+                                <th scope="row">
+                                    Order Address
+                                </th>
+                                <td id="ordAddress">
+
+                                </td>
+
+                            </tr>
+
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    Mobile No.
+                                </th>
+                                <td id="phone">
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    Pincode
+                                </th>
+                                <td id="postcode">
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    Sellar
+                                </th>
+                                <td id="seller">
+
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+
+
+                </div>
+                <div class="col-lg-4 text-center  justify-content-center py-0 py-md-4 px-4">
+
+
+                    <table class="table table-bordered table-striped text-left">
+                        <tbody>
+
+                            <tr>
+                                <th scope="row">
+                                    Payment Status
+                                </th>
+                                <td id="payment">
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    Quantity
+                                </th>
+                                <td id="qty">
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    Order Amount
+                                </th>
+                                <td id="price">
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    Customer
+                                </th>
+                                <td id="customer">
+
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+
+                </div>
+
+            </div>
+
+            <hr class="mx-auto my-3 my-md-4" style="width:320px;margin-top: -12px;">
+
+
+            <p class="font-weight-bold text-center pt-2 mt-1" style="font-size: 22px;">Order Timeline</p>
+            <hr class="mx-auto" style="width: 90px;margin-top: -12px;">
+
+            <!-- timeline -->
+
+
+            <div class="d-flex justify-content-center align-items-center" style="margin-top: -30px;">
+                <div class="col-lg-12">
+
+                    <!-- Stepers Wrapper -->
+
+                    <ul class="stepper stepper-horizontal text-center" id="timeline">
+
+                        <!-- First Step -->
+                        <li class="step completed">
+                            <a>
+                                <span class="circle" style="background-color: green !important;"><i class="fas fa-check "></i></span>
+
+                                <span class="label">
+                                  <div class="d-flex">
+                                      <div class="flex-column text-left text-md-center">
+                                          <p class="font-weight-bold">Order Placed</p>
+                                          <p class="date text-muted" style="font-size: 14px; margin-top: -10px;" id="statDate1"></p>
+                                      </div>
+                                  </div>
+                              </span>
+                                <!-- 
+                              <span class="label">Order Placed Successfully</span>
+                              <span class="date text-muted" style="font-size: 14px;" id="statDate1"><span> -->
+
+                            </a>
+                        </li>
+
+                        <!-- Second Step -->
+                        <li class="step" id="stage2" onclick="updata(this.id)">
+                            <a>
+                                <span class="circle" id="circle2">2</span>
+                                <!-- <span class="label">Order Confirmed</span>
+                              <br><span class="date text-muted" style="font-size: 14px;" id="statDate2"><span> 
+                                                     -->
+                                <span class="label">
+                                                      <div class="d-flex">
+                                                          <div class="flex-column text-left text-md-center">
+                                                              <p class="font-weight-bold">Order Confirmation</p>
+                                                              <p class="date text-muted" style="font-size: 14px; margin-top: -10px;" id="statDate2"></p>
+                                                          </div>
+                                                      </div>
+                                                  </span>
+
+                            </a>
+                        </li>
+
+                        <!-- Second Step -->
+                        <li class="step " id="stage3" onclick="updata(this.id)">
+                            <a>
+                                <span class="circle" id="circle3">3</span>
+                                <!-- <span class="label">Order Shipped</span>
+                              <br><span class="date text-muted" style="font-size: 14px;" id="statDate3"><span> -->
+                                <span class="label">
+                                      <div class="d-flex">
+                                          <div class="flex-column text-left text-md-center">
+                                              <p class="font-weight-bold">Order Shipping</p>
+                                              <p class="date text-muted" style="font-size: 14px; margin-top: -10px;" id="statDate3"></p>
+                                          </div>
+                                      </div>
+                                  </span>
+                            </a>
+                        </li>
+                        <!-- Second Step -->
+                        <li class="step" id="stage4" onclick="updata(this.id)">
+                            <a>
+                                <span class="circle" id="circle4">4</span>
+                                <span class="label">
+                                  <div class="d-flex">
+                                      <div class="flex-column text-left text-md-center">
+                                          <p class="font-weight-bold">Order out for Delivery</p>
+                                          <p class="date text-muted" style="font-size: 14px; margin-top: -10px;" id="statDate4"></p>
+                                      </div>
+                                  </div>
+                              </span>
+                            </a>
+                        </li>
+                        <!-- Second Step -->
+                        <li class="step" id="stage5" onclick="updata(this.id)">
+                            <a>
+                                <span class="circle" id="circle5">5</span>
+                                <span class="label">
+                                  <div class="d-flex">
+                                      <div class="flex-column text-left text-md-center">
+                                          <p class="font-weight-bold">Order Delivered</p>
+                                          <p class="date text-muted" style="font-size: 14px; margin-top: -10px;" id="statDate5"></p>
+                                      </div>
+                                  </div>
+                              </span>
+                            </a>
+                        </li>
+
+
+
+                    </ul>
+                    <!-- /.Stepers Wrapper -->
+
+                </div>
+            </div>
+
+
+
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- feedback modal -->
+    <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold" style="font-family: Nunito;color: green;">Write to us</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+                            </button>
+                </div>
+                <div class="modal-body mx-3">
+
+                    <div class="md-form">
+                        <textarea type="text" class=" form-control p-2" id="feedback" rows="4" placeholder="Your Message..." style="font-family: Nunito;"></textarea>
+                    </div>
+
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button id="feedbackSendBtn" onclick="feedback()">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- footer -->
+    <footer class="page-footer font-small unique-color-dark pt-4 z-depth-2">
+
+        <!-- Footer Links -->
+        <div class="container text-center text-md-left">
+
+            <!-- Grid row -->
+            <div class="row">
+
+                <!-- Grid column -->
+                <div class="col-md-4 mx-auto">
+                    <img src="images/logoTitle2.png" class="footerLogo">
+                    <p>AgriTech is a E-commerce platform for farmers, which serves farmers the tools and pesticides easily,quickly and at reasonable rates.</p>
+                </div>
+                <!-- Grid column -->
+
+                <hr class="clearfix w-100 d-md-none">
+
+                <!-- Grid column -->
+                <div class="col-md-2 mx-auto">
+
+                    <!-- Links -->
+                    <h5 class="text-uppercase mt-3 mb-4 footerLinkClass">Company</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="about.html">About Us</a>
+                        </li>
+                        <!-- <li>
+                          <a href="#!">Core Values</a>
+                      </li>
+                      <li>
+                          <a href="#!">Careers</a>
+                      </li>
+                      <li>
+                          <a href="#!">Sitemap</a>
+                      </li> -->
+                    </ul>
+
+                </div>
+                <!-- Grid column -->
+                <hr class="clearfix w-100 d-md-none">
+                <!-- Grid column -->
+                <div class="col-md-2 mx-auto">
+                    <!-- Links -->
+                    <h5 class=" text-uppercase mt-3 mb-4 footerLinkClass">Policy Info</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!">Privacy Policy</a>
+                        </li>
+                        <!-- <li>
+                          <a href="#!">Terms of Sale</a>
+                      </li> -->
+                        <li>
+                            <a href="#!">Terms of Use</a>
+                        </li>
+                        <!-- <li>
+                          <a href="#!">Report Abuse</a>
+                      </li> -->
+                    </ul>
+
+                </div>
+                <!-- Grid column -->
+                <hr class="clearfix w-100 d-md-none">
+                <!-- Grid column -->
+                <div class="col-md-2 mx-auto">
+                    <!-- Links -->
+                    <h5 class="text-uppercase mt-3 mb-4 footerLinkClass">help</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!">FAQ</a>
+                        </li>
+                        <li>
+                            <a href="" data-toggle="modal" data-target="#modalContactForm">Contact Us</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- Grid column -->
+
+            </div>
+            <!-- Grid row -->
+
+        </div>
+        <!-- Footer Links -->
+        <hr>
+
+        <!-- Social buttons -->
+        <ul class="list-unstyled list-inline text-center">
+            <li class="list-inline-item">
+                <a class="btn-floating btn-fb mx-1">
+                    <i class="fab fa-facebook-f"> </i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-tw mx-1">
+                    <i class="fab fa-twitter"> </i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-gplus mx-1">
+                    <i class="fab fa-google-plus-g"> </i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-li mx-1">
+                    <i class="fab fa-linkedin-in"> </i>
+                </a>
+            </li>
+        </ul>
+        <!-- Social buttons -->
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2020 Copyright:
+            <a href="#">AgriTech</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+
+
+    <!-- js -->
+    <script type="text/javascript" src="md/js/jquery.min.js"></script>
+    <script type="text/javascript" src="md/js/popper.min.js"></script>
+    <script type="text/javascript" src="md/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="md/js/mdb.min.js"></script>
+    <script src="jquery.toast.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyBw4RVlD1ZdnNNn4ow5hahtxPxBSpL_tpA",
+            authDomain: "website-e1c2c.firebaseapp.com",
+            databaseURL: "https://website-e1c2c.firebaseio.com",
+            projectId: "website-e1c2c",
+            storageBucket: "website-e1c2c.appspot.com",
+            messagingSenderId: "640557542653",
+            appId: "1:640557542653:web:215d1a31f7ace2f72fe294"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+    <script>
+        function feedback() {
+            if (document.getElementById("feedback").value == "") {
+                alert("Write something !");
+                return;
+            }
+            firebase.database().ref().child("Feedbacks").push({
+                Feedback: document.getElementById("feedback").value,
+                Name: localStorage.getItem("Username")
+            });
+            $("#modalContactForm").modal("hide");
+            $.toast({
+                text: "Success", // Text that is to be shown in the toast
+                heading: 'Thanks for your Feedback!', // Optional heading to be shown on the toast
+                icon: 'success', // Type of toast icon
+                showHideTransition: 'fade', // fade, slide or plain
+                allowToastClose: true, // Boolean value true or false
+                hideAfter: 3000, // false to make it sticky or number representing the miliseconds as time after which toast needs to be hidden
+                stack: 5, // false if there should be only one toast at a time or a number representing the maximum number of toasts to be shown at a time
+                position: 'bottom-right', // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
+
+
+
+                textAlign: 'left', // Text alignment i.e. left, right or center
+                loader: true, // Whether to show loader or not. True by default
+                loaderBg: '#9EC600', // Background color of the toast loader
+                beforeShow: function() {}, // will be triggered before the toast is shown
+                afterShown: function() {}, // will be triggered after the toat has been shown
+                beforeHide: function() {}, // will be triggered before the toast gets hidden
+                afterHidden: function() {} // will be triggered after the toast has been hidden
+            });
+            document.getElementById("feedback").value = "";
+        }
+
+        function logout() {
+            localStorage.clear();
+            window.location.href = ("login.html");
+        }
+        window.onload = () => {
+            $("#loadMe").modal({
+                backdrop: "static", //remove ability to close modal with click
+                keyboard: false, //remove option to close with keyboard
+                show: true //Display loader!
+            });
+            firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("cart").on("value", function(snapshot) {
+                var cartCnt = snapshot.numChildren();
+                document.getElementById("cartCountBadge").innerHTML = cartCnt;
+                if (cartCnt == 0) {
+                    //document.getElementById("checkout-btn").style["backgroundcolor"]="black";
+                    document.getElementById("checkout-btn").disabled = true;
+                    document.getElementById("checkout-btn").style = "background-color:grey !important";
+                } else {
+                    //  document.getElementById("checkout-btn").style["backgroundcolor"]="green";
+                    document.getElementById("checkout-btn").disabled = false;
+                    document.getElementById("checkout-btn").style = "background-color:green !important";
+                }
+
+            });
+            firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("delivery").child(localStorage.getItem("ordId")).on('value', function(snapshot1) {
+                var storageRef = firebase.storage().ref();
+                storageRef.child(snapshot1.val().image).getDownloadURL().then(function(url) {
+                    document.getElementById("ordImage").src = url;
+                }).catch(function(error) {
+                    console.log(error);
+                });
+                document.getElementById("ordId").innerHTML = "Order ID - " + snapshot1.val().ordid;
+                document.getElementById("name").innerHTML = (snapshot1.val().name).toUpperCase();
+
+                if (snapshot1.val().orderaddress.address.length > 22) {
+                    document.getElementById("ordAddress").innerHTML = snapshot1.val().orderaddress.address.substring(0, 22) + "...";
+                } else {
+                    document.getElementById("ordAddress").innerHTML = snapshot1.val().orderaddress.address;
+                }
+
+
+
+                document.getElementById("payment").innerHTML = snapshot1.val().payment;
+                document.getElementById("phone").innerHTML = snapshot1.val().orderaddress.phone;
+                document.getElementById("price").innerHTML = "Rs. " + snapshot1.val().totalprice;
+                document.getElementById("seller").innerHTML = snapshot1.val().seller;
+                document.getElementById("customer").innerHTML = snapshot1.val().customer;
+                document.getElementById("qty").innerHTML = snapshot1.val().qty;
+                document.getElementById("postcode").innerHTML = snapshot1.val().orderaddress.postalCode;
+
+
+
+                document.getElementById("statDate1").innerHTML = snapshot1.val().orderstatus.Stage1.date;
+                document.getElementById("statDate2").innerHTML = snapshot1.val().orderstatus.Stage2.date;
+                document.getElementById("statDate3").innerHTML = snapshot1.val().orderstatus.Stage3.date;
+                document.getElementById("statDate4").innerHTML = snapshot1.val().orderstatus.Stage4.date;
+                document.getElementById("statDate5").innerHTML = snapshot1.val().orderstatus.Stage5.date;
+
+                if (snapshot1.val().orderstatus.Stage2.orderStatus == "COMPLETED") {
+                    document.getElementById("stage2").classList = "step completed";
+                    document.getElementById("circle2").style = "background-color : green !important";
+                    document.getElementById("circle2").innerHTML = "<i class='fas fa-check'></i>"
+                } else if (snapshot1.val().orderstatus.Stage2.orderStatus == "ACTIVE") {
+                    document.getElementById("stage2").classList = "step active";
+                    document.getElementById("circle2").innerHTML = "<i class='fas fa-spinner'></i>";
+                    document.getElementById("circle2").style = "background-color : orangered !important";
+                }
+
+                if (snapshot1.val().orderstatus.Stage3.orderStatus == "COMPLETED") {
+                    document.getElementById("stage3").classList = "step completed";
+                    document.getElementById("circle3").style = "background-color : green !important";
+                    document.getElementById("circle3").innerHTML = "<i class='fas fa-check'></i>"
+                } else if (snapshot1.val().orderstatus.Stage3.orderStatus == "ACTIVE") {
+                    document.getElementById("stage3").classList = "step active";
+                    document.getElementById("circle3").innerHTML = "<i class='fas fa-spinner'></i>";
+                    document.getElementById("circle3").style = "background-color : orangered !important";
+                }
+
+                if (snapshot1.val().orderstatus.Stage4.orderStatus == "COMPLETED") {
+                    document.getElementById("stage4").classList = "step completed";
+                    document.getElementById("circle4").style = "background-color : green !important";
+                    document.getElementById("circle4").innerHTML = "<i class='fas fa-check'></i>"
+                } else if (snapshot1.val().orderstatus.Stage4.orderStatus == "ACTIVE") {
+                    document.getElementById("stage4").classList = "step active";
+                    document.getElementById("circle4").style = "background-color : orangered !important";
+                    document.getElementById("circle4").innerHTML = "<i class='fas fa-spinner'></i>";
+                }
+
+                if (snapshot1.val().orderstatus.Stage5.orderStatus == "COMPLETED") {
+                    document.getElementById("stage5").classList = "step completed";
+                    document.getElementById("circle5").style = "background-color : green !important";
+                    document.getElementById("circle5").innerHTML = "<i class='fas fa-check'></i>"
+                } else if (snapshot1.val().orderstatus.Stage5.orderStatus == "ACTIVE") {
+                    document.getElementById("stage5").classList = "step active";
+                    document.getElementById("circle5").style = "background-color : orangered !important";
+                    document.getElementById("circle5").innerHTML = "<i class='fas fa-spinner'></i>";
+                }
+
+                setTimeout(function() {
+                    $("#loadMe").modal("hide");
+                }, 1000);
+            });
+
+        }
+        var no = 0;
+
+        function changeqty(name, qty) {
+            name = decodeURIComponent(name);
+            if (qty == 0)
+                qty = 1;
+            qty = parseInt(qty);
+            firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("cart").child(name).child("qty").set(qty);
+        }
+
+        function nextProduct(name) {
+            //localStorage.setItem("pname",name);
+            window.location.href = ("ProductDetails.html?pname=" + name);
+        }
+
+        function expandcart() {
+            firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("cart").orderByChild("name").on('value', function(snapshot1) {
+                var storageRef = firebase.storage().ref();
+                document.getElementById("cartbody").innerHTML = "";
+                if (snapshot1.exists()) {
+                    var cnt = 0,
+                        cnt1 = 0,
+                        total = 0;
+                    document.getElementById("cartbody").innerHTML = "";
+
+                    snapshot1.forEach(function(childSnapshot) {
+                        total += childSnapshot.val().price * childSnapshot.val().qty;
+                        //document.getElementById("cartbody").innerHTML+="<!-- First row --><tr><th scope='row'><img id=img"+cnt+" alt='' class='img-fluid z-depth-0' style='height: 120px;'></th><td><h5 class='mt-3'><strong>"+childSnapshot.val().name+"</strong></h5><p class='text-muted'>"+childSnapshot.val().catagory+"</p></td><td></td><td>"+childSnapshot.val().price+"</td><td><input type='number' value='2' aria-label='Search' class='form-control' style='width: 100px'></td><td class='font-weight-bold'><strong>"+childSnapshot.val().price+"</strong></td><td><button type='button' class='btn btn-sm btn-primary' id=removebtn"+cnt+" data-toggle='tooltip' data-placement='top' title='Remove item' onclick=removeitem('"+ encodeURIComponent(childSnapshot.val().name)+"')>X</button></td></tr><!-- First row -->";
+                        // $("#removebtn"+cnt).click(function(){
+                        // firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("cart").child(childSnapshot.val().name).remove();
+                        // });
+                        cnt++;
+                        document.getElementById("cartbody").innerHTML += "<div class='row cart-item-row' ><div class='col-lg-2 col-md-2 col-sm-12 text-center' onclick=nextProduct('" + encodeURIComponent(childSnapshot.val().name) + "')><img id=img" + cnt + " class='cart-item-image img-fluid'></div><div class='col-lg-10 col-md-10 col-sm-12' style='padding-top: 24px'><div class='row'><div class='col-lg-8 col-md-8 col-sm-12 ' style='padding-bottom:2px;'><div class='text-center'> <div class='flex-column text-md-left'> <p class='cart-item-name-class px-4 ' onclick=nextProduct('" + encodeURIComponent(childSnapshot.val().name) + "')> <a>" + childSnapshot.val().name + "  </a> </p> <p class='cart-category-class px-4'> <a>" + childSnapshot.val().catagory + "</a> </p></div></div></div><div class='col-lg-4 col-md-4 col-sm-12 text-center'><div class='row'><div class='col text-right'><p class='cart-item-price'>Rs." + childSnapshot.val().price + "</p></div><div class='col'><div class='row cart-item-quantity'><input type='button' id='minus' class='cart-item-quantity-button' value='-' onclick=changeqty('" + encodeURIComponent(childSnapshot.val().name) + "','" + (childSnapshot.val().qty - 1) + "')><input value=" + childSnapshot.val().qty + " pattern='\d*' onkeyup=changeqty('" + encodeURIComponent(childSnapshot.val().name) + "',this.value) class='text-center cart-item-quantity-input'><input type='button' id='plus' value='+' onclick=changeqty('" + encodeURIComponent(childSnapshot.val().name) + "','" + (parseInt(childSnapshot.val().qty) + 1) + "') class='cart-item-quantity-button'> </div></div></div></div></div> <div class='d-flex d-inline justify-content-center cart-item-remove-div'><p class='cart-item-remove-button'><a id=removebtn" + cnt + " onclick=removeitem('" + encodeURIComponent(childSnapshot.val().name) + "')>Remove Item <i class='far fa-trash-alt'></i></a></p></div></div></div><hr>";
+                        (function(pid) {
+                            storageRef.child(childSnapshot.val().image).getDownloadURL().then(function(url) {
+                                document.getElementById("img" + pid).src = url;
+                            }).catch(function(error) {
+                                console.log(error);
+                            });
+                        })(cnt);
+                        // storageRef.child(childSnapshot.val().image).getDownloadURL().then(function(url) {
+
+
+
+                        //	document.getElementById("img"+cnt).src=url;
+                        //	cnt++;
+                        // });
+
+
+                    });
+                    document.getElementById("cart-subtotal").innerHTML = "Subtotal = Rs. " + total;
+                }
+            });
+        }
+
+        function removeitem(val) {
+            val = decodeURIComponent(val);
+            firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("cart").child(val).remove();
+            expandcart();
+        }
+
+        function addtocart(item) {
+            item = decodeURIComponent(item);
+            firebase.database().ref().child("Posts").child(item).once('value', function(snapshot1) {
+                var obj = {
+                    name: snapshot1.val().name,
+                    price: snapshot1.val().price,
+                    image: snapshot1.val().image,
+                    catagory: snapshot1.val().catagory,
+                    seller: snapshot1.val().seller,
+                    qty: 1
+                };
+                firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("cart").child(item).set(obj);
+            });
+        }
+        firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("cart").orderByChild("name").on('value', function(snapshot1) {
+            if (parseInt(snapshot1.numChildren()) == 0) {
+                document.getElementById("cartbody").style = "background-image:url('images/emptycart.png');background-repeat: no-repeat;background-size: 290px 250px;background-position: center center; ";
+                document.getElementById("cart-subtotal").innerHTML = "Subtotal = Rs. 0";
+            } else {
+                document.getElementById("cartbody").style = "background-color:white;";
+            }
+        });
+
+        function updata(id) {
+
+
+            var today = new Date();
+            var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+            var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+            var dateTime = date + ' ' + time;
+
+            if (id == "stage2" && document.getElementById("circle2").style.backgroundColor == "orangered") {
+                $("#loadMeip").modal({
+                    backdrop: "static", //remove ability to close modal with click
+                    keyboard: false, //remove option to close with keyboard
+                    show: true //Display loader!
+                });
+
+                $("#cancell").click(function() {
+                    $("#loadMeip").modal("hide");
+                });
+                $("#submit").click(function() {
+                    if (document.getElementById("ipdata").checked == false)
+                        return;
+                    $("#loadMeip").modal("hide");
+                    firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("delivery").child(localStorage.getItem("ordId")).once('value', function(snapshot) {
+                        firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("delivery").child(localStorage.getItem("ordId")).child("orderstatus").child("Stage2").child("date").set(dateTime);
+                        firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("delivery").child(localStorage.getItem("ordId")).child("orderstatus").child("Stage2").child("orderStatus").set("COMPLETED");
+
+                        firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("delivery").child(localStorage.getItem("ordId")).child("orderstatus").child("Stage3").child("date").set(dateTime);
+                        firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("delivery").child(localStorage.getItem("ordId")).child("orderstatus").child("Stage3").child("orderStatus").set("ACTIVE");
+
+                        firebase.database().ref().child("Users").child(snapshot.val().customer).child("orders").child(localStorage.getItem("ordId")).child("orderstatus").child("Stage2").child("date").set(dateTime);
+                        firebase.database().ref().child("Users").child(snapshot.val().customer).child("orders").child(localStorage.getItem("ordId")).child("orderstatus").child("Stage2").child("orderStatus").set("COMPLETED");
+
+                        firebase.database().ref().child("Users").child(snapshot.val().customer).child("orders").child(localStorage.getItem("ordId")).child("orderstatus").child("Stage3").child("date").set(dateTime);
+                        firebase.database().ref().child("Users").child(snapshot.val().customer).child("orders").child(localStorage.getItem("ordId")).child("orderstatus").child("Stage3").child("orderStatus").set("ACTIVE");
+                    });
+                });
+            } else if (id == "stage3" && document.getElementById("circle3").style.backgroundColor == "orangered") {
+                $("#loadMeip").modal({
+                    backdrop: "static", //remove ability to close modal with click
+                    keyboard: false, //remove option to close with keyboard
+                    show: true //Display loader!
+                });
+
+                $("#cancell").click(function() {
+                    $("#loadMeip").modal("hide");
+                });
+                $("#submit").click(function() {
+                    if (document.getElementById("ipdata").checked == false)
+                        return;
+                    $("#loadMeip").modal("hide");
+                    firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("delivery").child(localStorage.getItem("ordId")).once('value', function(snapshot) {
+                        firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("delivery").child(localStorage.getItem("ordId")).child("orderstatus").child("Stage3").child("date").set(dateTime);
+                        firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("delivery").child(localStorage.getItem("ordId")).child("orderstatus").child("Stage3").child("orderStatus").set("COMPLETED");
+
+                        firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("delivery").child(localStorage.getItem("ordId")).child("orderstatus").child("Stage4").child("date").set(dateTime);
+                        firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("delivery").child(localStorage.getItem("ordId")).child("orderstatus").child("Stage4").child("orderStatus").set("ACTIVE");
+
+                        firebase.database().ref().child("Users").child(snapshot.val().customer).child("orders").child(localStorage.getItem("ordId")).child("orderstatus").child("Stage3").child("date").set(dateTime);
+                        firebase.database().ref().child("Users").child(snapshot.val().customer).child("orders").child(localStorage.getItem("ordId")).child("orderstatus").child("Stage3").child("orderStatus").set("COMPLETED");
+
+                        firebase.database().ref().child("Users").child(snapshot.val().customer).child("orders").child(localStorage.getItem("ordId")).child("orderstatus").child("Stage4").child("date").set(dateTime);
+                        firebase.database().ref().child("Users").child(snapshot.val().customer).child("orders").child(localStorage.getItem("ordId")).child("orderstatus").child("Stage4").child("orderStatus").set("ACTIVE");
+                    });
+                });
+            } else if (id == "stage4" && document.getElementById("circle4").style.backgroundColor == "orangered") {
+                $("#loadMeip").modal({
+                    backdrop: "static", //remove ability to close modal with click
+                    keyboard: false, //remove option to close with keyboard
+                    show: true //Display loader!
+                });
+
+                $("#cancell").click(function() {
+                    $("#loadMeip").modal("hide");
+                });
+                $("#submit").click(function() {
+                    if (document.getElementById("ipdata").checked == false)
+                        return;
+                    $("#loadMeip").modal("hide");
+                    firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("delivery").child(localStorage.getItem("ordId")).once('value', function(snapshot) {
+                        firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("delivery").child(localStorage.getItem("ordId")).child("orderstatus").child("Stage4").child("date").set(dateTime);
+                        firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("delivery").child(localStorage.getItem("ordId")).child("orderstatus").child("Stage4").child("orderStatus").set("COMPLETED");
+
+                        firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("delivery").child(localStorage.getItem("ordId")).child("orderstatus").child("Stage5").child("date").set(dateTime);
+                        firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("delivery").child(localStorage.getItem("ordId")).child("orderstatus").child("Stage5").child("orderStatus").set("ACTIVE");
+
+                        firebase.database().ref().child("Users").child(snapshot.val().customer).child("orders").child(localStorage.getItem("ordId")).child("orderstatus").child("Stage4").child("date").set(dateTime);
+                        firebase.database().ref().child("Users").child(snapshot.val().customer).child("orders").child(localStorage.getItem("ordId")).child("orderstatus").child("Stage4").child("orderStatus").set("COMPLETED");
+
+                        firebase.database().ref().child("Users").child(snapshot.val().customer).child("orders").child(localStorage.getItem("ordId")).child("orderstatus").child("Stage5").child("date").set(dateTime);
+                        firebase.database().ref().child("Users").child(snapshot.val().customer).child("orders").child(localStorage.getItem("ordId")).child("orderstatus").child("Stage5").child("orderStatus").set("ACTIVE");
+                    });
+                });
+            } else if (id == "stage5" && document.getElementById("circle5").style.backgroundColor == "orangered") {
+                $("#loadMeip").modal({
+                    backdrop: "static", //remove ability to close modal with click
+                    keyboard: false, //remove option to close with keyboard
+                    show: true //Display loader!
+                });
+
+                $("#cancell").click(function() {
+                    $("#loadMeip").modal("hide");
+                });
+                $("#submit").click(function() {
+                    if (document.getElementById("ipdata").checked == false)
+                        return;
+                    $("#loadMeip").modal("hide");
+                    firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("delivery").child(localStorage.getItem("ordId")).once('value', function(snapshot) {
+                        firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("delivery").child(localStorage.getItem("ordId")).child("orderstatus").child("Stage5").child("date").set(dateTime);
+                        firebase.database().ref().child("Users").child(localStorage.getItem("Username")).child("delivery").child(localStorage.getItem("ordId")).child("orderstatus").child("Stage5").child("orderStatus").set("COMPLETED");
+
+                        firebase.database().ref().child("Users").child(snapshot.val().customer).child("orders").child(localStorage.getItem("ordId")).child("orderstatus").child("Stage5").child("date").set(dateTime);
+                        firebase.database().ref().child("Users").child(snapshot.val().customer).child("orders").child(localStorage.getItem("ordId")).child("orderstatus").child("Stage5").child("orderStatus").set("COMPLETED");
+
+                    });
+                });
+            }
+            document.getElementById("ipdata").checked = false;
+
+
+
+        }
+    </script>
+</body>
+
+</html>

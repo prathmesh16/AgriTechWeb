@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Create your account</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!-------MD BOOTSRAP----------->
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  	<!-- Bootstrap core CSS -->
+  	<link href="md/css/bootstrap.min.css" rel="stylesheet">
+  	<!-- Material Design Bootstrap -->
+  	<link href="md/css/mdb.min.css" rel="stylesheet">
+  	<!-- Your custom stayles (optional) -->
+  	<link href="md/css/style.css" rel="stylesheet">
+
+  	<link href="https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap" rel="stylesheet">
+
+  	<!-------------BOOTSTRAP-------------->
+
+  	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+	<style type="text/css">
+
+		.form-control{
+			border-radius: 30px;
+			color: black;
+			font-family: 'Nunito',sans-serif;	
+		}	
+
+
+
+		input:focus {
+			box-shadow:none !important;
+			border-color: #ced4da !important;
+			color: black !important;
+		}
+
+
+		#SignupBtn{
+			border-radius: 20px;
+			border: none;
+			margin-top:8px;	
+			width: 120px;
+			padding-top: 8px;
+			font-weight: bold;
+			font-family: 'Nunito',sans-serif;
+			background-color:#21b30e;
+			color: white;
+		}
+
+		#SignupBtn:focus{
+			box-shadow: none;
+		}
+
+		#SignupTitle{
+			color: #292929;
+			padding-top:20px;
+			font-family: 'Nunito', sans-serif;
+		}
+
+		#SignupLogo{
+			border:none;
+			border-radius:48px;
+			width:96px;
+			height:96px;
+			margin:14px;
+		}
+
+		#SignupLogo:hover{
+			width:102px;
+			height:102px;
+			border:none;
+			border-radius: 51px;
+			margin: 11px;
+		}
+
+		#SignupForm{
+			padding: 10px 20px;
+		}
+
+		
+		.SignupCard{
+			margin-top: 40px;
+			width: 360px;
+			border-top: 5px solid #73fc03;
+			border-right: none;
+			border-left: none;
+			border-radius: 5px;
+			border-bottom: 5px solid #73fc03;
+			margin-bottom: 40px;
+
+		}
+
+		#AlreadyLogin{
+			margin-top: 16px;
+			color:black;
+			font-family: 'Nunito',sans-serif;
+		}
+
+		#AlreadyLogin a{
+			color:green;
+			font-family: 'Nunito',sans-serif;
+			font-weight: bold;
+		}
+
+		#SignupBody{
+			background-image: url('back.jpg');
+			background-repeat: no-repeat;
+			background-position:center center;
+			background-clip:padding-box;
+		}
+
+		#Username{
+			border-right: none;
+		}
+
+		#Password,#Email,#Mobile{
+			margin-top: 0px;
+			border-right: none;
+		}
+
+		#ConfirmPassword{
+			margin-top: 16px;
+		}
+
+		#PasswordIcon,#EmailIcon,#UserIcon,#MobileIcon{
+			padding: .375rem .75rem;
+			height: calc(1.5em + .75rem + 2px);
+			font-size: 1rem;
+ 		   	font-weight: 400;
+   	 		line-height: 1.5;
+    		color: grey;
+    		border-left: none;
+    		background-clip: padding-box;
+    		border-top: 1px solid #ced4da;
+    		border-right: 1px solid #ced4da;
+    		border-bottom: 1px solid #ced4da;
+    		border-top-right-radius: 30px;
+    		border-bottom-right-radius: 30px; 
+		}
+
+	</style>
+
+}
+
+</head>
+<body id="SignupBody">
+
+	<center>
+	<div class="card container col-md-3 col-sm-6 text-center SignupCard">
+		<div class="card-body">
+			<h3 class="card-title" id="SignupTitle"><b>SIGN UP</b></h3>
+	
+			<!-- for  selecting profile picture -->
+			<img src="AddProfile.jpg" class="" id="SignupLogo" align="center">
+			<input type="file" id="SelectImage" style="display: none;">
+			
+
+			<!-- form -->
+			<form id="SignupForm" align="center">
+
+				<!--username-->
+			  <div class="form-group">
+			  	<div class="input-group">
+			    <input type="text" class="form-control" id="Username" placeholder="Username" required="yes">
+          		<span class="input-group-addon transparent" id="UserIcon"><span class="fa fa-user" ></span></span>
+          		</div>
+			  </div>
+
+			  <!-----email---->
+			  <div class="form-group">
+			  	<div class="input-group">
+			    <input type="email" class="form-control" id="Email" placeholder="Email-ID" required="yes">
+          		<span class="input-group-addon transparent" id="EmailIcon"><span class="fa fa-envelope" ></span></span>
+          		</div>
+			  </div>
+
+			  <!-----mobile---->
+			  <div class="form-group">
+			  	<div class="input-group">
+			    <input type="tel" class="form-control" id="Mobile" placeholder="Mobile No." pattern="[0-9]{10,10}" required="yes">
+          		<span class="input-group-addon transparent" id="MobileIcon"><span class="fas fa-mobile-alt"></span></span>
+          		</div>
+			  </div>
+
+
+				<!----password-------->
+			  <div class="form-group">
+			  	<div class="input-group">
+			    <input type="password" class="form-control" id="Password" placeholder="Password" required="yes">
+          		<span class="input-group-addon transparent" id="PasswordIcon">
+          			<a><span class="fas fa-eye" onclick="ShowOrHidePassword()" id="PassShowBtn"></span></a>
+          			<a><span class="fas fa-eye-slash" onclick="ShowOrHidePassword()" id="PassHideBtn" style="display: none;"></span></a>
+          		</span>
+			  </div>
+
+			  <!----confirm password-------->
+			   <div class="form-group">
+			    <input type="password" class="form-control" id="ConfirmPassword" placeholder="Confirm password" required="yes">
+			  </div>
+
+
+
+
+			  <button type="submit" class="btn" id="SignupBtn">Sign up</button>
+			 
+			  
+			  <p id="AlreadyLogin">Already have an account? <a href="login.html">Login</a></p>
+			
+			</form>
+		</div>
+	</div>
+	</center>
+
+	<script>
+		function ShowOrHidePassword(){
+			
+			var x = document.getElementById("Password");
+			var y=document.getElementById("PassShowBtn");
+			var z=document.getElementById("PassHideBtn");
+		
+			  if (x.type === "password") {
+			    x.type = "text";
+			    y.style.display="none";
+			    z.style.display="inline"
+			  } else if(x.type == "text"){
+			    x.type = "password";
+			    y.style.display="inline";
+			    z.style.display="none" 
+			  }
+		}
+
+		 // for selecting image...
+		$('#SignupLogo').click(function(){ $('#SelectImage').trigger('click'); });
+			 
+	 	$("#SelectImage").change(function(e) {
+
+			  for (var i = 0; i < e.originalEvent.srcElement.files.length; i++) {
+				
+				var file = e.originalEvent.srcElement.files[i];
+				var img = document.getElementById("SignupLogo");
+				var reader = new FileReader();
+				reader.onloadend = function() {
+					 img.src = reader.result;
+				}
+				reader.readAsDataURL(file);
+				$("#SelectImage").after(img);
+			}
+		});
+
+	</script>
+    <!-- ---------MD BOOTSTRAP ---------->
+  	<!-- JQuery -->
+  	<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+  	<!-- Bootstrap tooltips -->
+  	<script type="text/javascript" src="js/popper.min.js"></script>
+  	<!-- Bootstrap core JavaScript -->
+  	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+  	<!-- MDB core JavaScript -->
+  	<script type="text/javascript" src="js/mdb.min.js"></script>
+</body>
+</html>

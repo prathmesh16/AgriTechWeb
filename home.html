@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <title>Home Page</title>
+    </head>
+    <body>
+        <h1 id="name"></h1>
+        <button onclick="logout()">Logout</button>
+    </body>
+    <script>
+        window.onload=()=>{
+            document.getElementById("name").innerHTML=localStorage.getItem("Username");
+        }
+        function logout()
+        {
+            localStorage.clear();
+            window.location.replace("login.html");
+        }
+    </script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+		<script src="https://www.gstatic.com/firebasejs/7.6.1/firebase.js"></script>
+
+		<!-- TODO: Add SDKs for Firebase products that you want to use
+			https://firebase.google.com/docs/web/setup#available-libraries -->
+
+		<script>
+		// Your web app's Firebase configuration
+		var firebaseConfig = {
+			apiKey: "AIzaSyBw4RVlD1ZdnNNn4ow5hahtxPxBSpL_tpA",
+			authDomain: "website-e1c2c.firebaseapp.com",
+			databaseURL: "https://website-e1c2c.firebaseio.com",
+			projectId: "website-e1c2c",
+			storageBucket: "website-e1c2c.appspot.com",
+			messagingSenderId: "640557542653",
+			appId: "1:640557542653:web:215d1a31f7ace2f72fe294"
+		};
+		// Initialize Firebase
+		firebase.initializeApp(firebaseConfig);
+		</script>
+</html>

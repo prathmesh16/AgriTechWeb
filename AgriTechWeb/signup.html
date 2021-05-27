@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Create your account</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!-------MD BOOTSRAP----------->
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  	<!-- Bootstrap core CSS -->
+  	<link href="md/css/bootstrap.min.css" rel="stylesheet">
+  	<!-- Material Design Bootstrap -->
+  	<link href="md/css/mdb.min.css" rel="stylesheet">
+  	<!-- Your custom stayles (optional) -->
+  	<link href="md/css/style.css" rel="stylesheet">
+
+  	<link href="https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap" rel="stylesheet">
+
+  	<!-------------BOOTSTRAP-------------->
+
+  	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script src="jic.js"></script>
+	<style type="text/css">
+
+		.form-control{
+			border-radius: 30px;
+			color: black;
+			font-family: 'Nunito',sans-serif;	
+		}	
+
+
+
+		input:focus {
+			box-shadow:none !important;
+			border-color: #ced4da !important;
+			color: black !important;
+		}
+
+
+		#SignupBtn{
+			border-radius: 20px;
+			border: none;
+			margin-top:8px;	
+			width: 120px;
+			padding-top: 8px;
+			font-weight: bold;
+			font-family: 'Nunito',sans-serif;
+			background-color:#21b30e;
+			color: white;
+		}
+
+		#SignupBtn:focus{
+			box-shadow: none;
+		}
+
+		#SignupTitle{
+			color: #292929;
+			padding-top:20px;
+			font-family: 'Nunito', sans-serif;
+		}
+
+		#SignupLogo{
+			border:none;
+			border-radius: 40px;
+			width:80px;
+			height: 80px;
+			margin:16px;
+		}
+
+		#SignupLogo:hover{
+			width:86px;
+			height:86px;
+			border:none;
+			border-radius: 31.5px;
+			margin: 13px 16px;
+		}
+
+		#SignupForm{
+			padding: 10px 20px;
+		}
+
+		
+		.SignupCard{
+			margin-top: 40px;
+			width: 360px;
+			border-top: 5px solid #73fc03;
+			border-right: none;
+			border-left: none;
+			border-radius: 5px;
+			border-bottom: 5px solid #73fc03;
+			margin-bottom: 40px;
+
+		}
+
+		#AlreadyLogin a{
+			color:green;
+			font-weight: 500;
+			font-family: 'Nunito',sans-serif;
+			font-weight: bold;
+		}
+
+		#SignupBody{
+			background-image: url('back.jpg');
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: cover;
+		}
+
+		#Username{
+			border-right: none;
+		}
+
+		#Password,#Email,#Mobile{
+			margin-top: 0px;
+			border-right: none;
+		}
+
+		#ConfirmPassword{
+			margin-top: 16px;
+		}
+
+		#PasswordIcon,#EmailIcon,#UserIcon,#MobileIcon{
+			padding: .375rem .75rem;
+			height: calc(1.5em + .75rem + 2px);
+			font-size: 1rem;
+ 		   	font-weight: 400;
+   	 		line-height: 1.5;
+    		color: grey;
+    		border-left: none;
+    		background-clip: padding-box;
+    		border-top: 1px solid #ced4da;
+    		border-right: 1px solid #ced4da;
+    		border-bottom: 1px solid #ced4da;
+    		border-top-right-radius: 30px;
+    		border-bottom-right-radius: 30px; 
+		}
+	
+		.loader {
+			position: relative;
+			text-align: center;
+			margin: 15px auto 35px auto;
+			z-index: 9999;
+			display: block;
+			width: 80px;
+			height: 80px;
+			border: 10px solid rgba(0, 0, 0, .3);
+			border-radius: 50%;
+			border-top-color:#21b30e;
+			animation: spin 1s ease-in-out infinite;
+			-webkit-animation: spin 1s ease-in-out infinite;
+		  }
+		  
+		  @keyframes spin {
+			to {
+			  -webkit-transform: rotate(360deg);
+			}
+		  }
+		  
+		  @-webkit-keyframes spin {
+			to {
+			  -webkit-transform: rotate(360deg);
+			}
+		  }
+		  
+		  
+		  /** MODAL STYLING **/
+		  
+		  .modal-content {
+			border-radius: 0px;
+			box-shadow: 0 0 20px 8px rgba(0, 0, 0, 0.7);
+		  }
+		  
+		  .modal-backdrop.show {
+			opacity: 0.75;
+		  }
+		  
+		  .loader-txt {
+			p {
+			  font-size: 13px;
+			  color: #666;
+			  small {
+				font-size: 11.5px;
+				color: #999;
+			  }
+			}
+		  }
+		  
+		
+	</style>
+
+
+</head>
+<body id="SignupBody">
+
+	<center>
+	<div class="card container col-md-3 col-sm-6 text-center SignupCard">
+		<div class="card-body">
+			<h3 class="card-title" id="SignupTitle"><b>SIGN UP</b></h3>
+
+			<img src="add-pic2.png" id="SignupLogo" align="center">
+			
+			<input id="ipimg" type="file" style="display:none;">
+			<div id="SignupForm" align="center">
+
+				<!--username-->
+			  <div class="form-group">
+			  	<div class="input-group">
+			    <input type="text" class="form-control" id="Username" placeholder="Username" required="yes">
+          		<span class="input-group-addon transparent" id="UserIcon"><span class="fa fa-user" ></span></span>
+          		</div>
+			  </div>
+
+			  <!-----email---->
+			  <div class="form-group">
+			  	<div class="input-group">
+			    <input type="email" class="form-control" id="Email" placeholder="Email-ID" required="yes">
+          		<span class="input-group-addon transparent" id="EmailIcon"><span class="fa fa-envelope" ></span></span>
+          		</div>
+			  </div>
+
+			  <!-----mobile---->
+			  <div class="form-group">
+			  	<div class="input-group">
+			    <input type="tel" class="form-control" id="Mobile" placeholder="Mobile No." pattern="[0-9]{10,10}" required="yes">
+          		<span class="input-group-addon transparent" id="MobileIcon"><span class="fas fa-mobile-alt"></span></span>
+          		</div>
+			  </div>
+
+
+				<!----password-------->
+			  <div class="form-group">
+			  	<div class="input-group">
+			    <input type="password" class="form-control" id="Password" placeholder="Password" required="yes">
+          		<span class="input-group-addon transparent" id="PasswordIcon">
+          			<a><span class="fas fa-eye" onclick="ShowOrHidePassword()" id="PassShowBtn"></span></a>
+          			<a><span class="fas fa-eye-slash" onclick="ShowOrHidePassword()" id="PassHideBtn" style="display: none;"></span></a>
+          		</span>
+			  </div>
+
+			  <!----confirm password-------->
+			   <div class="form-group">
+			    <input type="password" class="form-control" id="ConfirmPassword" placeholder="Confirm password" required="yes">
+			  </div>
+
+
+
+
+			  <button class="btn" id="SignupBtn" onclick="signup()">Sign up</button>
+			 
+			  
+			  <p id="NoAccountSignUp">Already have an account? <a href="login.html">Login</a></p>
+			
+			</div>
+		</div>
+	</div>
+	</center>
+	<div class="modal fade" id="loadMe" tabindex="-1" role="dialog" aria-labelledby="loadMeLabel">
+		<div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+		  <div class="modal-content">
+			<div class="modal-body text-center">
+			  <div class="loader"></div>
+			  <div class="loader-txt">
+				<p id="loadermsg">Uploading....</p>
+			  </div>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	<!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/7.6.1/firebase.js"></script>
+
+	<!-- TODO: Add SDKs for Firebase products that you want to use
+		https://firebase.google.com/docs/web/setup#available-libraries -->
+
+	<script>
+	// Your web app's Firebase configuration
+	var firebaseConfig = {
+		apiKey: "AIzaSyBw4RVlD1ZdnNNn4ow5hahtxPxBSpL_tpA",
+		authDomain: "website-e1c2c.firebaseapp.com",
+		databaseURL: "https://website-e1c2c.firebaseio.com",
+		projectId: "website-e1c2c",
+		storageBucket: "website-e1c2c.appspot.com",
+		messagingSenderId: "640557542653",
+		appId: "1:640557542653:web:215d1a31f7ace2f72fe294"
+	};
+	// Initialize Firebase
+	firebase.initializeApp(firebaseConfig);
+	</script>
+	<script>
+		window.onload = () => {
+			let bannerNode = document.querySelector('[alt="www.000webhost.com"]').parentNode.parentNode;
+			bannerNode.parentNode.removeChild(bannerNode);
+		 }
+		 
+		var comp_img=null;
+		function signup()
+		{
+			if(document.getElementById("Username").value==""||document.getElementById("Email").value==""||document.getElementById("Mobile").value==""||document.getElementById("Password").value=="")
+				return;
+			if(document.getElementById("Password").value!=document.getElementById("ConfirmPassword").value)
+			{	
+				alert("Password not matching!");
+				return;
+			}
+			$("#loadMe").modal({
+				backdrop: "static", //remove ability to close modal with click
+				keyboard: false, //remove option to close with keyboard
+				show: true //Display loader!
+			  });
+			var name=document.getElementById("Username").value;
+			var email=document.getElementById("Email").value;
+			var phone=document.getElementById("Mobile").value;
+			var password=document.getElementById("Password").value;
+			if(document.getElementById("SignupLogo").src!="add-pic2.png")
+			{
+				// Created a Storage Reference with root dir
+				var storageRef = firebase.storage().ref();
+				// Get the file from DOM
+				var file = document.getElementById("ipimg").files[0];
+			
+				//var output_format = file.name.split(".").pop();
+			
+				//comp_img=document.getElementById("SignupLogo");
+				//comp_img.src=jic.compress(comp_img,25,output_format).src;
+				//alert(jic.compress(comp_img,25,output_format).src);
+				//console.log(file);
+				var imgname=uuidv4();
+				//dynamically set reference to the file name
+				var thisRef = storageRef.child(imgname);
+		  
+				//put request upload file to firebase storage
+				thisRef.put(file).then(function(snapshot) {
+					document.getElementById("loadermsg").innerHTML=" User succesfully registred!";
+					setTimeout(function() {
+						$("#loadMe").modal("hide");
+						window.location.replace("login.html");
+					  }, 2000);
+				});
+				var user=
+				{
+					"Name":name,
+					"Email":email,
+					"Phone":phone,
+					"Password":password,
+					"Image":imgname
+				};
+				firebase.database().ref().child("Users").child(name).set(user);
+				document.getElementById("Username").value="";
+				document.getElementById("Email").value="";
+				document.getElementById("Mobile").value="";
+				document.getElementById("Password").value="";
+				document.getElementById("ConfirmPassword").value="";
+				document.getElementById("SignupLogo").src="add-pic2.png";
+				$("#loadMe").modal("hide");
+			}
+			else
+			{
+				setTimeout(function() {
+					$("#loadMe").modal("hide");
+				  }, 2000);
+				alert("Please select profile pic");
+			}
+			//window.location.replace("login.html");
+		}
+		function compress(source_img_obj, quality, maxWidth, output_format){
+			var mime_type = "image/jpeg";
+			if(typeof output_format !== "undefined" && output_format=="png"){
+				mime_type = "image/png";
+			}
+		
+			maxWidth = maxWidth || 1000;
+			var natW = source_img_obj.naturalWidth;
+			var natH = source_img_obj.naturalHeight;
+			var ratio = natH / natW;
+			if (natW > maxWidth) {
+				natW = maxWidth;
+				natH = ratio * maxWidth;
+			}
+		
+			var cvs = document.createElement('canvas');
+			cvs.width = natW;
+			cvs.height = natH;
+		
+			var ctx = cvs.getContext("2d").drawImage(source_img_obj, 0, 0, natW, natH);
+			var newImageData = cvs.toDataURL(mime_type, quality/100);
+			var result_image_obj = new Image();
+			result_image_obj.src = newImageData;
+			return result_image_obj;
+		}
+		function uuidv4() {
+			return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+			  var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+			  return v.toString(16);
+			});
+		  }
+		function ShowOrHidePassword(){
+			
+			var x = document.getElementById("Password");
+			var y=document.getElementById("PassShowBtn");
+			var z=document.getElementById("PassHideBtn");
+		
+			  if (x.type === "password") {
+			    x.type = "text";
+			    y.style.display="none";
+			    z.style.display="inline"
+			  } else if(x.type == "text"){
+			    x.type = "password";
+			    y.style.display="inline";
+			    z.style.display="none" 
+			  }
+
+		}
+		$('#SignupLogo').click(function(){ $('#ipimg').trigger('click'); });
+		$("#ipimg").change(function(e) {
+
+			for (var i = 0; i < e.originalEvent.srcElement.files.length; i++) {
+				
+				var file = e.originalEvent.srcElement.files[i];
+				var img = document.getElementById("SignupLogo");
+				var reader = new FileReader();
+				reader.onloadend = function() {
+					 img.src = reader.result;
+				}
+				reader.readAsDataURL(file);
+				$("#ipimg").after(img);
+			}
+		});
+	</script>
+    <!-- ---------MD BOOTSTRAP ---------->
+  	<!-- JQuery -->
+  	<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+  	<!-- Bootstrap tooltips -->
+  	<script type="text/javascript" src="js/popper.min.js"></script>
+  	<!-- Bootstrap core JavaScript -->
+  	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+  	<!-- MDB core JavaScript -->
+  	<script type="text/javascript" src="js/mdb.min.js"></script>
+</body>
+</html>
